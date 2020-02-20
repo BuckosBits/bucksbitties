@@ -1,0 +1,43 @@
+Basic usage
+Variable	Usage
+AWS_ACCESS_KEY_ID (*)	AWS access key.
+AWS_SECRET_ACCESS_KEY (*)	AWS secret key.
+AWS_DEFAULT_REGION (*)	The AWS region code (us-east-1, us-west-2, etc.) of the region containing the AWS resource(s). For more information, see Regions and Endpoints in the Amazon Web Services General Reference.
+APPLICATION_NAME (*)	The name of the Elastic Beanstalk application.
+ENVIRONMENT_NAME (*)	Environment name.
+ZIP_FILE (*)	The application source bundle to deploy (zip, jar, war).
+S3_BUCKET	Bucket name used by Elastic Beanstalk to store artifacts. Default: ${APPLICATION_NAME}-elasticbeanstalk-deployment.
+VERSION_LABEL	Version label for the new application revision. Default: ${APPLICATION_NAME}-${BITBUCKET_BUILD_NUMBER}-${BITBUCKET_COMMIT:0:8}.
+DESCRIPTION	Description for the new application revision. Default: a URL pointing to the pipeline result page.
+WAIT	Wait for deployment to complete. Default: false.
+WAIT_INTERVAL	Time to wait between polling for deployment to complete (in seconds). Default: 10.
+COMMAND	Command to be executed during the deployment. Valid options are all, upload-only, deploy-only. Default: all.
+DEBUG	Turn on extra debug information. Default: false.
+(*) = required variable.	
+Advanced usage
+If COMMAND is set to upload-only
+
+Variable	Usage
+AWS_ACCESS_KEY_ID (*)	AWS access key.
+AWS_SECRET_ACCESS_KEY (*)	AWS secret key.
+AWS_DEFAULT_REGION (*)	The AWS region code (us-east-1, us-west-2, etc.) of the region containing the AWS resource(s). For more information, see Regions and Endpoints in the Amazon Web Services General Reference.
+APPLICATION_NAME (*)	The name of the Elastic Beanstalk application.
+COMMAND (*)	Command to be used. Use upload-only here.
+ZIP_FILE (*)	The application source bundle to deploy (zip, jar, war).
+S3_BUCKET	Bucket name used by Elastic Beanstalk to store artifacts. Default: ${APPLICATION_NAME}-elasticbeanstalk-deployment}.
+VERSION_LABEL	Version label for the new application revision. Default: ${ENVIRONMENT_NAME}_${BITBUCKET_COMMIT:0:8}_YYYY-mm-dd_HHMMSS).
+DESCRIPTION	Description for the new application revision. Default: "".
+DEBUG	Turn on extra debug information. Default: false.
+If COMMAND is set to deploy-only
+
+Variable	Usage
+AWS_ACCESS_KEY_ID (*)	AWS access key.
+AWS_SECRET_ACCESS_KEY (*)	AWS secret key.
+AWS_DEFAULT_REGION (*)	The AWS region code (us-east-1, us-west-2, etc.) of the region containing the AWS resource(s). For more information, see Regions and Endpoints in the Amazon Web Services General Reference.
+APPLICATION_NAME (*)	The name of the Elastic Beanstalk application.
+COMMAND (*)	Command to be used. Use deploy-only here.
+ENVIRONMENT_NAME (*)	Environment name.
+VERSION_LABEL	Version label for the new application revision. Default: ${ENVIRONMENT_NAME}_${BITBUCKET_COMMIT:0:8}_YYYY-mm-dd_HHMMSS).
+WAIT	Wait for deployment to complete. Default: false.
+WAIT_INTERVAL	Time to wait between polling for deployment to complete (in seconds). Default: 10.
+DEBUG	Turn on extra debug information. Default: false.
