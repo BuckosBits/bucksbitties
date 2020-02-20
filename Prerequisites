@@ -1,0 +1,3 @@
+An IAM user is configured with sufficient permissions to perform a deployment to your application and upload artifacts to the S3 bucket.
+You have configured the Elastic Beanstalk application and environment.
+An S3 bucket has been set up to which deployment artifacts will be copied. Use name ${APPLICATION_NAME}-elasticbeanstalk-deployment to automatically use it.
