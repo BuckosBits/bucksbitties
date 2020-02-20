@@ -1,0 +1,12 @@
+Basic example:
+Upload the artifact application.zip and deploy your environment.
+
+script:
+  - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.0
+    variables:
+      AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+      AWS_DEFAULT_REGION: 'us-east-1'
+      APPLICATION_NAME: 'my-app-name'
+      ENVIRONMENT_NAME: 'production'
+      ZIP_FILE: 'application.zip'
