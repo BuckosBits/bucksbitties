@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Date: 1998/08/31 09:38:35 $ $Revisions:$ -->
+<div1 role="java-binding" id="java-binding">
+  <head>Java Language Binding</head>
+  <p>This appendix contains the complete Java binding for the Level 1 Document
+    Object Model. The definitions are divided into Core and HTML.</p>
+  <p>The Java files are also available as <loc
+      href="java-binding.zip">&w3c.url;/java-binding.zip</loc></p>
+
+  <div2 id="ID-1453982312">
+    <head>Document Object Model Level 1 Core</head>
+    <!--
+    ******************************************************
+    | LEVEL ONE CORE JAVA BINDINGS                       |
+    ******************************************************
+    -->
+      <?GENERATE-JAVA ID-419945773?>
+  </div2>
+  <div2 id="ID-1068341473">
+    <head>Document Object Model Level 1 HTML</head>
+    <!--
+    ******************************************************
+    | LEVEL ONE HTML JAVA BINDINGS                       |
+    ******************************************************
+    -->
+      <?GENERATE-JAVA ID-1342638483?>
+  </div2>
+</div1>
