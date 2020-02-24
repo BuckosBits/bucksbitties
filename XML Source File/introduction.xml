@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *************************************************************************
+ * BEGINNING OF DOM INTRODUCTION                                         * 
+ *************************************************************************
+-->
+<div1 id="ID-500153371">
+  <head>What is the Document Object Model?</head>
+
+  <orglist role="editors">
+    <member>
+      <name>Jonathan Robie</name>
+      <affiliation>Texcel Research</affiliation>
+    </member>
+  </orglist>
+
+  <div2 id="ID-E7C3082">
+    <head>Introduction</head>
+    <p>The Document Object Model (DOM) is an application programming interface (API) for HTML and
+      XML documents. It defines the logical structure of documents and
+      the way a document is accessed and manipulated. In the DOM specification,
+      the term "document" is used in the broad sense - increasingly, XML is being used as a
+      way of representing many different kinds of information that may
+      be stored in diverse systems, and much of this would traditionally
+      be seen as data rather than as documents. Nevertheless, XML presents
+      this data as documents, and the DOM may be used to manage this data.</p>
+
+    <p>With the Document
+      Object Model, programmers can build documents, navigate
+      their structure, and add, modify, or delete elements and content.
+      Anything found in an HTML or XML document can be accessed,
+      changed, deleted, or added using the Document Object Model,
+      with a few exceptions - in particular, the DOM interfaces for
+      the XML internal and external subsets have not yet been specified.</p>
+    <p>As a W3C specification, one important objective for the Document
+      Object Model is to provide a standard programming interface that
+      can be used in a wide variety of environments and applications.
+      The DOM is designed to be used with any programming
+      language. In order to provide a precise, language-independent specification 
+      of the DOM interfaces, we have chosen to define 
+      the specifications in OMG IDL, as defined in the <loc
+      href="http://www.omg.org/corba/corbiiop.htm">CORBA 2.2
+      specification.</loc>  In addition to the OMG IDL specification,
+      we provide language bindings for Java and ECMAScript (an
+      industry-standard scripting language based on JavaScript and
+      JScript). </p>
+    <note><p>OMG IDL is used only as a language-independent and
+	implementation-neutral way to specify interfaces. Various other
+	IDLs could have been used. In general, IDLs are designed for
+	specific computing environments. The Document Object Model 
+	can be implemented in any computing environment, and does not 
+	require the object binding runtimes generally associated with 
+	such IDLs.
+      </p></note>
+  </div2>
+  <div2 id="ID-E7C30821">
+    <head>What the Document Object Model is</head>
+    <p>The DOM is a programming API for documents.
+      It closely resembles the structure of the
+      documents it models. For instance, consider this table, taken
+      from an HTML document: </p>
+    <eg role='code'>
+      &lt;TABLE&gt;
+      &lt;TBODY&gt; 
+      &lt;TR&gt; 
+      &lt;TD&gt;Shady Grove&lt;/TD&gt;
+      &lt;TD&gt;Aeolian&lt;/TD&gt; 
+      &lt;/TR&gt; 
+      &lt;TR&gt;
+      &lt;TD&gt;Over the River, Charlie&lt;/TD&gt;        
+      &lt;TD&gt;Dorian&lt;/TD&gt; 
+      &lt;/TR&gt; 
+      &lt;/TBODY&gt;
+      &lt;/TABLE&gt;
+    </eg> 
+    <p>The DOM represents this table like this:    
+      <graphic source="./images/table.gif" alt="DOM representation of the example table"/>
+    </p>
+    <p>In the DOM, documents have a logical
+      structure which is very much like a tree; to be more precise, it
+      is like a &quot;forest&quot; or &quot;grove&quot;, which can
+      contain more than one tree. However, the DOM
+      does not specify that documents must be <emph>implemented</emph> as a
+      tree or a grove<!--but not the same as an sgml grove-->, nor
+      does it specify how the relationships among objects be
+      implemented. The DOM is a logical model that may be implemented in any
+      convenient manner. In this
+      specification, we use the term <emph>structure model</emph> to
+      describe the tree-like representation of a document; we
+      specifically avoid terms like &quot;tree&quot; or
+      &quot;grove&quot; in order to avoid implying a particular
+      implementation. One important property of DOM structure models
+      is <emph>structural isomorphism</emph>: if any two Document
+      Object Model implementations are used to create a representation
+      of the same document, they will create the same structure model,
+      with precisely the same objects and relationships.</p>
+      <p>The name &quot;Document Object Model&quot; was chosen because
+      it is an &quot;object model&quot; in the traditional
+      object oriented design sense: documents are modeled using
+      objects, and the model encompasses not only the structure of a
+      document, but also the behavior of a document and the objects
+      of which it is composed. In other words, the nodes in the
+      above diagram do not represent a data structure, they
+      represent objects, which have functions and identity. As an
+      object model, the DOM identifies:</p>
+    <ulist>
+      <item><p>the interfaces and objects used to represent and manipulate
+	  a document</p></item>
+      <item><p>the semantics of these interfaces and objects - including
+	  both behavior and attributes</p></item>
+      <item><p>the relationships and collaborations among these interfaces
+	  and objects</p></item>
+    </ulist>
+    
+    <p>The structure of SGML documents has traditionally been
+      represented by an abstract data model, not by an object model.
+      In an abstract data model, the model is centered around the
+      data. In object oriented programming languages, the data itself
+      is encapsulated in objects that hide the data, protecting it
+      from direct external manipulation. The functions associated with
+      these objects determine how the objects may be manipulated, and
+      they are part of the object model.</p>
+    <p>The Document Object Model currently consists of two parts,
+      DOM Core and DOM HTML. The DOM Core represents the
+      functionality  used for XML documents, and also serves as the
+      basis for DOM HTML. 
+
+	A compliant implementation of the DOM must implement all of the 
+	fundamental interfaces in the Core chapter with the semantics as 
+	defined. Further, it must implement at least one of the HTML DOM 
+	and the extended (XML) interfaces with the semantics as defined.
+	</p> 
+    
+  </div2>
+  <div2 id="ID-E7C30822">
+    <head>What the Document Object Model is not</head>
+    <p>This section is designed to give a more precise understanding
+      of the DOM by distinguishing it from other
+      systems that may seem to be like it.</p>
+    <ulist>
+      <item><p>Although the Document Object Model was strongly influenced
+	  by "Dynamic HTML", in Level 1, it does not implement all of
+	  "Dynamic HTML". In particular, events have not yet been defined.
+	  Level 1 is designed to lay a firm foundation for this kind
+	  of functionality by providing a robust, flexible model of the
+	  document itself.</p></item>
+      <item><p>The Document Object Model is not a binary specification.
+	  DOM programs written in the same language will be
+	  source code compatible across platforms, but the DOM
+	  does not define any form of binary interoperability.</p></item>
+      <item><p>The Document Object Model is not a way of persisting objects
+	  to XML or HTML. Instead of specifying how objects may be
+	  represented in XML, the DOM specifies how
+	  XML and HTML documents are represented as objects, so that
+	  they may be used in object oriented programs.</p></item>
+      <item><p>The Document Object Model is not a set of data structures,
+	  it is an object model that specifies interfaces. Although this
+	  document contains diagrams showing parent/child relationships,
+	  these are logical relationships defined by the programming
+	  interfaces, not representations of any particular internal
+	  data structures.</p></item>
+      <item><p>The Document Object Model does not define &quot;the true
+	  inner semantics&quot; of XML or HTML. The semantics of those
+	  languages are defined by W3C Recommendations for these languages.
+	  The DOM is a programming model designed to
+	  respect these semantics. The DOM does not
+	  have any ramifications for the way you write XML and HTML
+	  documents; any document that can be written in these languages
+	  can be represented in the DOM.</p></item>
+
+      <item><p>The Document Object Model, despite its name, is not a
+	  competitor to the Component Object Model (COM). COM, like
+	  CORBA, is a language independent way to specify interfaces and
+	  objects; the DOM is a set of interfaces and
+	  objects designed for managing HTML and XML documents. The DOM
+	  may be implemented using language-independent systems like COM
+	  or CORBA; it may also be implemented using language-specific
+	  bindings like the Java or ECMAScript bindings specified in
+	  this document.</p></item>
+    </ulist>
+  </div2>
+  <div2 id="ID-E7C30823">
+    <head>Where the Document Object Model came from</head>
+    <p>The DOM originated as a specification to
+      allow JavaScript scripts and Java programs to be portable among
+      Web browsers.  "Dynamic HTML" was  the immediate ancestor of the
+      Document Object Model, and it was originally thought of largely
+      in terms of  browsers. However, when the DOM
+      Working Group was formed at W3C, it was also joined by vendors in other
+      domains, including HTML or XML editors and document
+      repositories. Several of these vendors had worked with SGML
+      before XML was developed; as a result, the DOM
+      has been influenced by SGML Groves and the HyTime standard. Some
+      of these vendors had also developed their own object models for
+      documents in order to provide an API for SGML/XML
+      editors or document repositories, and these object models have
+      also influenced the DOM. </p>
+  </div2>
+  
+
+  <div2 id="ID-E7C30824"><head>Entities and the DOM Core</head>
+    <p>In the fundamental DOM interfaces, there are no objects representing
+      entities. Numeric character references, and references to the
+      pre-defined entities in HTML and XML, are replaced by the
+      single character that makes up the entity's replacement.
+      For example, in:   
+      <eg role='code'>
+        &lt;p&gt;This is a dog &amp;amp; a cat&lt;/p&gt;        
+      </eg>
+      the "&amp;amp;" will be replaced by the character "&amp;", and the text
+      in the P element will form a single continuous sequence of
+      characters. Since numeric character references and pre-defined entities
+      are not recognized as such in CDATA sections, or the SCRIPT and STYLE
+      elements in HTML, they are not replaced by the single character they
+      appear to refer to. If the example above were enclosed in a CDATA
+      section, the "&amp;amp;" would not be replaced by "&amp;"; neither would
+      the &lt;p&gt; be recognized as a start tag. The representation of general
+      entities, both internal and external, are defined within the
+      extended (XML) interfaces of the Level 1 specification.</p>
+    <p>
+      Note: When a DOM representation of a document is serialized
+      as XML or HTML text, applications will need to check each
+      character in text data to see if it needs to be escaped
+      using a numeric or pre-defined entity. Failing to do so
+      could result in invalid HTML or XML. Also, implementations should be
+      aware of the fact that serialization into a character encoding
+      ("charset") that does not fully cover ISO 10646 may fail if there are
+      characters in markup or CDATA sections that are not present in the
+      encoding.</p>
+  </div2>
+
+  <div2 id="ID-E7C30826"><head>DOM Interfaces and DOM Implementations</head>
+
+    <p>The DOM specifies interfaces which may be used to manage XML or
+      HTML documents. It is important to realize that these interfaces
+      are an abstraction - much like "abstract base classes" in C++,
+      they are a means of specifying a way to access and manipulate an
+      application's internal representation of a document. Interfaces 
+	do not imply a particular concrete
+      implementation. Each DOM application is free to maintain
+      documents in any convenient representation, as long as the
+      interfaces shown in this specification are supported. Some
+      DOM implementations will be existing programs that use the
+      DOM interfaces to access software written long before the
+      DOM specification existed. Therefore, the DOM is designed
+      to avoid implementation dependencies; in particular,</p>
+    <olist>
+      <item><p>Attributes defined in the IDL do not imply concrete
+	  objects which must have specific data members - in the
+	  language bindings, they are translated to a pair of
+	  get()/set() functions, not to a data member. (Read-only
+	  functions have only a get() function in the language
+	  bindings).  </p>
+      </item>
+      <item><p>DOM applications may provide additional interfaces
+	  and objects not found in this specification and still be
+	  considered DOM compliant.</p></item>
+      <item><p>Because we specify interfaces and not the actual
+	  objects that are to be created, the DOM can not know what
+	  constructors to call for an implementation.  In general,
+	  DOM users call the createXXX() methods on the Document
+	  class to create document structures, and DOM
+	  implementations create their own internal representations
+	  of these structures in their implementations of the
+	  createXXX() functions.
+	</p></item>
+      </olist>
+  </div2>
+  <div2 id="ID-E7C30825">
+    <head>Limitations of Level 1</head> 
+    <p>
+      The DOM Level 1 specification is intentionally limited to 
+      those methods needed to represent and manipulate document 
+      structure and content.
+      The plan is for future Levels of the DOM specification to provide:
+      
+      <olist>
+	<item><p> A structure model for the internal subset and the
+	    external subset.</p></item>
+	<item><p> Validation against a schema.</p></item>
+	<item><p> Control for rendering documents via style sheets.</p></item>
+	<item><p> Access control.</p></item>
+	<item><p> Thread-safety.</p></item>
+	<item><p> Events.</p></item>
+      </olist></p>
+  </div2>
+</div1>
+<!--
+  *************************************************************************
+  * END OF DOM INTRODUCTION                                               *
+  *************************************************************************
+-->
+
