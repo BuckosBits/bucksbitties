@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Date: 1998/10/01 10:14:52 $ $Revision: 1.32 $ -->
+<!--
+ *************************************************************************
+ * BEGINNING OF LEVEL ONE CORE                                           *
+ *************************************************************************
+-->
+<div1 id="ID-419945773">
+  <head>Document Object Model (Core) Level 1</head>
+  <orglist role="editors">
+    <member>
+      <name>Mike Champion</name>
+      <affiliation>ArborText (from November 20, 1997)</affiliation>
+    </member>
+    <member>
+      <name>Steve Byrne</name>
+      <affiliation>JavaSoft (until November 19, 1997)</affiliation>
+    </member>
+    <member>
+      <name>Gavin Nicol</name>
+      <affiliation>Inso EPS</affiliation>
+    </member>
+    <member>
+      <name>Lauren Wood</name>
+      <affiliation>SoftQuad, Inc.</affiliation>
+    </member>
+  </orglist>
+  <?GENERATE-MINI-TOC?>
+  <!--
+  ******************************************************
+  | INTRODUCTION                                       |
+  ******************************************************
+  -->
+  <div2 id="ID-1590626201">
+    <head>Overview of the DOM Core Interfaces</head>
+      <p>This section defines a minimal set of objects and
+	interfaces for accessing and manipulating document objects.
+	The functionality specified in this section (the
+	<emph>Core</emph> functionality) should be sufficient to allow
+	software developers and web script authors to access and
+	manipulate parsed HTML and XML content inside conforming
+	products. The DOM Core API also allows population
+	of a <code>Document</code> object using only DOM API calls; creating
+        the skeleton <code>Document</code> and saving it persistently is left
+        to the product that implements the DOM API.</p>
+    <div3 id="ID-1590626202"><head>The DOM Structure Model</head>
+	<p>The DOM presents documents as a hierarchy of <code>Node</code>
+	objects that also implement other, more specialized interfaces. Some
+	types of nodes may have child nodes of various types, and others are
+	leaf nodes that cannot have anything below them in the document
+	structure. The node types, and which node types they may have as
+	children, are as follows:
+        <ulist>
+	<item><p><code>Document</code> --  <code>Element</code> (maximum of
+	      one), <code>ProcessingInstruction</code>, <code>Comment</code>,
+	      <code>DocumentType</code> </p></item>
+	<item><p><code>DocumentFragment</code> --  <code>Element</code>,
+	      <code>ProcessingInstruction</code>, <code>Comment</code>,
+	      <code>Text</code>, <code>CDATASection</code>,
+	      <code>EntityReference</code> </p></item>
+	<item><p><code>DocumentType</code> -- no children</p></item>
+	<item><p><code>EntityReference</code> -- <code>Element</code>,
+	      <code>ProcessingInstruction</code>, <code>Comment</code>,
+	      <code>Text</code>, <code>CDATASection</code>,
+	      <code>EntityReference</code> </p></item>
+	<item><p><code>Element</code> -- <code>Element</code>,
+	      <code>Text</code>,  <code>Comment</code>,
+	      <code>ProcessingInstruction</code>, <code>CDATASection</code>,
+	      <code>EntityReference</code></p></item>
+	<item><p><code>Attr</code> -- <code>Text</code>,
+	      <code>EntityReference</code></p></item>
+	<item><p><code>ProcessingInstruction</code> --  no children</p></item>
+	<item><p><code>Comment</code> --  no children</p></item>
+	<item><p><code>Text</code> --  no children</p></item>
+	<item><p><code>CDATASection</code> --  no children</p></item>
+	<item><p><code>Entity</code> -- <code>Element</code>,
+	      <code>ProcessingInstruction</code>, <code>Comment</code>,
+	      <code>Text</code>, <code>CDATASection</code>,
+	      <code>EntityReference</code></p></item>
+	<item><p><code>Notation</code> --  no children</p></item>
+	</ulist> </p>
+	<p>The DOM also specifies a <code>NodeList</code> interface to handle
+	ordered lists of <code>Node</code>s, such as the children of a
+	<code>Node</code>, or the elements returned by the
+	<code>Element.getElementsByTagName</code> method, and also a
+	<code>NamedNodeMap</code> interface to handle unordered sets of nodes
+	referenced by their name attribute, such as the attributes of an
+	<code>Element</code>. <code>NodeList</code>s and
+	<code>NamedNodeMap</code>s in the DOM are "live", that is, changes to
+	the underlying document structure are reflected in all relevant
+	<code>NodeList</code>s and <code>NamedNodeMap</code>s.  For example, if
+	a DOM user gets a <code>NodeList</code> object containing the children
+	of an <code>Element</code>, then subsequently adds more children to
+	that element (or removes children, or modifies them), those changes are
+	automatically reflected in the <code>NodeList</code> without further
+	action on the user's part. Likewise changes to a <code>Node</code> in
+	the tree are reflected in all references to that <code>Node</code> in
+	<code>NodeList</code>s and <code>NamedNodeMap</code>s. </p>
+
+    </div3>
+    <div3 id="ID-249F15BA"><head>Memory Management</head>
+      <p>Most of the APIs defined by this specification are <emph>
+	interfaces</emph> rather than classes.  That means that 
+	an actual implementation need only expose methods with 
+	the defined names and specified operation, not actually
+	implement classes that correspond directly to the interfaces.
+	This allows the DOM APIs to be implemented as a thin veneer on top
+	of legacy applications with their own data structures, or 
+	on top of newer applications with different class hierarchies.
+	This also means that ordinary constructors (in the Java or C++
+	sense) cannot be used to create DOM objects, since the 
+	underlying objects to be constructed may have little relationship
+	to the DOM interfaces. The conventional solution to this in
+	object-oriented design is to define <emph>factory</emph> methods
+	that create instances of objects that implement the various
+	interfaces.  In the DOM Level 1, objects implementing some
+	interface "X" are created by a "createX()" method on the 
+	<code>Document</code> interface; this is because all DOM objects live
+	in the context of a specific Document.</p>
+	<p>The DOM Level 1 API does <emph>not</emph> define a standard
+	way to create <code>DOMImplementation</code> or <code>Document</code>
+	objects; actual DOM implementations must provide
+	some proprietary way of bootstrapping these DOM interfaces, and
+	then all other objects can be built from the Create methods on
+	<code>Document</code> (or by various other convenience methods).</p>
+      <p>The Core DOM APIs are designed to be compatible with a wide
+	range of languages, including both general-user scripting languages and
+	the more challenging languages used mostly by professional programmers.
+	Thus, the DOM
+	APIs need to operate across a variety of memory management
+	philosophies, from language platforms that do not expose memory
+	management to the user at all, through those (notably Java) that 
+	provide explicit constructors but provide an  automatic garbage
+	collection mechanism to automatically  reclaim unused memory,
+	to those (especially C/C++) that generally require the
+	programmer to explicitly allocate object memory, track where
+	it is used, and explicitly free it for re-use.  To ensure a
+	consistent API across these platforms, the DOM does not
+	address memory management issues at all, 
+	but instead leaves these for the
+	implementation. Neither of the explicit language bindings
+	devised by the DOM Working Group (for ECMAScript and Java)
+	require any memory management  methods, but DOM bindings for
+	other languages (especially C or C++) probably will require
+	such support. These extensions will be the responsibility of
+	those adapting the DOM API to a specific language, not the DOM
+	WG.
+      </p>
+    </div3>
+    <div3 id="ID-45A944CB"> <head>Naming Conventions</head>
+      <p>While it would
+	be nice to have attribute and method names that are short,
+	informative,  internally consistent, and familiar to users of
+	similar APIs,  the names also should not clash with the names
+	in legacy APIs  supported by DOM implementations.
+	Furthermore,  both OMG IDL and <code>ECMAScript</code> have
+	significant limitations in their ability to disambiguate names
+	from different namespaces that makes it difficult to avoid naming
+	conflicts with short, familiar names. So, DOM names tend to be
+	long and quite descriptive in order to be unique across all
+	environments.
+      </p>
+      <p>The Working Group has also attempted to be internally
+	consistent in its use of various terms, even though these may
+	not be common distinctions in other APIs.  For example, we use
+	the method name "remove" when the method changes the
+	structural model, and the method name "delete" when the method
+	gets rid of something inside the structure model. The thing
+	that is deleted is not returned. The thing that is removed may
+	be returned, when it makes sense to return it. </p>
+    </div3>
+    <div3 id="ID-1CED5498"><head>Inheritance vs Flattened Views of the API</head>
+      <p>The DOM Core APIs present two somewhat different sets of
+	interfaces to an XML/HTML document; one presenting an "object
+	oriented" approach with a hierarchy of inheritance, and a
+	"simplified" view that allows all manipulation to be done via
+	the <code>Node</code> interface without requiring casts (in
+	Java and other C-like languages) or query interface calls in
+	COM environments. These operations are fairly expensive in Java and
+	COM, and the DOM may be used in performance-critical
+	environments, so we allow significant functionality using just the
+	<code>Node</code> interface. Because many other users will find the
+	inheritance hierarchy easier to understand than the
+	"everything is a <code>Node</code>" approach to the DOM, we also
+	support the full higher-level interfaces for those who prefer a more
+	object-oriented API. </p>
+      <p>In practice, this means that there is a certain amount of
+	redundancy in the API. The Working Group considers the
+	"inheritance" approach the primary view of the API, and the
+	full set of  functionality on <code>Node</code> to be "extra"
+	functionality that users may employ, but that does not eliminate
+	the need for methods on other interfaces that an
+	object-oriented analysis would dictate. (Of course, when the
+	O-O analysis yields an attribute or method that is 
+	identical to one on the <code>Node</code> interface, we don't
+	specify a completely redundant one). Thus, even though there
+	is a generic <code>nodeName</code> attribute on the <code>Node</code>
+	interface, there is still a <code>tagName</code> attribute on the
+	<code>Element</code> interface; these two attributes must
+	contain the same value, but the Working Group considers it
+	worthwhile to support both, given the different constituencies
+	the DOM API must satisfy. </p>
+      
+    </div3>
+    <div3 id="ID-C74D1578">
+      <head>The <code>DOMString</code> type</head>
+
+      <p>To ensure interoperability, the DOM specifies the
+      <code>DOMString</code> type as follows:
+
+      <ulist>
+        <item><p>A <code>DOMString</code> is a sequence of 16-bit
+	  quantities. This may be expressed in IDL terms as:</p>
+<eg>
+         typedef sequence&lt;unsigned short&gt; DOMString;
+</eg></item>
+
+        <item><p>Applications must encode <code>DOMString</code> using UTF-16
+        (defined in Appendix C.3 of [UNICODE] and Amendment 1 of
+	[ISO-10646]).</p>
+
+        <p>The UTF-16 encoding was chosen because of its widespread
+        industry practice. Please note that for both HTML and XML, the document
+        character set (and therefore the notation of numeric character
+        references) is based on UCS-4. A single numeric character reference in
+        a source document may therefore in some cases correspond to two array
+        positions in a <code>DOMString</code> (a high surrogate and a low
+        surrogate). </p>
+
+        <note><p>Even though the DOM defines the name of the string type to
+        be <code>DOMString</code>, bindings may used different names. For,
+        example for Java, <code>DOMString</code> is bound to the
+	<code>String</code> type because it also uses UTF-16 as its
+	encoding.</p></note></item>
+      </ulist></p>
+
+      <note><p>As of August 1998, the OMG IDL specification included a
+      <code>wstring</code> type. However, that definition did not meet the
+      interoperability criteria of the DOM API since it relied on encoding
+      negotiation to decide the width of a character.</p></note>
+
+    </div3>
+    <div3 id="ID-5DFED1F0">
+      <head>Case sensitivity in the DOM</head>
+      <p>The DOM has many interfaces that imply string matching. 
+	HTML processors generally assume an uppercase (less often, 
+        lowercase) normalization of names for such things as
+	elements, while XML is explicitly case sensitive. For the
+	purposes of the DOM, string matching takes place on a character
+	code by character code basis, on the 16 bit value of a
+	<code>DOMString</code>. As such, the DOM assumes that any
+	normalizations will take place in the processor,
+	<emph>before</emph> the DOM structures are built.</p>
+      <p>This then raises the issue of exactly what normalizations
+	occur. The W3C I18N working group is in the process of
+	defining exactly which normalizations are necessary for applications
+	implementing the DOM.</p>
+    </div3>
+  </div2>
+  <!--
+  ******************************************************
+  | DOCUMENT OBJECT MODEL APIs                        |
+  ******************************************************
+  -->
+  <div2 id="ID-BBACDC08">
+    <head>Fundamental Interfaces</head>
+    <p>The interfaces within this section are considered
+      <emph>fundamental</emph>, and must be fully implemented by all
+      conforming implementations of the DOM, including all HTML DOM
+      implementations.</p>
+    <definitions>
+      &level-one-exceptions;
+      &level-one-core-dom;
+      &level-one-core-document;
+      &level-one-core-node;
+      &level-one-core-node-list;
+      &level-one-core-named-node-map;
+      &level-one-core-data;
+      &level-one-core-attribute;
+      &level-one-core-element;
+      &level-one-core-text;
+      &level-one-core-comment;
+    </definitions>
+    </div2>
+      <div2 id="ID-E067D597">
+	<head>Extended Interfaces</head>
+	<p>The interfaces defined here form part of the DOM Level 1
+	  Core  specification, but objects that  expose these
+	  interfaces will never be encountered in a DOM implementation
+	  that deals only with HTML. As such, HTML-only DOM
+	  implementations do not need to have objects that implement
+	  these interfaces.</p>
+	<definitions>
+	  &level-one-core-cdata-section;
+	  &level-one-core-doctype;
+	  &level-one-core-notation;
+	  &level-one-core-entity;
+	  &level-one-core-entity-reference;
+          &level-one-core-pi;
+	</definitions>
+      </div2>
+    </div1>
+      <!--
+      *************************************************************************
+      * END OF LEVEL ONE CORE                                                 *
+      *************************************************************************
+      -->
