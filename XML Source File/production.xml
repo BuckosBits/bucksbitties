@@ -1,0 +1,115 @@
+<!-- $Date: 1998/09/23 14:14:55 $ $Revision: 1.12 $ -->
+<div1 id="ID-2010795334" role="note">
+  <head>Production Notes (Non-Normative)</head>
+  <orglist role="editors">
+    <member>
+      <name>Gavin Nicol</name>
+      <affiliation>Inso EPS</affiliation>
+    </member>
+  </orglist>
+  <p>The DOM specification serves as a good example of the power of
+    using XML: all of the HTML documents, Java bindings, OMG IDL bindings, and
+    ECMA Script bindings are generated from a single set of XML source
+    files. This section outlines how this specification is written in
+    XML, and how the various derived works are created. </p>
+  <div2 id="ID-1181349559">
+    <head>The Document Type Definition</head> 
+    <p>This specification was written entirely in XML, using a DTD based
+      heavily on the DTD used by the XML Working Group for the XML
+      specification. The major difference between the DTD used by the XML
+      Working Group, and the DTD used for this specification is the
+      addition of a DTD module for interface specifications.</p>
+    <p>The DTD module for interfaces specifications is a very loose
+      translation of the Extended Backus-Naur Form (EBNF)
+      specification of the OMG IDL syntax into XML DTD syntax. In
+      addition to the translation, the ability to
+      <emph>describe</emph> the interfaces was added, thereby creating
+      a limited form of <emph>literate programming</emph> for
+      interface definitions.</p>
+    <p>While the DTD module is sufficient for the purposes of the DOM
+      WG, it is very loosely typed, meaning that there are very few
+      constraints placed on the type specifications (the type
+      information is effectively treated as an opaque string). In a DTD 
+      for object
+      to object communication, some stricter enforcement of data types
+      would probably be beneficial.</p>
+  </div2>
+  <div2 id="ID-934280754">
+    <head>The production process</head>
+    <p>The DOM specification is written using XML. All documents are valid
+      XML. In order to produce
+      the HTML versions of the specification, the object indexes, the Java
+      source code, and the OMG IDL and ECMA Script
+      definitions, the XML specification is <emph>converted</emph>.</p>
+    <p>The tool currently used for conversion is <emph>COST</emph> by
+      Joe English. <code>COST</code> takes the ESIS output of
+      <code>nsgmls</code>, creates an internal representation, and
+      then allows <emph>scripts</emph>, and <emph>event
+	handlers</emph> to be run over the internal data structure.
+      Event handlers allow document <emph>patterns</emph> and
+      associated processing to be specified: when the pattern is
+      matched during a pre-order traversal of a document subtree, the
+      associated action is executed. This is the heart of the
+      conversion process. Scripts are used to tie the various
+      components together. For example, each of the major derived data
+      sources (Java code etc.) is created by the execution of a
+      script, which in turn executes one or more event handlers. The
+      scripts and event handlers are specified using TCL.</p>
+    <p>The current version of <code>COST</code> has been somewhat
+      modified from the publicly available version. In particular,
+      it now runs correctly under 32-bit Windows, uses TCL 8.0, and 
+      correctly handles the case sensitivity of
+      XML (though it probably could not correctly handle native language
+      markup).</p>
+    <p>We could also have used <code>Jade</code>, by James Clark. Like
+      <code>COST</code>, <code>Jade</code> allows patterns and actions
+      to be specified, but <code>Jade</code> is based on DSSSL, an
+      international standard, whereas <code>COST</code> is
+      not. <code>Jade</code> is more powerful than <code>COST</code>
+      in many ways, but prior experience of the editor with Cost made it 
+      easier to use this rather than <code>Jade</code>. A future version 
+      or Level of
+      the DOM specification may be produced using <code>Jade</code> or
+      an <code>XSL</code> processor.</p>
+    <p>The complete XML source files are available at: <loc
+	href="xml-source.zip">&w3c.url;/xml-source.zip</loc></p>
+  </div2>
+  <div2 id="ID-235933356">
+    <head>Object Definitions</head>
+    <p>As stated earlier, all object definitions are specified in XML.
+      The Java bindings, OMG IDL bindings, and ECMA Script bindings are all
+      generated automatically from the XML source code.</p>
+    <p>This is possible because the information specified in XML is a
+      <emph>superset</emph> of what these other syntax need. This is a
+      general observation, and the same kind of technique can be
+      applied to many other areas: given rich structure, rich
+      processing and conversion are possible. For Java and OMG IDL, it
+      is basically just a matter of renaming syntactic keywords; for
+      ECMA Script, the process is somewhat more involved.</p>
+    <p>A typical object definition in XML looks something like this:
+<eg role="code">
+&lt;interface name="foo">
+  &lt;descr>&lt;p>Description goes here...&lt;/p>&lt;/descr>
+  &lt;method name="bar">
+    &lt;descr>&lt;p>Description goes here...&lt;/p>&lt;/descr>
+    &lt;parameters>
+      &lt;param name="baz" type="DOMString" attr="in">
+        &lt;descr>&lt;p>Description goes here...&lt;/p>&lt;/descr>
+      &lt;/param>
+    &lt;/parameters>
+    &lt;returns type="void">
+       &lt;descr>&lt;p>Description goes here...&lt;/p>&lt;/descr>
+    &lt;/returns>
+    &lt;raises>
+       &lt;!-- Throws no exceptions -->  
+    &lt;/raises>
+  &lt;/method>
+&lt;/interface></eg></p>
+    <p>As can easily be seen, this is quite verbose, but not unlike
+      OMG IDL. In fact, when the specification was originally
+      converted to use XML, the OMG IDL definitions were automatically
+      converted into the corresponding XML source using common Unix text
+      manipulation tools.</p>
+    </div2>
+</div1>
+ 
