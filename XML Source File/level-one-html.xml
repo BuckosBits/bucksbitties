@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *************************************************************************
+ * BEGINNING OF LEVEL ONE CORE                                           *
+ *************************************************************************
+-->
+<!-- $Date: 1998/10/01 09:00:54 $ $Revision: 1.18 $ -->
+<div1 id="ID-1342638483">  
+  <head>Document Object Model (HTML) Level 1</head>
+  <orglist role="editors">
+    <member>
+      <name>Mike Champion</name>
+      <affiliation>ArborText</affiliation>
+    </member>
+    <member>
+      <name>Vidur Apparao</name>
+      <affiliation>Netscape</affiliation>
+    </member>
+    <member>
+      <name>Scott Isaacs</name>
+      <affiliation>Microsoft (until January 1998)</affiliation>
+    </member>
+    <member>
+      <name>Chris Wilson</name>
+      <affiliation>Microsoft (after January 1998)</affiliation>
+    </member>
+    <member>
+      <name>Ian Jacobs</name>
+      <affiliation>W3C</affiliation>
+    </member>
+  </orglist>
+  <?GENERATE-MINI-TOC?>
+  <!--
+  ******************************************************
+  | INTRODUCTION                                       |
+  ******************************************************
+  -->
+  <div2 id="ID-1176245063">
+    <head>Introduction</head>
+    <p>This section extends the Level 1 Core API to describe objects and
+      methods specific to HTML documents. In general, the
+      functionality needed to manipulate hierarchical document
+      structures, elements, and attributes will be found in the core
+      section; functionality that depends on the specific
+      elements defined in HTML will be found in this section.</p>
+    <p>The goals of the HTML-specific DOM API are:
+      <ulist>
+	<item><p>to specialize and add functionality that relates
+	    specifically to HTML documents and elements.</p></item>
+	<item><p>to address issues of backwards compatibility with the
+	    "DOM Level 0".</p></item>
+	<item><p>to provide convenience mechanisms, where appropriate, for
+	    common and frequent operations on HTML documents.</p></item>
+      </ulist>
+    </p>
+    <p>The term "DOM Level 0" refers to a mix (not formally specified) of HTML
+    document functionalities offered by Netscape Navigator version 3.0 and
+    Microsoft Internet Explorer version 3.0. In some cases, attributes or
+    methods have been included for reasons of backward compatibility with "DOM
+    Level 0".</p>
+    <p>The key differences between the core DOM and the HTML
+      application of DOM is that the HTML Document Object Model
+      exposes a number of convenience methods and properties that are
+      consistent with the existing models and are more appropriate to
+      script writers. In many cases, these enhancements are not
+      applicable to a general DOM because they rely on the presence of
+      a predefined DTD. For DOM Level 1, the transitional and
+      frameset DTDs for HTML 4.0 are assumed. Interoperability
+      between implementations is only guaranteed for elements and
+      attributes that are specified in these DTDs. </p>
+    <p>More specifically, this document includes the following specializations
+      for HTML:
+      <ulist>
+	<item><p>An HTMLDocument interface, derived from the core
+	    Document interface. HTMLDocument specifies the operations
+	    and queries that can be made on a HTML
+	    document.</p></item>
+	<item><p>An HTMLElement interface, derived from the core
+	    Element interface. HTMLElement specifies the operations
+	    and queries that can be made on any HTML element. Methods
+	    on HTMLElement include those that allow for the retrieval
+	    and modification of attributes that apply to all HTML
+	    elements.</p></item>
+	<item><p>Specializations for all HTML elements that have
+	    attributes that extend beyond those specified in the
+	    HTMLElement interface. For all such attributes, the
+	    derived interface for the element contains explicit
+	    methods for setting and getting the values.</p></item>
+      </ulist>
+    </p>
+    <p>The DOM Level 1 does not include mechanisms to access and
+      modify style specified through CSS 1. Furthermore, it does not
+      define an event model for HTML documents. This functionality
+      is planned to be specified in a future Level of this specification.</p>
+  </div2>
+
+  <!--
+  ******************************************************
+  | HTML APPLICATION OF CORE DOM                       |
+  ******************************************************
+  -->
+  <!-- <note role="editorial">Properties and methods should be
+          on its own line, but is not.</note> -->
+  <div2 id="ID-535378264">
+    <head>HTML Application of Core DOM</head>
+    <div3 id="ID-2041995112">
+      <head>Naming Conventions</head>
+      <p>The HTML DOM follows a naming convention for properties,
+	methods, events, collections, and data types. All names are
+	defined as one or more English words concatenated together to
+	form a single string. </p>
+      <div4 id="ID-1958798402">
+	<head>Properties and Methods</head>
+	<p>The property or method name starts with the initial keyword
+	  in lowercase, and each subsequent word starts with a capital
+	  letter. For example, a property that returns document meta
+	  information such as the date the file was created might be
+	  named &quot;fileDateCreated&quot;. In the ECMAScript
+	  binding, properties are exposed as properties of a given
+	  object. In Java, properties are exposed with get and set
+	  methods. </p>
+      </div4>
+      <div4 id="ID-1234123411">
+	<head>Non-HTML 4.0 interfaces and attributes</head>
+	<p>While most of the interfaces defined below can
+           be mapped directly to elements defined in the HTML 4.0
+           Recommendation, some of them cannot. Similarly, not
+           all attributes listed below have counterparts in the
+           HTML 4.0 specification (and some do, but have been
+           renamed to avoid conflicts with scripting languages).
+           Interfaces and attribute definitions that have links 
+           to the HTML 4.0 specification have corresponding element
+	   and attribute definitions there; all
+           others are added by this specification, either for 
+           convenience or backwards compatibility with "DOM Level 0"
+           implementations.
+         </p>
+      </div4>
+      <!-- We don't have a list of events in this spec, so I've 
+      commented out this mention of them. -->
+      <!--
+    <div4 id="ID-1875601692">
+    <head>Events</head>
+    <p>All attributes for supporting events are spelled entirely
+      in lowercase letters. All events are prefixed with
+      &quot;on&quot;. Events that are exposed as properties also
+      follow this naming convention. For example, a click event is
+      named &quot;onclick&quot; and is exposed as a property named
+      &quot;onclick&quot; in the object model. </p>
+    </div4>
+      -->
+    </div3>
+  </div2>
+
+  <div2 id="ID-1019015399">
+    <head>Miscellaneous Object Definitions</head>
+    <definitions>
+      &level-one-html-htmlcollection;
+    </definitions>
+  </div2>
+  <div2 id="ID-1006298752">
+    <head>Objects related to HTML documents</head>
+    <definitions>
+      &level-one-html-htmldocument;
+    </definitions>
+  </div2>
+  <div2 id="ID-882764350">
+    <head>HTML Elements</head>
+    <div3 id="ID-642250288">
+      <head>Property Attributes</head>
+      <p> HTML attributes are exposed as properties on the element
+	object. The name of the exposed property always uses the
+	naming conventions, and is independent of the case of the
+	attribute in the source document. The data type of the
+	property is determined by the type of the attribute as
+	determined by the HTML 4.0 transitional and frameset DTDs. 
+        The attributes have the
+	semantics (including case-sensitivity)
+        given in the HTML 4.0 specification. </p>
+      <p>The attributes are exposed as properties for compatibility
+	with "DOM Level 0". This usage is deprecated because it can not be
+	generalized to all possible attribute names, as is required
+	both for XML and potentially for future versions of HTML. We
+	recommend the use of generic methods on the core Element 
+	interface for setting, getting and removing attributes.
+	<table border='1'>
+	  <tbody>
+	    <tr role='head'>
+	      <td>DTD Data Type</td>
+	      <td>Object Model Data Type</td>
+	    </tr>
+	    <tr>
+	      <td>CDATA</td>
+	      <td>DOMString</td>
+	    </tr>
+	    <tr>
+	      <td>Value list (e.g., (left | right | center))</td>
+	      <td>DOMString</td>
+	    </tr>
+	    <tr>
+	      <td>one-value Value list (e.g., (border))</td>
+	      <td>boolean</td>
+	    </tr>
+	    <tr>
+	      <td>Number</td>
+	      <td>long int</td>
+	    </tr>
+	  </tbody>
+	</table>
+      </p>
+      <p>The return value of an attribute that has a data type that is a
+	value list is always capitalized, independent of the case of
+	the value in the source document. For example, if the value of
+	the align attribute on a P element is "left" then it is
+	returned as "Left". For attributes with the <code>CDATA</code>
+	data type, the case of the return value is that given in 
+	the source document. </p>
+    </div3>
+    <div3 id="ID-213157251">
+      <head>Naming Exceptions</head>
+      <p>To avoid name-space conflicts, an attribute with the same
+	name as a keyword in one of our chosen binding languages is
+	prefixed. For HTML, the prefix used is "html".
+	For example, the <code>for</code> attribute of the
+        <code>LABEL</code> element
+	collides with loop construct naming conventions and is renamed
+	<code>htmlFor</code>.</p>
+    </div3>
+    <div3 id="ID-822762427">
+      <head>Exposing Element Type Names (tagName)</head>
+      <p>The element type names exposed through a property are in 
+        uppercase. For example, the body element type name is
+	exposed through the "tagName" property as "BODY".</p> 
+    </div3>
+  <div3 id="ID-011100101">
+    <head>The HTMLElement interface</head>
+    <definitions>
+	  &level-one-html-htmlelement;
+    </definitions>
+  </div3>
+
+    <div3 id="ID-798055546">
+      <head>Object definitions</head>
+      <definitions>
+          <!-- Head elements -->
+	  &level-one-html-htmlhtmlelement;
+	  &level-one-html-htmlheadelement;
+	  &level-one-html-htmllinkelement;
+	  &level-one-html-htmltitleelement;
+	  &level-one-html-htmlmetaelement;
+	  &level-one-html-htmlbaseelement;
+	  &level-one-html-htmlisindexelement;
+	  &level-one-html-htmlstyleelement;
+	  &level-one-html-htmlbodyelement;
+
+	  <!-- Form elements -->
+	  &level-one-html-htmlformelement;
+	  &level-one-html-htmlselectelement;
+	  &level-one-html-htmloptgroupelement;
+	  &level-one-html-htmloptionelement;
+	  &level-one-html-htmlinputelement;
+	  &level-one-html-htmltextareaelement;
+	  &level-one-html-htmlbuttonelement;
+	  &level-one-html-htmllabelelement;
+	  &level-one-html-htmlfieldsetelement;
+	  &level-one-html-htmllegendelement;
+      
+          <!-- List elements -->
+	  &level-one-html-htmlulistelement;
+	  &level-one-html-htmlolistelement;
+	  &level-one-html-htmldlistelement;
+	  &level-one-html-htmldirectoryelement;
+	  &level-one-html-htmlmenuelement;
+	  &level-one-html-htmllielement;
+
+	  <!-- Block elements -->
+	  &level-one-html-htmlblockquoteelement;
+	  &level-one-html-htmldivelement;
+	  &level-one-html-htmlparagraphelement;
+	  &level-one-html-htmlheadingelement;
+	  &level-one-html-htmlquoteelement;
+	
+	  <!-- Formatting and graphics elements -->
+	  &level-one-html-htmlpreelement;
+	  &level-one-html-htmlbrelement;
+	  &level-one-html-htmlbasefontelement;
+	  &level-one-html-htmlfontelement;
+	  &level-one-html-htmlhrelement;
+
+	  <!-- Modification notice elements -->
+	  &level-one-html-htmlmodelement;
+
+	  <!-- Hyperlink elements -->
+	  &level-one-html-htmlanchorelement;
+
+	  <!-- Replaced elements -->
+	  &level-one-html-htmlimageelement;
+	  &level-one-html-htmlobjectelement;
+	  &level-one-html-htmlparamelement;
+	  &level-one-html-htmlappletelement;
+
+	  <!-- Image maps -->
+	  &level-one-html-htmlmapelement;
+	  &level-one-html-htmlareaelement;
+
+	  <!-- Scripting  -->
+	  &level-one-html-htmlscriptelement;
+
+	  <!-- Table elements -->
+	  &level-one-html-htmltableelement;
+	  &level-one-html-htmltablecaptionelement;
+	  &level-one-html-htmltablecolelement;
+	  &level-one-html-htmltablesectionelement;
+	  &level-one-html-htmltablerowelement;
+	  &level-one-html-htmltablecellelement;
+
+          <!-- Frames -->
+	  &level-one-html-htmlframesetelement;
+	  &level-one-html-htmlframeelement;
+	  &level-one-html-htmliframeelement;
+
+	  <!-- Miscellaneous -->
+      </definitions>
+    </div3>
+  </div2>
+</div1>
