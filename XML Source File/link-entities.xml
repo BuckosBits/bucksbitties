@@ -1,0 +1,9 @@
+<!ENTITY javaidl      "http://java.sun.com/products/jdk/preview/docs/ext/idl/">
+<!ENTITY omg          "http://www.omg.org/">
+<!ENTITY msidl        "http://premium.microsoft.com/msdn/library/sdkdoc/mi-laref_49v0.htm">
+<!ENTITY html-3.2     "http://www.w3.org/TR/REC-html32">
+<!ENTITY html-4.0     "http://www.w3.org/TR/REC-html40">
+<!ENTITY ecma-262     "http://www.ecma.ch/stand/ecma-262.htm">
+<!ENTITY javascript   "http://developer.netscape.com/one/javascript/resources.html">
+<!ENTITY xml-spec     "http://www.w3.org/TR/REC-xml">
+<!ENTITY corba        "http://www.omg.org/corba/corbiiop.htm">
