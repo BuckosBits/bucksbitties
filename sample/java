@@ -37,3 +37,4 @@ try {
 ShardMapManager smm = ShardMapManagerFactory.GetSqlShardMapManager(smmConnectionString,  
           ShardMapManagerLoadPolicy.Lazy);
           RecoveryManager rm = smm.GetRecoveryManager();
+rm.DetachShard(s.Location, customerMap);
