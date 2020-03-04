@@ -9,3 +9,8 @@ def hello():
     return "Hello World!"
 (venv) $ pip install flask
 (venv) $ pip freeze > requirements.txt
+$ sls wsgi serve
+ * Running on http://localhost:5000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 109-942-480
