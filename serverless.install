@@ -1,5 +1,0 @@
-$ npm install serverless --global
-$ serverless login
-$ serverless --org moneyman573 --app my-first-app
-$ cd my-first-app
-$ serverless deploy
