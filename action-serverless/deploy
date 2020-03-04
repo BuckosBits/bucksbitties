@@ -37,3 +37,4 @@ endpoints:
   ANY - https://bl4r0gjjv5.execute-api.us-east-1.amazonaws.com/dev/{proxy+}
 functions:
   app: serverless-flask-dev-app
+$ sls deploy
