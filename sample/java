@@ -15,3 +15,22 @@ try (Connection conn = shardMap.openConnectionForKey(customerId, Configuration.g
 } catch (SQLException e) {
     e.printStackTrace();
 }
+int customerId = 12345;
+int productId = 4321;
+try {
+    SqlDatabaseUtils.getSqlRetryPolicy().executeAction(() -> {
+        // Looks up the key in the shard map and opens a connection to the shard
+        try (Connection conn = shardMap.openConnectionForKey(customerId, Configuration.getCredentialsConnectionString())) {
+            // Create a simple command that will insert or update the customer information
+            PreparedStatement ps = conn.prepareStatement("UPDATE Sales.Customer SET PersonID = ? WHERE CustomerID = ?");
+
+            ps.setInt(1, productId);
+            ps.setInt(2, customerId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    });
+} catch (Exception e) {
+    throw new StoreException(e.getMessage(), e);
+}
