@@ -1,0 +1,30 @@
+VSS.require(["TFS/Dashboards/WidgetHelpers", "TFS/WorkItemTracking/RestClient"], 
+    function (WidgetHelpers, TFS_Wit_WebApi) {
+        WidgetHelpers.IncludeWidgetStyles();
+        VSS.register("HelloWorldWidget2", function () { 
+            var projectId = VSS.getWebContext().project.id;
+
+            var getQueryInfo = function (widgetSettings) {
+                // Get a WIT client to make REST calls to Azure DevOps Services
+                return TFS_Wit_WebApi.getClient().getQuery(projectId, "Shared Queries/Feedback")
+                    .then(function (query) {
+                        // Do something with the query
+
+                        return WidgetHelpers.WidgetStatusHelper.Success();
+                    }, function (error) {                            
+                        return WidgetHelpers.WidgetStatusHelper.Failure(error.message);
+                    });
+            }
+
+            return {
+                load: function (widgetSettings) {
+                    // Set your title
+                    var $title = $('h2.title');
+                    $title.text('Hello World');
+
+                    return getQueryInfo(widgetSettings);
+                }
+            }
+        });
+        VSS.notifyLoadSucceeded();
+    });
