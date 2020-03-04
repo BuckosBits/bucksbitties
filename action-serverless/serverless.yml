@@ -322,3 +322,11 @@ metadata:
         env:
         - name: LOG_LEVEL
           value: {{ .Values.log.level }}
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ include "delivery.fullname" . | replace "." "" }}
+  labels:
+     ...
+  annotations:
+    kubernetes.io/change-cause: {{ .Values.reason }}
