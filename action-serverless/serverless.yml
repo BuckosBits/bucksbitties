@@ -132,3 +132,19 @@ functions:
     events:
       - http: ANY /
       - http: 'ANY {proxy+}'
+# serverless.yml
+
+functions:
+  app:
+    handler: wsgi.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
+  getUser:
+    handler: wsgi.handler
+    events:
+      - http: 'GET /users/{proxy+}'
+  createUser:
+    handler: wsgi.handler
+    events:
+      - http: 'POST /users'
