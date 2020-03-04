@@ -38,3 +38,4 @@ endpoints:
 functions:
   app: serverless-flask-dev-app
 $ sls deploy
+$ sls dynamodb install
