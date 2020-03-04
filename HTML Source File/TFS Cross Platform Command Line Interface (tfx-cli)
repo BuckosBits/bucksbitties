@@ -8,3 +8,15 @@
 |--- scripts                        
 |--- hello-world.html               // html page to be used for your widget  
 |--- vss-extension.json             // extension's manifest
+npm install vss-web-extension-sdk
+<!DOCTYPE html>
+    <html>
+        <head>          
+            <script src="sdk/scripts/VSS.SDK.min.js"></script>              
+        </head>
+        <body>
+            <div class="widget">
+                <h2 class="title"></h2>
+            </div>
+        </body>
+    </html>
