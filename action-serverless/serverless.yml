@@ -262,3 +262,14 @@ Serverless: Routes for createUser:
 Serverless: POST /users
 
 Serverless: Offline listening on http://localhost:3000
+# serverless.yml
+
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline #serverless-offline needs to be last in the list
+
+custom:
+  tableName: 'users-table-${self:provider.stage}'
+  dynamodb:
+    start:
+      migrate: true
