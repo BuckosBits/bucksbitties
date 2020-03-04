@@ -85,3 +85,19 @@ if (IS_OFFLINE === 'true') {
 app.use(bodyParser.json({ strict: false }));
 
 ... rest of application code ...
+$ sls offline start
+Dynamodb Local Started, Visit: http://localhost:8000/shell
+Serverless: DynamoDB - created table users-table-dev
+Serverless: Starting Offline: dev/us-east-1.
+
+Serverless: Routes for app:
+Serverless: ANY /
+Serverless: ANY /{proxy*}
+
+Serverless: Routes for getUser:
+Serverless: GET /users/{proxy*}
+
+Serverless: Routes for createUser:
+Serverless: POST /users
+
+Serverless: Offline listening on http://localhost:3000
