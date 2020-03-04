@@ -105,3 +105,9 @@ $ curl -H "Content-Type: application/json" -X POST http://localhost:3000/users -
 {"userId":"michaelglenn1","name":"Michael Glenn"}
 $ curl -H "Content-Type: application/json" -X GET http://localhost:3000/users/michaelglenn1
 {"userId":"michaelglenn1","name":"Michael Glenn"}
+helm install $HELM_CHARTS/package/ \
+     --set image.tag=0.1.0 \
+     --set image.repository=package \
+     --set dockerregistry=$ACR_SERVER \
+     --namespace backend \
+     --name package-v0.1.0
