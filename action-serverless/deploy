@@ -42,3 +42,5 @@ $ sls dynamodb install
 $ sls dynamodb start
 Dynamodb Local Started, Visit: http://localhost:8000/shell
 Serverless: DynamoDB - created table users-table-dev
+$ serverless install --url https://github.com/alexdebrie/serverless-flask --name my-flask-app
+$ cd my-flask-app && npm run setup
