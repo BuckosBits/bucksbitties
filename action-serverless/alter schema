@@ -19,3 +19,9 @@ const schema = new GraphQLSchema({
     }
   })
 })
+$ curl -G 'https://9qdmq5nvql.execute-api.us-east-1.amazonaws.com/dev/query' --data-urlencode 'query={greeting(firstName: "Jeremy")}'
+# {"data":{"greeting":"Hello, Jeremy."}}
+$ curl -G 'https://9qdmq5nvql.execute-api.us-east-1.amazonaws.com/dev/query' --data-urlencode 'query=mutation {changeNickname(firstName:
+2"Jeremy", nickname: "Jer")}'
+$ curl -G 'https://9qdmq5nvql.execute-api.us-east-1.amazonaws.com/dev/query' --data-urlencode 'query={greeting(firstName: "Jeremy")}'
+# {"data":{"greeting":"Hello, Jer."}}
