@@ -116,3 +116,6 @@ $ kubectl rollout history deployments/delivery-v010 -n backend
 deployment.extensions/delivery-v010
 REVISION  CHANGE-CAUSE
 1         Initial deployment
+~$ helm list
+NAME            REVISION    UPDATED                     STATUS        CHART            APP VERSION     NAMESPACE
+delivery-v0.1.0 1           Sun Apr  7 00:25:30 2019    DEPLOYED      delivery-v0.1.0  v0.1.0          backend
