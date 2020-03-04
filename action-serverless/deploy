@@ -23,3 +23,17 @@ $ serverless deploy
 
 $ curl -G 'https://9qdmq5nvql.execute-api.us-east-1.amazonaws.com/dev/query' --data-urlencode 'query={greeting(firstName: "Jeremy")}'
 # {"data":{"greeting":"Hello, Jeremy."}}
+$ sls deploy
+... snip ...
+Service Information
+service: serverless-flask
+stage: dev
+region: us-east-1
+stack: serverless-flask-dev
+api keys:
+  None
+endpoints:
+  ANY - https://bl4r0gjjv5.execute-api.us-east-1.amazonaws.com/dev
+  ANY - https://bl4r0gjjv5.execute-api.us-east-1.amazonaws.com/dev/{proxy+}
+functions:
+  app: serverless-flask-dev-app
