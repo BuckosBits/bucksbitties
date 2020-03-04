@@ -17,3 +17,25 @@ using (SqlConnection conn = customerShardMap.OpenConnectionForKey(customerId, Co
     cmd.Parameters.AddWithValue("@customerID", customerId);cmd.Parameters.AddWithValue("@newPersonID", newPersonId);
     cmd.ExecuteNonQuery();
 }
+int customerId = 12345;
+int newPersonId = 4321;
+
+Configuration.SqlRetryPolicy.ExecuteAction(() -> {
+
+    // Connect to the shard for a customer ID.
+    using (SqlConnection conn = customerShardMap.OpenConnectionForKey(customerId, Configuration.GetCredentialsConnectionString(), ConnectionOptions.Validate))
+    {
+        // Execute a simple command
+        SqlCommand cmd = conn.CreateCommand();
+
+        cmd.CommandText = @"UPDATE Sales.Customer
+                            SET PersonID = @newPersonID
+                            WHERE CustomerID = @customerID";
+
+        cmd.Parameters.AddWithValue("@customerID", customerId);
+        cmd.Parameters.AddWithValue("@newPersonID", newPersonId);
+        cmd.ExecuteNonQuery();
+
+        Console.WriteLine("Update completed");
+    }
+});
