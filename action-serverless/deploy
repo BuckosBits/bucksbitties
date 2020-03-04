@@ -59,3 +59,4 @@ endpoints:
 functions:
   app: my-express-application-dev-app
 $ sls deploy
+$ sls dynamodb install
