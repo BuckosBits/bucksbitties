@@ -19,3 +19,13 @@ sls wsgi serve
  * Restarting with stat
  * Debugger is active!
  * Debugger PIN: 109-942-480
+$ curl -H "Content-Type: application/json" -X POST http://localhost:5000/users -d '{"userId": "michaelglenn1", "name": "Michael Glenn"}'
+{
+  "name": "Michael Glenn",
+  "userId": "michaelglenn1"
+}
+$ curl -H "Content-Type: application/json" -X GET http://localhost:5000/users/michaelglenn1
+{
+  "name": "Michael Glenn",
+  "userId": "michaelglenn1"
+}
