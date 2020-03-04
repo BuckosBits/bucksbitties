@@ -53,3 +53,29 @@ def create_user():
         'userId': user_id,
         'name': name
     })
+# app.py
+
+import os
+
+import boto3
+
+from flask import Flask, jsonify, request
+app = Flask(__name__)
+
+USERS_TABLE = os.environ['USERS_TABLE']
+IS_OFFLINE = os.environ.get('IS_OFFLINE')
+
+if IS_OFFLINE:
+    client = boto3.client(
+        'dynamodb',
+        region_name='localhost',
+        endpoint_url='http://localhost:8000'
+    )
+else:
+    client = boto3.client('dynamodb')
+
+
+@app.route("/")
+def hello():
+    return jsonify(os.environ)
+... rest of application code ...
