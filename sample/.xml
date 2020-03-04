@@ -1,0 +1,5 @@
+<dependency> 
+    <groupId>com.microsoft.azure</groupId> 
+    <artifactId>elastic-db-tools</artifactId> 
+    <version>1.0.0</version> 
+</dependency>
