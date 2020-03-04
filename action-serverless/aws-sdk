@@ -1,1 +1,2 @@
 $ npm install --save aws-sdk
+$ npm install --save aws-sdk body-parser
