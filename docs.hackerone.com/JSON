@@ -157,3 +157,34 @@
         ],
         ...     
 }
+{
+    ...
+    "contributions": [
+        ... , 
+        {
+             "id": "HelloWorldWidget3",
+             "type": "ms.vss-dashboards-web.widget",
+             "targets": [
+                 "ms.vss-dashboards-web.widget-catalog",  "fabrikam.vsts-extensions-myExtensions.HelloWorldWidget.Configuration"
+             ],
+             "properties": {
+                 "name": "Hello World Widget 3 (with config)",
+                 "description": "My third widget",
+                 "previewImageUrl": "img/preview3.png",                       
+                 "uri": "hello-world3.html",
+                 "isNameConfigurable": true,
+                 "supportedSizes": [
+                    {
+                        "rowSpan": 1,
+                        "columnSpan": 2
+                    },
+                    {
+                        "rowSpan": 2,
+                        "columnSpan": 2
+                    }
+                 ],
+                 "supportedScopes": ["project_team"]
+             }
+         },
+         ...
+}
