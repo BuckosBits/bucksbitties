@@ -35,3 +35,11 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
 ENTRYPOINT ["dotnet", "Fabrikam.Workflow.Service.dll"]
+FROM build AS testrunner
+WORKDIR /src/tests
+
+COPY Fabrikam.Workflow.Service.Tests/*.csproj .
+RUN dotnet restore Fabrikam.Workflow.Service.Tests.csproj
+
+COPY Fabrikam.Workflow.Service.Tests/. .
+ENTRYPOINT ["dotnet", "test", "--logger:trx"]
