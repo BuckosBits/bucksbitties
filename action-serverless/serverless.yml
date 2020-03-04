@@ -124,3 +124,5 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         TableName: ${self:custom.tableName}
+$ pip install boto3
+$ pip freeze > requirements.txt
