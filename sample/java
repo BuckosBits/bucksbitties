@@ -38,3 +38,28 @@ ShardMapManager smm = ShardMapManagerFactory.GetSqlShardMapManager(smmConnection
           ShardMapManagerLoadPolicy.Lazy);
           RecoveryManager rm = smm.GetRecoveryManager();
 rm.DetachShard(s.Location, customerMap);
+rm.DetectMappingDifferences(location, shardMapName);
+ResolveMappingDifferences (RecoveryToken, MappingDifferenceResolution.KeepShardMapping);
+rm.AttachShard(location, shardMapName)
+rm.AttachShard(s.Location, customerMap);
+var gs = rm.DetectMappingDifferences(s.Location);
+   foreach (RecoveryToken g in gs)
+    {
+    rm.ResolveMappingDifferences(g, MappingDifferenceResolution.KeepShardMapping);
+    }
+    var shards = smm.GetShards();
+foreach (shard s in shards)
+{
+  if (s.Location.Server == Configuration.PrimaryServer)
+      {
+       ShardLocation slNew = new ShardLocation(Configuration.SecondaryServer, s.Location.Database);
+       rm.DetachShard(s.Location);
+       rm.AttachShard(slNew);
+       var gs = rm.DetectMappingDifferences(slNew);
+       foreach (RecoveryToken g in gs)
+         {
+            rm.ResolveMappingDifferences(g, MappingDifferenceResolution.KeepShardMapping);
+         }
+     }
+ }
+ 
