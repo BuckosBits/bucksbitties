@@ -337,3 +337,12 @@ metadata:
     arguments: '--pull --target testrunner'
     dockerFile: $(System.DefaultWorkingDirectory)/$(dockerFileName)
     imageName: '$(imageName)-test'
+- task: Docker@1
+  inputs:
+    azureSubscriptionEndpoint: $(AzureSubscription)
+    azureContainerRegistry: $(AzureContainerRegistry)
+    command: 'run'
+    containerName: testrunner
+    volumes: '$(System.DefaultWorkingDirectory)/TestResults:/app/tests/TestResults'
+    imageName: '$(imageName)-test'
+    runInBackground: false
