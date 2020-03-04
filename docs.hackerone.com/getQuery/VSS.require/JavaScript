@@ -48,3 +48,15 @@ $queryDropdown.on("change", function () {
      var eventArgs = WidgetHelpers.WidgetEvent.Args(customSettings);
      widgetConfigurationContext.notify(eventName, eventArgs);
  });
+return {
+    load: function (widgetSettings) {
+        // Set your title
+        var $title = $('h2.title');
+        $title.text('Hello World');
+
+        return getQueryInfo(widgetSettings);
+    },
+    reload: function (widgetSettings) {
+        return getQueryInfo(widgetSettings);
+    }
+}
