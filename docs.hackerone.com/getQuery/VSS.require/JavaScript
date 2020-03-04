@@ -60,3 +60,11 @@ return {
         return getQueryInfo(widgetSettings);
     }
 }
+var settings = JSON.parse(widgetSettings.customSettings.data);
+if (!settings || !settings.queryPath) {
+    var $container = $('#query-info-container');
+    $container.empty();
+    $container.text("Sorry nothing to show, please configure a query path.");
+
+    return WidgetHelpers.WidgetStatusHelper.Success();
+}
