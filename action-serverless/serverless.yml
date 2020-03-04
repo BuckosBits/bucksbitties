@@ -148,3 +148,20 @@ functions:
     handler: wsgi.handler
     events:
       - http: 'POST /users'
+# serverless.yml
+
+plugins:
+  - serverless-python-requirements
+  - serverless-wsgi
+  - serverless-dynamodb-local
+
+custom:
+  tableName: 'users-table-${self:provider.stage}'
+  wsgi:
+    app: app.app
+    packRequirements: false
+  pythonRequirements:
+    dockerizePip: non-linux
+  dynamodb:
+    start:
+      migrate: true
