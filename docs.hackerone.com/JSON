@@ -99,3 +99,61 @@
          "vso.work"
      ]
  }
+{
+    ...
+    "contributions": [
+        ... , 
+        {
+             "id": "HelloWorldWidget3",
+             "type": "ms.vss-dashboards-web.widget",
+             "targets": [
+                 "ms.vss-dashboards-web.widget-catalog",
+                 "fabrikam.vsts-extensions-myExtensions.HelloWorldWidget.Configuration"
+             ],
+             "properties": {
+                 "name": "Hello World Widget 3 (with config)",
+                 "description": "My third widget",
+                 "previewImageUrl": "img/preview3.png",                       
+                 "uri": "hello-world3.html",
+                 "supportedSizes": [
+                      {
+                             "rowSpan": 1,
+                             "columnSpan": 2
+                         }
+                     ],
+                 "supportedScopes": ["project_team"]
+             }
+         },
+         {
+             "id": "HelloWorldWidget.Configuration",
+             "type": "ms.vss-dashboards-web.widget-configuration",
+             "targets": [ "ms.vss-dashboards-web.widget-configuration" ],
+             "properties": {
+                 "name": "HelloWorldWidget Configuration",
+                 "description": "Configures HelloWorldWidget",
+                 "uri": "configuration.html"
+             }
+         }
+    ],
+    "files": [
+            {
+                "path": "hello-world.html", "addressable": true
+            },
+             {
+                "path": "hello-world2.html", "addressable": true
+            },
+            {
+                "path": "hello-world3.html", "addressable": true
+            },
+            {
+                "path": "configuration.html", "addressable": true
+            },
+            {
+                "path": "sdk/scripts", "addressable": true
+            },
+            {
+                "path": "img", "addressable": true
+            }
+        ],
+        ...     
+}
