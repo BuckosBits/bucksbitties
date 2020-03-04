@@ -7,3 +7,5 @@ app = Flask(__name__)
 @app.route("/")
 def hello():
     return "Hello World!"
+(venv) $ pip install flask
+(venv) $ pip freeze > requirements.txt
