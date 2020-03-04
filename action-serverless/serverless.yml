@@ -346,3 +346,36 @@ metadata:
     volumes: '$(System.DefaultWorkingDirectory)/TestResults:/app/tests/TestResults'
     imageName: '$(imageName)-test'
     runInBackground: false
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'VSTest'
+    testResultsFiles: 'TestResults/*.trx'
+    searchFolder: '$(System.DefaultWorkingDirectory)'
+    publishRunAttachments: true
+    - task: Docker@1
+  inputs:
+    azureSubscriptionEndpoint: $(AzureSubscription)
+    azureContainerRegistry: $(AzureContainerRegistry)
+    dockerFile: $(System.DefaultWorkingDirectory)/$(dockerFileName)
+    includeLatestTag: false
+    imageName: '$(imageName)'
+    - task: Docker@1
+  inputs:
+    azureSubscriptionEndpoint: $(AzureSubscription)
+    azureContainerRegistry: $(AzureContainerRegistry)
+    command: 'Push an image'
+    imageName: '$(imageName)'
+    includeSourceTags: false
+    - task: HelmDeploy@0
+  inputs:
+    command: package
+    chartPath: $(chartPath)
+    chartVersion: $(Build.SourceBranchName)
+    arguments: '--app-version $(Build.SourceBranchName)'
+    task: AzureCLI@1
+  inputs:
+    azureSubscription: $(AzureSubscription)
+    scriptLocation: inlineScript
+    inlineScript: |
+    az acr helm push $(System.ArtifactsDirectory)/$(repositoryName)-$(Build.SourceBranchName).tgz --name $(AzureContainerRegistry);
+    
