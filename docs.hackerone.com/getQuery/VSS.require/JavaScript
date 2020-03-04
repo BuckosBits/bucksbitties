@@ -68,3 +68,19 @@ if (!settings || !settings.queryPath) {
 
     return WidgetHelpers.WidgetStatusHelper.Success();
 }
+return {
+    load: function (widgetSettings) {
+        // Set your title
+        var $title = $('h2.title');
+        $title.text(widgetSettings.name);
+
+        return getQueryInfo(widgetSettings);
+    },
+    reload: function (widgetSettings) {
+        // Set your title
+        var $title = $('h2.title');
+        $title.text(widgetSettings.name);
+
+        return getQueryInfo(widgetSettings);
+    }
+}
