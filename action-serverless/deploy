@@ -39,3 +39,6 @@ functions:
   app: serverless-flask-dev-app
 $ sls deploy
 $ sls dynamodb install
+$ sls dynamodb start
+Dynamodb Local Started, Visit: http://localhost:8000/shell
+Serverless: DynamoDB - created table users-table-dev
