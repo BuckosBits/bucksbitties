@@ -330,3 +330,10 @@ metadata:
      ...
   annotations:
     kubernetes.io/change-cause: {{ .Values.reason }}
+- task: Docker@1
+  inputs:
+    azureSubscriptionEndpoint: $(AzureSubscription)
+    azureContainerRegistry: $(AzureContainerRegistry)
+    arguments: '--pull --target testrunner'
+    dockerFile: $(System.DefaultWorkingDirectory)/$(dockerFileName)
+    imageName: '$(imageName)-test'
