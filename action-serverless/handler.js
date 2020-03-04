@@ -35,3 +35,5 @@ module.exports.query = (event, context, callback) => graphql(schema, event.query
     result => callback(null, {statusCode: 200, body: JSON.stringify(result)}),
     err => callback(err)
   )
+const AWS = require('aws-sdk');
+const dynamoDb = new AWS.DynamoDB.DocumentClient();
