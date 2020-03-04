@@ -289,3 +289,16 @@ functions:
     events:
       - http: ANY /
       - http: 'ANY {proxy+}'
+trigger:
+  batch: true
+  branches:
+    include:
+    # for new release to production: release flow strategy
+    - release/delivery/v*
+    - refs/release/delivery/v*
+    - master
+    - feature/delivery/*
+    - topic/delivery/*
+  paths:
+    include:
+    - /src/shipping/delivery/
