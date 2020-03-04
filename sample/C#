@@ -1,0 +1,2 @@
+ShardMapManager smm = ShardMapManagerFactory.GetSqlShardMapManager(smmConnectionString, ShardMapManagerLoadPolicy.Lazy);
+RangeShardMap<int> customerShardMap = smm.GetRangeShardMap<int>("customerMap");
