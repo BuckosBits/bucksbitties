@@ -37,3 +37,38 @@ module.exports.query = (event, context, callback) => graphql(schema, event.query
   )
 const AWS = require('aws-sdk');
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const promisify = foo => new Promise((resolve, reject) => {
+  foo((error, result) => {
+    if(error) {
+      reject(error)
+    } else {
+      resolve(result)
+    }
+  })
+})
+
+// replace previous implementation of getGreeting
+const getGreeting = firstName => promisify(callback =>
+  dynamoDb.get({
+    TableName: process.env.DYNAMODB_TABLE,
+    Key: { firstName },
+  }, callback))
+  .then(result => {
+    if(!result.Item) {
+      return firstName
+    }
+    return result.Item.nickname
+  })
+  .then(name => `Hello, ${name}.`)
+
+  // add method for updates
+const changeNickname = (firstName, nickname) => promisify(callback =>
+  dynamoDb.update({
+    TableName: process.env.DYNAMODB_TABLE,
+    Key: { firstName },
+    UpdateExpression: 'SET nickname = :nickname',
+    ExpressionAttributeValues: {
+      ':nickname': nickname
+    }
+  }, callback))
+  .then(() => nickname)
