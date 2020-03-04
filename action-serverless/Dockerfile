@@ -43,3 +43,5 @@ RUN dotnet restore Fabrikam.Workflow.Service.Tests.csproj
 
 COPY Fabrikam.Workflow.Service.Tests/. .
 ENTRYPOINT ["dotnet", "test", "--logger:trx"]
+docker build . -t delivery-test:1 --target=testrunner
+docker run -p 8080:8080 delivery-test:1
