@@ -34,3 +34,6 @@ try {
 } catch (Exception e) {
     throw new StoreException(e.getMessage(), e);
 }
+ShardMapManager smm = ShardMapManagerFactory.GetSqlShardMapManager(smmConnectionString,  
+          ShardMapManagerLoadPolicy.Lazy);
+          RecoveryManager rm = smm.GetRecoveryManager();
