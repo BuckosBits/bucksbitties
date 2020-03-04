@@ -9,3 +9,4 @@ $ curl -H "Content-Type: application/json" -X GET ${BASE_DOMAIN}/users/alexdebri
   "name": "Michael Glenn",
   "userId": "michaelglenn1"
 }
+export BASE_DOMAIN=https://bl4r0gjjv5.execute-api.us-east-1.amazonaws.com/dev
