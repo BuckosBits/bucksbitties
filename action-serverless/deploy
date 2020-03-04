@@ -112,3 +112,7 @@ helm install $HELM_CHARTS/package/ \
      --namespace backend \
      --name package-v0.1.0
 helm install <package-chart-name> --version <desiredVersion>
+$ kubectl rollout history deployments/delivery-v010 -n backend
+deployment.extensions/delivery-v010
+REVISION  CHANGE-CAUSE
+1         Initial deployment
