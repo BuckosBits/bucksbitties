@@ -1,2 +1,4 @@
 ShardMapManager smm = ShardMapManagerFactory.GetSqlShardMapManager(smmConnectionString, ShardMapManagerLoadPolicy.Lazy);
 RangeShardMap<int> customerShardMap = smm.GetRangeShardMap<int>("customerMap");
+// Syntax:
+public SqlConnection OpenConnectionForKey<TKey>(TKey key, string connectionString, ConnectionOptions options)
