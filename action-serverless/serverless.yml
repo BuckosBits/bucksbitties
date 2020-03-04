@@ -126,3 +126,9 @@ resources:
         TableName: ${self:custom.tableName}
 $ pip install boto3
 $ pip freeze > requirements.txt
+functions:
+  app:
+    handler: wsgi.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
