@@ -1,0 +1,10 @@
+|--- README.md
+|--- sdk    
+    |--- node_modules           
+    |--- scripts
+        |--- VSS.SDK.min.js       
+|--- img                        
+    |--- logo.png                           
+|--- scripts                        
+|--- hello-world.html               // html page to be used for your widget  
+|--- vss-extension.json             // extension's manifest
