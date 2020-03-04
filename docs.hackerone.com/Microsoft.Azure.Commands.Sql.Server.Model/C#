@@ -1,1 +1,2 @@
 public class AzureSqlServerModel
+public string FullyQualifiedDomainName { get; set; }
