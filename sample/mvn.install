@@ -1,1 +1,2 @@
 mvn install
+mvn -q exec:java "-Dexec.mainClass=com.microsoft.azure.elasticdb.samples.elasticscalestarterkit.Program"
