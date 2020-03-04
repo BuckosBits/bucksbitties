@@ -228,3 +228,19 @@ functions:
     events:
       - http: ANY /
       - http: 'ANY {proxy+}'
+# serverless.yml
+
+functions:
+  app:
+    handler: index.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
+  getUser:
+    handler: index.handler
+    events:
+      - http: 'GET /users/{proxy+}'
+  createUser:
+    handler: index.handler
+    events:
+      - http: 'POST /users'
