@@ -1,0 +1,22 @@
+[ 
+   { 
+      "CustomError": "Custom Failure Reason",
+      "StackTraceErrors":[ 
+         "org.openqa.selenium.TimeoutException: Expected condition failed: waiting for presence of element located by:",
+         "org.openqa.selenium.WebDriverException: Get by url is not supported."
+      ],
+      "CustomFields" : 
+         [
+            "version-11",
+            "Test-ok"
+         ],
+      "Tags" : ["Sanity", "Nightly"]
+   },
+   { 
+      "CustomError": "Element not found",
+      "StackTraceErrors":[ 
+         "<<Exception Message 1>",
+         "<<Exception Message 2>"
+      ]
+   }
+]
