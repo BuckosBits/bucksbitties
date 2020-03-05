@@ -1,13 +1,13 @@
-# bucksbitties
+# BucksBitties
+# Html Source Files
+# XML Source Files
+# ACTION-SERVERLESS
+# DOCS.HACKERONE.COM
+# EOSIO-EXPLORER
+# PACKAGE/DOCKER/AUTHENTICATE
+# SAMPLE
 # Build and Release Folders
-bin-debug/
-bin-release/
-[Oo]bj/
-[Bb]in/
-
 # Other files and folders
-.settings/
-
 # Executables
 *.swf
 *.air
@@ -15,27 +15,21 @@ bin-release/
 *.apk
 
 # Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
+
 # should NOT be excluded as they contain compiler settings and other important
+
 # information for Eclipse / Flash Builder.
-
 FROM node:10-slim
-
 LABEL version="1.0.0"
 LABEL repository="https://github.com/aaronpanch/action-serverless"
 LABEL homepage="https://github.com/aaronpanch/action-serverless"
 LABEL maintainer="Aaron Panchal <aaron.panchal@gmail.com>"
-
 LABEL "com.github.actions.name"="GitHub Action for Serverless Framework"
 LABEL "com.github.actions.description"="Wraps the Serverless CLI"
 LABEL "com.github.actions.icon"="zap"
 LABEL "com.github.actions.color"="gray-dark"
 
 # Install serverless globally
-RUN yarn global add serverless
-
-ADD "entrypoint.sh" "/entrypoint.sh"
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["help"]
 
 MIT License
 
@@ -60,11 +54,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 # GitHub Action for Serverless
-
 This Action wraps the [Serverless Framework](https://serverless.com/framework/docs/getting-started/) CLI to enable common commands. See their documentation for usage and provider selection.
 
 ## Usage
-
 You'll first have to have a Serverless project as outlined in Serverless's [Getting Started](https://serverless.com/framework/docs/getting-started/).  Suppose your provider of choice were Amazon AWS. A workflow could look as follows to install dependencies, and deploy to a Lambda function.
 
 _Note:_ We're first using the NPM Action to install project dependencies, then running `serverless deploy` via the action.
@@ -92,17 +84,14 @@ action "deploy" {
 ```
 
 ### Secrets
-
 Depending on the Serverless provider chosen, you'll need to supply appropriate credentials.  The above example illustrates a typical AWS scenario, but Serverless supports other cloud providers.
 
 Typically, with any cloud provider, their particular authentication environment params are **Required**.
 
 ### Environment Variables
-
 - `SERVICE_ROOT` - **Optional**.  To specify a particular subdirectory of your project that contains the Serverless service (the directory with the `serverless.yml` file) you can specify a `SERVICE_ROOT`.  This action will `cd` into that directory then execute commands.  The default root is `.` (project root).
 
 #### Example
-
 To navigate and deploy two services (in this example "Users" and "Admins") in different subdirectories:
 
 ```hcl
