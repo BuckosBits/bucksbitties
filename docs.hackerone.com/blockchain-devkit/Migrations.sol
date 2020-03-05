@@ -21,3 +21,8 @@ contract Migrations {
     upgraded.setCompleted(last_completed_migration);
   }
 }
+var Migrations = artifacts.require("./Migrations.sol");
+
+module.exports = function(deployer) {
+  deployer.deploy(Migrations);
+};
