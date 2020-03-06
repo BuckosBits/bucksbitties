@@ -1,3 +1,296 @@
+URI, UUID, and structures
+You should be familiar with REST architecture before writing an integration. Read this overview page to gain a good understanding of Bitbucket's REST implementation.
+On this page
+
+URI structure
+HTTP methods
+UUID
+User object and UUID
+Repository object and UUID
+Team object and UUID
+Standard error responses
+Standard ISO-8601 timestamps
+URI structure
+All Bitbucket Cloud requests start with the https://api.bitbucket.org/2.0 prefix (for the 2.0 API) and https://api.bitbucket.org/1.0 prefix (1.0 API).
+The next segment of the URI path depends on the endpoint of the request. For example, using the curl command and the repositories endpoint you can list all the issues on Bitbucket's tutorial repository:
+curl https://api.bitbucket.org/2.0/repositories/tutorials/tutorials.bitbucket.org
+Given a specific endpoint, you can then drill down to a particular aspect or resource of that endpoint. The issues resource on a repository is an example:
+curl https://api.bitbucket.org/1.0/repositories/tutorials/tutorials.bitbucket.org/issues
+HTTP methods
+A given endpoint or resource has a series of actions (or methods) associated with it. The Bitbucket service supports these standard HTTP methods:
+Call	Description
+GET	Retrieves information.
+PUT	Updates existing information.
+POST	Creates new information.
+DELETE	Removes existing information.
+For example, you can call use the POST action on the issues resource and create an issue on the issue tracker.
+Specifying content length
+
+You can get a 411 Length Required response. If this happens, the API requires a Content-Length header but the client is not sending it. You should add the header yourself, for example using the curl client:
+curl -r PUT --header "Content-Length: 0" -u user:pass https://api.bitbucket.org/1.0/emails/rap@atlassian.com
+Universally Unique Identifier
+UUID's provide a single point of recognition for users, teams, and repositories. The UUID is distinct from the username, team name, and repository name fields and remains the same even when those fields change. For example when a user changes their username or moves a repository you will need to modify calls which use those identifiers but not if you are pointing to the UUID.
+UUID examples and structure
+UUID's work with both the 1.0 and 2.0 APIs for the user, team, and repository objects. The following examples the following characters are replacements for curly brackets: %7B replaces { and %7D replaces }. You will see this structure in the following example sections.
+User object and UUID
+When you make a call using either the username or the UUID for that user the response is the same.
+Call with username:
+curl https://api.bitbucket.org/2.0/users/tutorials
+*Call with UUID for the user:
+curl https://api.bitbucket.org/2.0/users/%7Bc788b2da-b7a2-404c-9e26-d3f077557007%7D
+Response
+
+{
+    "username": "tutorials",
+    "nickname": "tutorials",
+    "account_status": "active",
+    "website": "https://tutorials.bitbucket.org/",
+    "display_name": "tutorials account",
+    "uuid": "{c788b2da-b7a2-404c-9e26-d3f077557007}",
+    "links": {
+        "self": {
+            "href": "https://api.bitbucket.org/2.0/users/tutorials"
+        },
+        "repositories": {
+            "href": "https://api.bitbucket.org/2.0/repositories/tutorials"
+        },
+        "html": {
+            "href": "https://bitbucket.org/tutorials"
+        },
+        "followers": {
+            "href": "https://api.bitbucket.org/2.0/users/tutorials/followers"
+        },
+        "avatar": {
+            "href": "https://bitbucket-assetroot.s3.amazonaws.com/c/photos/2013/Nov/25/tutorials-avatar-1563784409-6_avatar.png"
+        },
+        "following": {
+            "href": "https://api.bitbucket.org/2.0/users/tutorials/following"
+        }
+    },
+    "created_on": "2011-12-20T16:34:07.132459+00:00",
+    "location": "Santa Monica, CA",
+    "type": "user"
+}
+Repository object and UUID
+Once you have the UUID for a repository you no longer need a username or team name to make the API call so long as you use an empty field. This helps you resolve repositories no matter if the username or team name changes.
+Call with team name (1team) and repository name (moxie):
+curl https://api.bitbucket.org/2.0/repositories/1team/moxie
+Call with UUID and empty field:
+curl https://api.bitbucket.org/2.0/repositories/%7B%7D/%7B21fa9bf8-b5b2-4891-97ed-d590bad0f871%7D
+Call with UUID and teamname:
+curl https://api.bitbucket.org/2.0/repositories/1team/%7B21fa9bf8-b5b2-4891-97ed-d590bad0f871%7D
+Response
+
+{
+    "created_on": "2013-11-08T01:11:03.222520+00:00",
+    "description": "",
+    "fork_policy": "allow_forks",
+    "full_name": "1team/moxie",
+    "has_issues": false,
+    "has_wiki": false,
+    "is_private": false,
+    "language": "",
+    "links": {
+        "avatar": {
+            "href": "https://bitbucket.org/1team/moxie/avatar/32/"
+        },
+        "branches": {
+            "href": "https://api.bitbucket.org/2.0/repositories/1team/moxie/refs/branches"
+        },
+        "clone": [
+            {
+                "href": "https://bitbucket.org/1team/moxie.git",
+                "name": "https"
+            },
+            {
+                "href": "ssh://git@bitbucket.org/1team/moxie.git",
+                "name": "ssh"
+            }
+        ],
+        "commits": {
+            "href": "https://api.bitbucket.org/2.0/repositories/1team/moxie/commits"
+        },
+        "downloads": {
+            "href": "https://api.bitbucket.org/2.0/repositories/1team/moxie/downloads"
+        },
+        "forks": {
+            "href": "https://api.bitbucket.org/2.0/repositories/1team/moxie/forks"
+        },
+        "hooks": {
+            "href": "https://api.bitbucket.org/2.0/repositories/1team/moxie/hooks"
+        },
+        "html": {
+            "href": "https://bitbucket.org/1team/moxie"
+        },
+        "pullrequests": {
+            "href": "https://api.bitbucket.org/2.0/repositories/1team/moxie/pullrequests"
+        },
+        "self": {
+            "href": "https://api.bitbucket.org/2.0/repositories/1team/moxie"
+        },
+        "tags": {
+            "href": "https://api.bitbucket.org/2.0/repositories/1team/moxie/refs/tags"
+        },
+        "watchers": {
+            "href": "https://api.bitbucket.org/2.0/repositories/1team/moxie/watchers"
+        }
+    },
+    "name": "moxie",
+    "owner": {
+        "display_name": "the team",
+        "links": {
+            "avatar": {
+                "href": "https://bitbucket.org/account/1team/avatar/32/"
+            },
+            "html": {
+                "href": "https://bitbucket.org/1team/"
+            },
+            "self": {
+                "href": "https://api.bitbucket.org/2.0/teams/1team"
+            }
+        },
+        "type": "team",
+        "username": "1team",
+        "uuid": "{aa559944-83c9-4963-a9a8-69ac8d9cf5d2}"
+    },
+    "project": {
+        "key": "PROJ",
+        "links": {
+            "avatar": {
+                "href": "https://bitbucket.org/account/user/1team/projects/PROJ/avatar/32"
+            },
+            "html": {
+                "href": "https://bitbucket.org/account/user/1team/projects/PROJ"
+            }
+        },
+        "name": "Untitled project",
+        "type": "project",
+        "uuid": "{ab52aaeb-16ad-4fb0-bb1d-47e4f00367ff}"
+    },
+    "scm": "git",
+    "size": 33348,
+    "type": "repository",
+    "updated_on": "2013-11-08T01:11:03.263237+00:00",
+    "uuid": "{21fa9bf8-b5b2-4891-97ed-d590bad0f871}",
+    "website": ""
+}
+Team object and UUID
+This example shows a call for a list of team members using both the team name and with the UUID for the team object. As the call is unauthenticated in the following example the response object will only show members with public profiles. The response is the same in either case.
+Call with teamname
+
+curl https://api.bitbucket.org/2.0/teams/1team/members
+Call with UUID for team object
+
+curl https://api.bitbucket.org/2.0/teams/%7Baa559944-83c9-4963-a9a8-69ac8d9cf5d2%7D/members
+Response
+
+{
+    "page": 1,
+    "pagelen": 50,
+    "size": 2,
+    "values": [
+        {
+            "created_on": "2011-12-20T16:34:07.132459+00:00",
+            "display_name": "tutorials account",
+            "links": {
+                "avatar": {
+                    "href": "https://bitbucket.org/account/tutorials/avatar/32/"
+                },
+                "followers": {
+                    "href": "https://api.bitbucket.org/2.0/users/tutorials/followers"
+                },
+                "following": {
+                    "href": "https://api.bitbucket.org/2.0/users/tutorials/following"
+                },
+                "hooks": {
+                    "href": "https://api.bitbucket.org/2.0/users/tutorials/hooks"
+                },
+                "html": {
+                    "href": "https://bitbucket.org/tutorials/"
+                },
+                "repositories": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/tutorials"
+                },
+                "self": {
+                    "href": "https://api.bitbucket.org/2.0/users/tutorials"
+                },
+                "snippets": {
+                    "href": "https://api.bitbucket.org/2.0/snippets/tutorials"
+                }
+            },
+            "location": null,
+            "type": "user",
+            "username": "tutorials",
+            "nickname": "tutorials",
+            "account_status": "active",
+            "uuid": "{c788b2da-b7a2-404c-9e26-d3f077557007}",
+            "website": "https://tutorials.bitbucket.org/"
+        },
+        {
+            "created_on": "2013-12-10T14:44:13+00:00",
+            "display_name": "Dan Stevens [Atlassian]",
+            "links": {
+                "avatar": {
+                    "href": "https://bitbucket.org/account/dans9190/avatar/32/"
+                },
+                "followers": {
+                    "href": "https://api.bitbucket.org/2.0/users/dans9190/followers"
+                },
+                "following": {
+                    "href": "https://api.bitbucket.org/2.0/users/dans9190/following"
+                },
+                "hooks": {
+                    "href": "https://api.bitbucket.org/2.0/users/dans9190/hooks"
+                },
+                "html": {
+                    "href": "https://bitbucket.org/dans9190/"
+                },
+                "repositories": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/dans9190"
+                },
+                "self": {
+                    "href": "https://api.bitbucket.org/2.0/users/dans9190"
+                },
+                "snippets": {
+                    "href": "https://api.bitbucket.org/2.0/snippets/dans9190"
+                }
+            },
+            "location": null,
+            "type": "user",
+            "username": "dans9190",
+            "nickname": "dans9190",
+            "account_status": "active",
+            "uuid": "{1cd06601-cd0e-4fce-be03-e9ac226978b7}",
+            "website": ""
+        }
+    ]
+}
+Standardized error responses
+The 2.0 API standardizes the error response layout. The 2.0 API serves a JSON object along with the appropriate HTTP status code. The JSON object provides a detailed problem description.
+{
+    "type": "error",
+    "error": {
+        "message": "Bad request",
+        "fields": {
+            "src": [
+                "This field is required."
+            ]
+        },
+        "detail": "You must specify a valid source branch when creating a pull request.",
+        "id": "d23a1cc5178f7637f3d9bf2d13824258",
+        "data": {
+          "extra": "Optional, endpoint-specific data to further augment the error."
+        }
+    }
+}
+This object contains an error element which contains the following nested elements:
+Element	Description
+message	A short description of the problem. This element is always present. Its value may be localized.
+fields	This optional element is used in response to POST or PUT operations in which clients have provided invalid input. It contains a list of one or more client-provided fields that failed validation. The values may be localized.
+detail	An optional detailed explanation of the failure. Its value may be localized.
+id	An optional unique error identifier that identifies the error in Bitbucket's logging system. If you feel you hit a bug in an API and this field is provided, please mention it if you decide to contact support as it will greatly help us narrow down the problem.
+Standard ISO-8601 timestamps
+All 2.0 APIs use standardized ISO-8601 timestamps. In most cases, our APIs return UTC timestamps and for these, the timezone offset part will be 00:00. In rare cases where the original localized timestamp has significance, the timezone offset may identify the event's original timezone.
 Cors and hypermedia
 This section describes Cross-origin resource sharing (CORS), what content types we support in requests and responses, and hyperlinking resources in each json responses.
 On this page
