@@ -40,3 +40,6 @@ Configuration.SqlRetryPolicy.ExecuteAction(() -> {
         Console.WriteLine("Update completed");
     }
 });
+TEST_CONN_USER
+TEST_CONN_PASSWORD
+TEST_CONN_SERVER_NAME
