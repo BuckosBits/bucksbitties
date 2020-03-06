@@ -1,0 +1,223 @@
+|--- README.md
+|--- sdk    
+    |--- node_modules           
+    |--- scripts
+        |--- VSS.SDK.min.js       
+|--- img                        
+    |--- logo.png                           
+|--- scripts                        
+|--- hello-world.html               // html page to be used for your widget  
+|--- hello-world2.html              // renamed copy of hello-world.html
+|--- vss-extension.json             // extension's manifest
+<!DOCTYPE html>
+<html>
+    <head>                          
+        <script src="sdk/scripts/VSS.SDK.min.js"></script>              
+        <script type="text/javascript">
+            VSS.init({
+                explicitNotifyLoaded: true,
+                usePlatformStyles: true
+            });
+
+            VSS.require("TFS/Dashboards/WidgetHelpers", function (WidgetHelpers) {
+                WidgetHelpers.IncludeWidgetStyles();
+                VSS.register("HelloWorldWidget2", function () {                
+                    return {
+                        load: function (widgetSettings) {
+                            var $title = $('h2.title');
+                            $title.text('Hello World');
+
+                            return WidgetHelpers.WidgetStatusHelper.Success();
+                        }
+                    }
+                });
+                VSS.notifyLoadSucceeded();
+            });       
+        </script>
+    </head>
+    <body>
+        <div class="widget">
+            <h2 class="title"></h2>
+            <div id="query-info-container"></div>
+        </div>
+    </body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>    
+    <script src="sdk/scripts/VSS.SDK.min.js"></script>
+    <script type="text/javascript">
+        VSS.init({
+            explicitNotifyLoaded: true,
+            usePlatformStyles: true
+        });
+
+        VSS.require(["TFS/Dashboards/WidgetHelpers", "TFS/WorkItemTracking/RestClient"], 
+            function (WidgetHelpers, TFS_Wit_WebApi) {
+                WidgetHelpers.IncludeWidgetStyles();
+                VSS.register("HelloWorldWidget2", function () {                
+                    var projectId = VSS.getWebContext().project.id;
+
+                    var getQueryInfo = function (widgetSettings) {
+                        // Get a WIT client to make REST calls to Azure DevOps Services
+                        return TFS_Wit_WebApi.getClient().getQuery(projectId, "Shared Queries/Feedback")
+                            .then(function (query) {
+                                // Create a list with query details                                
+                                var $list = $('<ul>');
+                                $list.append($('<li>').text("Query ID: " + query.id));
+                                $list.append($('<li>').text("Query Name: " + query.name));
+                                $list.append($('<li>').text("Created By: " + (query.createdBy ? query.createdBy.displayName: "<unknown>") ));
+
+                                // Append the list to the query-info-container
+                                var $container = $('#query-info-container');
+                                $container.empty();
+                                $container.append($list);
+
+                                // Use the widget helper and return success as Widget Status
+                                return WidgetHelpers.WidgetStatusHelper.Success();
+                            }, function (error) {
+                                // Use the widget helper and return failure as Widget Status
+                                return WidgetHelpers.WidgetStatusHelper.Failure(error.message);
+                            });
+                    }
+
+                    return {
+                        load: function (widgetSettings) {
+                            // Set your title
+                            var $title = $('h2.title');
+                            $title.text('Hello World');
+
+                            return getQueryInfo(widgetSettings);
+                        }
+                    }
+                });
+            VSS.notifyLoadSucceeded();
+        });       
+    </script>
+
+</head>
+<body>
+    <div class="widget">
+        <h2 class="title"></h2>
+        <div id="query-info-container"></div>
+    </div>
+</body>
+</html>
+|--- README.md
+|--- sdk    
+    |--- node_modules           
+    |--- scripts
+        |--- VSS.SDK.min.js       
+|--- img                        
+    |--- logo.png                           
+|--- scripts          
+|--- configuration.html                          
+|--- hello-world.html               // html page to be used for your widget  
+|--- hello-world2.html              // renamed copy of hello-world.html
+|--- hello-world3.html              // renamed copy of hello-world2.html
+|--- vss-extension.json             // extension's manifest
+<!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml">
+        <head>                          
+            <script src="sdk/scripts/VSS.SDK.min.js"></script>              
+        </head>
+        <body>
+            <div class="container">
+                <fieldset>
+                    <label class="label">Query: </label>
+                    <select id="query-path-dropdown" style="margin-top:10px">
+                        <option value="" selected disabled hidden>Please select a query</option>
+                        <option value="Shared Queries/Feedback">Shared Queries/Feedback</option>
+                        <option value="Shared Queries/My Bugs">Shared Queries/My Bugs</option>
+                        <option value="Shared Queries/My Tasks">Shared Queries/My Tasks</option>                        
+                    </select>
+                </fieldset>             
+            </div>
+        </body>
+    </html>
+<script type="text/javascript">
+        VSS.init({                        
+            explicitNotifyLoaded: true,
+            usePlatformStyles: true
+        });
+
+        VSS.require("TFS/Dashboards/WidgetHelpers", function (WidgetHelpers) {
+            VSS.register("HelloWorldWidget.Configuration", function () {   
+                var $queryDropdown = $("#query-path-dropdown"); 
+
+                return {
+                    load: function (widgetSettings, widgetConfigurationContext) {
+                        var settings = JSON.parse(widgetSettings.customSettings.data);
+                        if (settings && settings.queryPath) {
+                             $queryDropdown.val(settings.queryPath);
+                         }
+
+                        return WidgetHelpers.WidgetStatusHelper.Success();
+                    },
+                    onSave: function() {
+                        var customSettings = {
+                            data: JSON.stringify({
+                                    queryPath: $queryDropdown.val()
+                                })
+                        };
+                        return WidgetHelpers.WidgetConfigurationSave.Valid(customSettings); 
+                    }
+                }
+            });
+            VSS.notifyLoadSucceeded();
+        });
+    </script>
+<!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml">
+        <head>                          
+            <script src="sdk/scripts/VSS.SDK.min.js"></script>      
+            <script type="text/javascript">
+                VSS.init({                        
+                    explicitNotifyLoaded: true,
+                    usePlatformStyles: true
+                });
+
+                VSS.require("TFS/Dashboards/WidgetHelpers", function (WidgetHelpers) {
+                    VSS.register("HelloWorldWidget.Configuration", function () {   
+                        var $queryDropdown = $("#query-path-dropdown");
+
+                        return {
+                            load: function (widgetSettings, widgetConfigurationContext) {
+                                var settings = JSON.parse(widgetSettings.customSettings.data);
+                                if (settings && settings.queryPath) {
+                                     $queryDropdown.val(settings.queryPath);
+                                 }
+
+                                 $queryDropdown.on("change", function () {
+                                     var customSettings = {data: JSON.stringify({queryPath: $queryDropdown.val()})};
+                                     var eventName = WidgetHelpers.WidgetEvent.ConfigurationChange;
+                                     var eventArgs = WidgetHelpers.WidgetEvent.Args(customSettings);
+                                     widgetConfigurationContext.notify(eventName, eventArgs);
+                                 });
+
+                                return WidgetHelpers.WidgetStatusHelper.Success();
+                            },
+                            onSave: function() {
+                                var customSettings = {data: JSON.stringify({queryPath: $queryDropdown.val()})};
+                                return WidgetHelpers.WidgetConfigurationSave.Valid(customSettings); 
+                            }
+                        }
+                    });
+                    VSS.notifyLoadSucceeded();
+                });
+            </script>       
+        </head>
+        <body>
+            <div class="container">
+                <fieldset>
+                    <label class="label">Query: </label>
+                    <select id="query-path-dropdown" style="margin-top:10px">
+                        <option value="" selected disabled hidden>Please select a query</option>
+                        <option value="Shared Queries/Feedback">Shared Queries/Feedback</option>
+                        <option value="Shared Queries/My Bugs">Shared Queries/My Bugs</option>
+                        <option value="Shared Queries/My Tasks">Shared Queries/My Tasks</option>                        
+                    </select>
+                </fieldset>     
+            </div>
+        </body>
+    </html>
