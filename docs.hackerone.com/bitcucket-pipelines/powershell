@@ -1,0 +1,20 @@
+Login-Michael Glenn
+
+Set-AzContext -Subscription <Invest86>
+$fhirRg = New-AzResourceGroup -Name ctm-fhir-blueprint -Location eastus
+$fhirServiceName = <fhir service name>
+New-AzResourceGroupDeployment -ResourceGroupName $fhirRg.ResourceGroupName -TemplateFile ..\arm-templates\azuredeploy-fhir.json -serviceName $fhirServiceName
+$metadataUrl = "https://$fhirServiceName.azurewebsites.net/metadata" 
+$metadata = Invoke-WebRequest -Uri $metadataUrl
+$metadata.RawContent
+$rg = New-AzResourceGroup -Name ctm-blueprint -Location eastus
+$ta4hServiceName = <text analytics service>
+New-AzResourceGroupDeployment -TemplateFile ..\arm-templates\azuredeploy-ta4h.json -ResourceGroupName $rg.ResourceGroupName -serviceName $ta4hServiceName
+$statusUrl = "https://$ta4hServiceName-webapp.azurewebsites.net/status"
+$status = Invoke-WebRequest -Uri $statusUrl
+$status.RawContent
+$structuringServiceName = <ctm structuring service>
+New-AzResourceGroupDeployment -TemplateFile ..\arm-templates\azuredeploy-structuring.json -ResourceGroupName $rg.ResourceGroupName -serviceName $structuringServiceName -textAnalyticsService $ta4hServiceName
+$botServiceName = "myService"
+$saasSubscriptionId = .\marketplace -name $botServiceName -planId free
+.\default_azuredeploy.ps1 -ResourceGroup $rg.ResourceGroupName -saasSubscriptionId $saasSubscriptionId  -serviceName $botServiceName -botLocation US
