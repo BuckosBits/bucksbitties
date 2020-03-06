@@ -480,3 +480,16 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    Open API Specification
+Bitbucket uses the Open API Specification (OAI, formerly known as Swagger) to describe its APIs. Our OAI specification schema is hosted at https://api.bitbucket.org/swagger.json and serves as the canonical definition and comprehensive declaration of all available endpoints.
+The OAI specification makes writing client applications easier by: auto-generating boilerplate code (like data object classes) and dealing with authentication and error handling.
+You can find a comprehensive set of open tools for the OAI specification at: https://github.com/swagger-api.
+JSON Schema
+Bitbucket uses JSON Schema to describe the layout of every type of object consumed or produced by the API. These schemas are collected under the #definitions element of our swagger.json file.
+When an endpoint expects an object as part of a POST or PUT, it also expects the object to validate against the JSON schemas. The same applies to objects returned by an endpoint.
+Condensed Versus Full Objects
+Most objects in Bitbucket come both in "full" and "partial" representation. The full representation is when all elements are included. This is the layout returned by a resource's self location (e.g. /2.0/repositories/foo/bar), as well as resource collection endpoints (e.g. /2.0/repositories).
+However, Bitbucket objects often embed other objects. For example, a repository object embeds a user object for its owner. Likewise, a pullrequest object embeds its repository object.
+These related objects are embedded, or inlined, to reduce the "chatter" when clients make frequent followup API calls to collect information on common, related information.
+Embedded related objects are typically limited in their fields to avoid such object graphs from becoming too deep and noisy. They often exclude their own nested objects in an attempt to strike a balance between performance and utility.
+An object's embedded or condensed representation tends to be standardized, meaning the fields included is the same set, regardless of where the object was embedded.
