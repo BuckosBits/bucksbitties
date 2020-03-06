@@ -674,3 +674,41 @@ However, Bitbucket objects often embed other objects. For example, a repository 
 These related objects are embedded, or inlined, to reduce the "chatter" when clients make frequent followup API calls to collect information on common, related information.
 Embedded related objects are typically limited in their fields to avoid such object graphs from becoming too deep and noisy. They often exclude their own nested objects in an attempt to strike a balance between performance and utility.
 An object's embedded or condensed representation tends to be standardized, meaning the fields included is the same set, regardless of where the object was embedded.
+Tags
+users	(No description)
+teams	(No description)
+repositories	(No description)
+source	
+Browse the source code in the repository and create new commits by uploading.
+refs	(No description)
+commits	(No description)
+pullrequests	(No description)
+issue_tracker	
+The issue resources provide functionality for getting information on issues in an issue tracker, creating new issues, updating them and deleting them.
+You can access public issues without authentication, but you can't gain access to private repositories' issues. By authenticating, you will get the ability to create issues, as well as access to updating data or deleting issues you have access to.
+wiki	(No description)
+downloads	(No description)
+snippets	(No description)
+webhooks	
+Webhooks provide a way to configure Bitbucket Cloud to make requests to your server (or another external service) whenever certain events occur in Bitbucket Cloud.
+A webhook consists of:
+A subject -- The resource that generates the events. Currently, this resource is the repository, user account, or team where you create the webhook.
+One or more event -- The default event is a repository push, but you can select multiple events that can trigger the webhook.
+A URL -- The endpoint where you want Bitbucket to send the event payloads when a matching event happens.
+There are two parts to getting a webhook to work: creating the webhook and triggering the webhook. After you create a webhook for an event, every time that event occurs, Bitbucket sends a payload request that describes the event to the specified URL. Thus, you can think of webhooks as a kind of notification system.
+Use webhooks to integrate applications with Bitbucket Cloud. The following use cases provides examples of when you would want to use webhooks:
+Every time a user pushes commits in a repository, you may want to notify your CI server to start a build.
+Every time a user pushes commits or creates a pull request, you may want to display a notification in your application.
+commitstatuses	
+Commit statuses provide a way to tag commits with meta data, like automated build results.
+branchrestrictions	
+Repository owners and administrators can set branch management rules on a repository that control what can be pushed by whom. Through these rules, you can enforce a project or team workflow. For example, owners or administrators can:
+Limit push powers
+Prevent branch (bookmark) deletion
+Prevent history re-writes (Git only)
+projects	
+Bitbucket Cloud projects make it easier for teams to focus on a goal, product, or process by organizing their repositories.
+pipelines	
+Bitbucket Pipelines brings continuous delivery to Bitbucket Cloud, empowering teams with full branching to deployment visibility and faster feedback loops.
+deployments	
+Teams are deploying code faster than ever, thanks to continuous delivery practices and tools like Bitbucket Pipelines. Bitbucket Deployments gives teams visibility into their deployment environments and helps teams to track how far changes have progressed in their deployment pipeline.
