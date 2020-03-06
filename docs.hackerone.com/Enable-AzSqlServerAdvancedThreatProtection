@@ -1,8 +1,0 @@
-Enable-AzSqlServerAdvancedThreatProtection
-      [-InputObject <AzureSqlServerModel>]
-      -ServerName <String>
-      [-ResourceGroupName] <String>
-      [-DefaultProfile <IAzureContextContainer>]
-      [-WhatIf]
-      [-Confirm]
-      [<CommonParameters>]
