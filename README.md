@@ -5,7 +5,6 @@
 # ACTION-SERVERLESS
 # DOCS.HACKERONE.COM
 # EOSIO-EXPLORER
-# SAMPLE
 # Build and Release Folders
 # Other files and folders
 # Executables
