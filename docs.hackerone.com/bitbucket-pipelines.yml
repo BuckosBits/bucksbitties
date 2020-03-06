@@ -1,3 +1,128 @@
+Cors and hypermedia
+This section describes Cross-origin resource sharing (CORS), what content types we support in requests and responses, and hyperlinking resources in each json responses.
+On this page
+
+CORS
+Supported content types
+Resource links
+Cors
+The Bitbucket API supports Cross-origin resource sharing to allow requests for restricted resources across domains. For more information you can refer to:
+Wikipedia article on CORS
+W3C CORS recommendation
+Sending a general request from the api to bitbucket.com:
+curl -i https://api.bitbucket.org -H "origin: http://bitbucket.com"
+
+Gives this result:
+HTTP/1.1 302 FOUND
+Server: nginx/1.6.2
+Vary: Cookie
+Cache-Control: max-age=900
+Content-Type: text/html; charset=utf-8
+Strict-Transport-Security: max-age=31536000
+Date: Tue, 21 Jun 2016 17:54:37 GMT
+Location: http://confluence.atlassian.com/x/IYBGDQ
+X-Served-By: app-110
+X-Static-Version: 2c820eb0d2b3
+ETag: "d41d8cd98f00b204e9800998ecf8427e"
+X-Content-Type-Options: nosniff
+X-Render-Time: 0.00379920005798
+Connection: Keep-Alive
+X-Version: 2c820eb0d2b3
+X-Frame-Options: SAMEORIGIN
+X-Request-Count: 383
+X-Cache-Info: cached
+Content-Length: 0
+Sending the same request with the CORS check -X OPTIONS in the call:
+curl -i https://api.bitbucket.org -H "origin: http://bitbucket.com" -X OPTIONS
+
+Gives this result:
+HTTP/1.1 302 FOUND
+Server: nginx/1.6.2
+Vary: Cookie
+Cache-Control: max-age=900
+Content-Type: text/html; charset=utf-8
+Access-Control-Expose-Headers: Accept-Ranges, Content-Encoding, Content-Length, Content-Type, ETag, Last-Modified
+Strict-Transport-Security: max-age=31536000
+Date: Tue, 21 Jun 2016 18:04:30 GMT
+Access-Control-Max-Age: 86400
+Location: http://confluence.atlassian.com/x/IYBGDQ
+X-Served-By: app-111
+Access-Control-Allow-Origin: *
+X-Static-Version: 2c820eb0d2b3
+ETag: "d41d8cd98f00b204e9800998ecf8427e"
+X-Content-Type-Options: nosniff
+X-Render-Time: 0.00371098518372
+Connection: keep-alive
+X-Version: 2c820eb0d2b3
+X-Frame-Options: SAMEORIGIN
+X-Request-Count: 357
+Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS
+Access-Control-Allow-Headers: Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, Origin, Range, X-CsrftokenX-Requested-With
+X-Cache-Info: not cacheable; request wasn't a GET or HEAD
+Content-Length: 0
+Supported content types
+The default and primary content type for 2.0 APIs is JSON. This applies both to responses from the server and to the request bodies provided by the client.
+Unless documented otherwise, whenever creating a new (POST) or modifying an existing (PUT) object, your client must provide the object's normal representation. Not every object element can be mutated. For example, a repository's created_on date is an auto-generated, immutable field. Your client can omit immutable fields from a request body.
+In some cases, a resource might also accept regular application/x-www-url-form-encoded POST and PUT bodies. Such bodies can be more convenient in scripts and command line usage. Requests bodies can contain contain nested elements or they can be flat (without nested elements). Clients can send flat request bodies as either as application/json or as application/x-www-url-form-encoded. Nested objects always require JSON.
+Resource links
+Every 2.0 object contains a links element that points to related resources or alternate representations. Use links to quickly discover and traverse to related objects. Links serve a "self-documenting" function for each endpoint. For example, the following request for a specific user:
+$ curl https://api.bitbucket.org/2.0/users/tutorials
+
+{
+    "username": "tutorials",
+    "nickname": "tutorials",
+    "account_status": "active",
+    "website": "https://tutorials.bitbucket.org/",
+    "display_name": "tutorials account",
+    "uuid": "{c788b2da-b7a2-404c-9e26-d3f077557007}",
+    "links": {
+        "self": {
+            "href": "https://api.bitbucket.org/2.0/users/tutorials"
+        },
+        "repositories": {
+            "href": "https://api.bitbucket.org/2.0/repositories/tutorials"
+        },
+        "html": {
+            "href": "https://bitbucket.org/tutorials"
+        },
+        "followers": {
+            "href": "https://api.bitbucket.org/2.0/users/tutorials/followers"
+        },
+        "avatar": {
+            "href": "https://bitbucket-assetroot.s3.amazonaws.com/c/photos/2013/Nov/25/tutorials-avatar-1563784409-6_avatar.png"
+        },
+        "following": {
+            "href": "https://api.bitbucket.org/2.0/users/tutorials/following"
+        }
+    },
+    "created_on": "2011-12-20T16:34:07.132459+00:00",
+    "location": "Santa Monica, CA",
+    "type": "user"
+}
+Links can be actual REST API resources or they can be informational. In this example, informative resources include the user's avatar and the HTML URL for the user's Bitbucket account. Your client should avoid hardcoding an API's URL and instead use the URLs returned in API responses.
+A link's key is its rel (relationship) attribute and it contains a mandatory href element. For example, the following link:
+"self": {
+      "href": "https://api.bitbucket.org/api/2.0/users/tutorials"
+}
+The rel for this link is self and the href is https://api.bitbucket.org/api/2.0/users/tutorials. A single rel key can contain an list (array) of href objects. Your client should anticipate that any rel key can contain one or more href objects.
+Finally, links can also contain optional elements. Two common optional elements are the name element and the title element. They are often used to disambiguate links that share the same rel key. In the example below, the repository object that contains a clone link with two href objects. Each object contains the optional name element to clarify its use.
+"links": {
+  "self": {
+    "href": "https://api.bitbucket.org/2.0/repositories/evzijst/bitbucket"
+  },
+  "clone": [
+    {
+      "href": "https://api.bitbucket.org/evzijst/bitbucket.git",
+      "name": "https"
+    },
+    {
+      "href": "ssh://git@bitbucket.org/erik/bitbucket.git",
+      "name": "ssh"
+    }
+  ],
+  ...
+}
+Links can support URI Templates; Those that do contain a "templated": "true" element.
 - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.0
   variables:
     AWS_ACCESS_KEY_ID: '<string>'
