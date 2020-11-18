@@ -20,7 +20,7 @@
 		<intellij.perfectomobile.version>18.4.0.0 </intellij.perfectomobile.version>
 		<qaf.version>2.1.14</qaf.version>
 		<qafsupport.version>2.1.14</qafsupport.version>
-		<appium.client.version>6.1.0</appium.client.version>
+		<appium.client.version>7.4.0</appium.client.version>
 	</properties>
 
 	<scm>
