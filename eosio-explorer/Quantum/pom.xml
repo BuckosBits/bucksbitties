@@ -7,6 +7,12 @@
 	<groupId>com.quantum</groupId>
 	<artifactId>quantum-support</artifactId>
 	<version>1.20.1</version>
+	</project>
+<dependency>
+	<groupId>com.google.guava</groupId>
+	<artifactId>guava</artifactId>
+	<version>[30.0-jre,)</version>
+</dependency>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -208,24 +214,19 @@
 
 
 		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>29.0-android</version>
-
-			<version>30.0-android</version>
-
-			<version>30.0-jre</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.apache.commons</groupId>
-		    <artifactId>commons-collections4</artifactId>
-		    <version>4.1</version>
-		</dependency>
-	</dependencies>
-</project>
+		</project>
+	<dependency>
+		<groupId>com.google.guava</groupId>
+		<artifactId>guava</artifactId>
+		<version>[30.0-jre,)</version>
+	</dependency>
+	<version>30.0-android</version>
+	<version>30.0-jre</version>
+	</dependency>
 <dependency>
-  <groupId>com.google.guava</groupId>
-  <artifactId>guava</artifactId>
-  <version>[30.0-jre,)</version>
+	<groupId>org.apache.commons</groupId>
+	<artifactId>commons-collections4</artifactId>
+	<version>4.1</version>
 </dependency>
+</dependencies>
+
