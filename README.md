@@ -20,9 +20,9 @@
 # information for Eclipse / Flash Builder.
 FROM node:10-slim
 LABEL version="1.0.0"
-LABEL repository="https://github.com/aaronpanch/action-serverless"
-LABEL homepage="https://github.com/aaronpanch/action-serverless"
-LABEL maintainer="Aaron Panchal <aaron.panchal@gmail.com>"
+LABEL repository="https://github.com/BuckosBits/bucksbitties
+LABEL homepage="https://github.com/BuckosBits/bucksbitties
+LABEL maintainer="Michael Glenn <mbg198618@gmail.com>"
 LABEL "com.github.actions.name"="GitHub Action for Serverless Framework"
 LABEL "com.github.actions.description"="Wraps the Serverless CLI"
 LABEL "com.github.actions.icon"="zap"
@@ -32,7 +32,7 @@ LABEL "com.github.actions.color"="gray-dark"
 
 MIT License
 
-Copyright (c) 2019 Aaron Panchal
+Copyright (c) 2021 Michael Glenn
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
