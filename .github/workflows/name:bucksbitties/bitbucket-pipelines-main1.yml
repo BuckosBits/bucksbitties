@@ -5,10 +5,10 @@ name:bucksbitties/bitbucket-pipelines-main1.yml
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
-  push:https://github.com/BuckosBits/bucksbitties/new/master
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  push:https://github.com/BuckosBits/bucksbitties/bitbucket-pipelines-main1.yml
+  branches: [ main1 ]
+  pull_request:https://github.com/MoneyMan573/bucksbitties
+    branches: [ main1 ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
