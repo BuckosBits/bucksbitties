@@ -19,7 +19,7 @@
 
 # information for Eclipse / Flash Builder.
 FROM node:10-slim
-LABEL version="1.0.0"
+LABEL version="v2.0"
 LABEL repository="https://github.com/BuckosBits/bucksbitties
 LABEL homepage="https://github.com/BuckosBits/bucksbitties
 LABEL maintainer="Michael Glenn <mbg198618@gmail.com>"
@@ -69,13 +69,13 @@ workflow "Deploy via Serverless" {
 }
 
 action "install" {
-  uses = "actions/npm@master"
+  uses = "actions/BuckosBits/bucksbitties@master"
   args = "install"
 }
 
 action "deploy" {
   needs = ["install"]
-  uses = "aaronpanch/action-serverless@master"
+  uses = "BuckosBits/bucksbitties@master"
   args = "deploy"
   secrets = [
     "AWS_ACCESS_KEY_ID",
@@ -97,7 +97,7 @@ To navigate and deploy two services (in this example "Users" and "Admins") in di
 
 ```hcl
 action "Deploy Users Service" {
-  uses = "aaronpanch/action-serverless@master"
+  uses = "BuckosBits/bucksbitties@master"
   args = "deploy"
   env = {
     SERVICE_ROOT = "users_service"
