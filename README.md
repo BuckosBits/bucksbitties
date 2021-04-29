@@ -53,10 +53,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 # GitHub Action for Serverless
-This Action wraps the [Serverless Framework](https://serverless.com/framework/docs/getting-started/) CLI to enable common commands. See their documentation for usage and provider selection.
+This Action wraps the [Serverless Framework](https://serverless.com/framework/docs/getting-started/) 
+CLI to enable common commands. See their documentation for usage and provider selection.
 
 ## Usage
-You'll first have to have a Serverless project as outlined in Serverless's [Getting Started](https://serverless.com/framework/docs/getting-started/).  Suppose your provider of choice were Amazon AWS. A workflow could look as follows to install dependencies, and deploy to a Lambda function.
+You'll first have to have a Serverless project as outlined in Serverless's [Getting Started](https://serverless.com/framework/docs/getting-started/).  
+Suppose your provider of choice were Amazon AWS. A workflow could look as follows to install dependencies, and deploy to a Lambda function.
 
 _Note:_ We're first using the NPM Action to install project dependencies, then running `serverless deploy` via the action.
 
@@ -107,7 +109,7 @@ action "Deploy Users Service" {
 }
 
 action "Deploy Admin Service" {
-  uses = "aaronpanch/action-serverless@master"
+  uses = "BuckosBits/bucksbitties@master"
   args = "deploy"
   env = {
     SERVICE_ROOT = "admin_service"
