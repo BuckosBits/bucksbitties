@@ -20,9 +20,9 @@
 # information for Eclipse / Flash Builder.
 FROM node:10-slim
 LABEL version="1.0.0"
-LABEL repository="https://github.com/aaronpanch/action-serverless"
-LABEL homepage="https://github.com/aaronpanch/action-serverless"
-LABEL maintainer="Aaron Panchal <aaron.panchal@gmail.com>"
+LABEL repository="https://github.com/BigGuy573/action-serverless"
+LABEL homepage="https://github.com/BigGuy5574action-serverless"
+LABEL maintainer="Aaron Panchal <mbg198618@gmail.com>"
 LABEL "com.github.actions.name"="GitHub Action for Serverless Framework"
 LABEL "com.github.actions.description"="Wraps the Serverless CLI"
 LABEL "com.github.actions.icon"="zap"
@@ -73,7 +73,7 @@ action "install" {
 
 action "deploy" {
   needs = ["install"]
-  uses = "aaronpanch/action-serverless@master"
+  uses = "BigGuy573/action-serverless@master"
   args = "deploy"
   secrets = [
     "AWS_ACCESS_KEY_ID",
@@ -95,7 +95,7 @@ To navigate and deploy two services (in this example "Users" and "Admins") in di
 
 ```hcl
 action "Deploy Users Service" {
-  uses = "aaronpanch/action-serverless@master"
+  uses = "BigGuy573/action-serverless@master"
   args = "deploy"
   env = {
     SERVICE_ROOT = "users_service"
@@ -107,7 +107,7 @@ action "Deploy Users Service" {
 }
 
 action "Deploy Admin Service" {
-  uses = "aaronpanch/action-serverless@master"
+  uses = "BigGuy573/action-serverless@master"
   args = "deploy"
   env = {
     SERVICE_ROOT = "admin_service"
@@ -653,7 +653,7 @@ Deploy multicontainer Docker environment as an AWS Elastic Beanstalk application
       same "printed page" as the copyright notice for easier
       identification within third-party archives.
 
-   Copyright [yyyy] [name of copyright owner]
+   Copyright [2021] [Michael Glenn]
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
