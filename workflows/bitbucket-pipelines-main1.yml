@@ -1,11 +1,11 @@
 # This is a basic workflow to help you get started with Actions
 
-name:bucksbitties/bitbucket-pipelines-main1.yml
+name:bucksbitties/workflows/bitbucket-pipelines-main1.yml
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
-  push:https://github.com/BuckosBits/bucksbitties/.github/workflows/name:bucksbitties/bitbucket-pipelines-main1.yml
+  push:https://github.com/BuckosBits/bucksbitties/workflows/bucksbitties/bitbucket-pipelines-main1.yml
     branches: [ main ]
   pull_request:MoneyMan573/bucksbitties
     branches: [ main ]
