@@ -21,7 +21,7 @@
 FROM node:10-slim
 LABEL version="1.0.0"
 LABEL repository="https://github.com/BigGuy573/action-serverless"
-LABEL homepage="https://github.com/BigGuy5574action-serverless"
+LABEL homepage="https://github.com/BigGuy573/action-serverless"
 LABEL maintainer="Michael Glenn @BigGuy573" <mbg198618@gmail.com>"
 LABEL "com.github.actions.name"="GitHub Action for Serverless Framework"
 LABEL "com.github.actions.description"="Wraps the Serverless CLI"
