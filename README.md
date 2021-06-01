@@ -22,6 +22,10 @@ FROM node:10-slim
 # <<<<<<< BigGuy573/BuckosBits/master/MoneyMan573.main.yml
 LABEL version="1.0.0"
 LABEL repository="https://github.com/BigGuy573/action-serverless"
+# <<<<<<< MoneyMan573/BuckosBits/bucksbitties
+LABEL homepage="https://github.com/BigGuy5574action-serverless"
+LABEL maintainer="Michael Glenn @BigGuy573" <mbg198618@gmail.com>"
+# =======
 # <<<<<<< BuckosBits/bucksbitties/MoneyMan573/bucksbitties/main.yml
 LABEL homepage="https://github.com/BigGuy573/action-serverless"
 LABEL maintainer="Michael Glenn @BigGuy573" <mbg198618@gmail.com>"
@@ -33,6 +37,7 @@ LABEL version="v2.0"
 LABEL repository="https://github.com/BuckosBits/bucksbitties
 LABEL homepage="https://github.com/BuckosBits/bucksbitties
 LABEL maintainer="Michael Glenn <mbg198618@gmail.com>"
+# >>>>>>> master
 # >>>>>>> master
 # >>>>>>> master
 LABEL "com.github.actions.name"="GitHub Action for Serverless Framework"
@@ -138,7 +143,10 @@ To navigate and deploy two services (in this example "Users" and "Admins") in di
 #
 # ```hcl
 action "Deploy Users Service" {
+# <<<<<<< MoneyMan573/BuckosBits/bucksbitties
+# =======
 # <<<<<<< BuckosBits/bucksbitties/MoneyMan573/bucksbitties/main.yml
+# >>>>>>> master
   uses = "BigGuy573/action-serverless@master"
   args = "deploy"
   env = {
@@ -152,6 +160,8 @@ action "Deploy Users Service" {
 
 action "Deploy Admin Service" {
   uses = "BigGuy573/action-serverless@master"
+# <<<<<<< MoneyMan573/BuckosBits/bucksbitties
+# =======
 # =======
 # <<<<<<< BigGuy573/BuckosBits/master/MoneyMan573.main.yml
  # uses = "BigGuy573/action-serverless@master"
@@ -173,6 +183,7 @@ action "Deploy Admin Service" {
   uses = "BigGuy573/action-serverless@master"
 # =======
   uses = "BuckosBits/bucksbitties@master"
+# >>>>>>> master
 # >>>>>>> master
 # >>>>>>> master
   args = "deploy"
