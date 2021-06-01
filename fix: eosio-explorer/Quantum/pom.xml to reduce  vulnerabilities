@@ -1,0 +1,1319 @@
+From 538fdf0abbd0ed0bad739488f1854ae2fb795c55 Mon Sep 17 00:00:00 2001
+From: snyk-bot <snyk-bot@snyk.io>
+Date: Tue, 12 May 2020 02:30:52 -0500
+Subject: [PATCH 01/35] fix: eosio-explorer/Quantum/pom.xml to reduce
+ vulnerabilities
+
+The following vulnerabilities are fixed with an upgrade:
+- https://snyk.io/vuln/SNYK-JAVA-COMGOOGLEGUAVA-32236
+- https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECOMMONS-30008
+- https://snyk.io/vuln/SNYK-JAVA-ORGSPRINGFRAMEWORK-31651
+- https://snyk.io/vuln/SNYK-JAVA-ORGTESTNG-174823
+---
+ eosio-explorer/Quantum/pom.xml | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/eosio-explorer/Quantum/pom.xml b/eosio-explorer/Quantum/pom.xml
+index 92c58eb..8b90f6a 100644
+--- a/eosio-explorer/Quantum/pom.xml
++++ b/eosio-explorer/Quantum/pom.xml
+@@ -13,14 +13,14 @@
+ 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+ 		<reportium-sdk.version>2.3</reportium-sdk.version>
+ 		<selenium.version>3.141.59</selenium.version>
+-		<testng.version>6.10</testng.version>
++		<testng.version>7.0.0</testng.version>
+ 		<cukes.version>1.2.5</cukes.version>
+ 		<org.json.version>20160810</org.json.version>
+ 		<perfectomobile.version>18.3.0.3</perfectomobile.version>
+ 		<intellij.perfectomobile.version>18.4.0.0 </intellij.perfectomobile.version>
+ 		<qaf.version>2.1.14</qaf.version>
+ 		<qafsupport.version>2.1.14</qafsupport.version>
+-		<appium.client.version>6.1.0</appium.client.version>
++		<appium.client.version>7.0.0</appium.client.version>
+ 	</properties>
+ 
+ 	<scm>
+@@ -209,12 +209,12 @@
+ 		<dependency>
+ 			<groupId>com.google.guava</groupId>
+ 			<artifactId>guava</artifactId>
+-			<version>24.1-jre</version>
++			<version>24.1.1-android</version>
+ 		</dependency>
+ 		<dependency>
+ 		    <groupId>org.apache.commons</groupId>
+ 		    <artifactId>commons-collections4</artifactId>
+-		    <version>4.0</version>
++		    <version>4.1</version>
+ 		</dependency>
+ 	</dependencies>
+ </project>
+
+From daab9b8e6ace9e9e8b466ab9577202fc1b96415b Mon Sep 17 00:00:00 2001
+From: Michael Glenn <50783497+MoneyMan573@users.noreply.github.com>
+Date: Tue, 12 May 2020 02:34:02 -0500
+Subject: [PATCH 02/35] Create CODE_OF_CONDUCT.md
+
+---
+ CODE_OF_CONDUCT.md | 76 ++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 76 insertions(+)
+ create mode 100644 CODE_OF_CONDUCT.md
+
+diff --git a/CODE_OF_CONDUCT.md b/CODE_OF_CONDUCT.md
+new file mode 100644
+index 0000000..c7ea5e6
+--- /dev/null
++++ b/CODE_OF_CONDUCT.md
+@@ -0,0 +1,76 @@
++# Contributor Covenant Code of Conduct
++
++## Our Pledge
++
++In the interest of fostering an open and welcoming environment, we as
++contributors and maintainers pledge to making participation in our project and
++our community a harassment-free experience for everyone, regardless of age, body
++size, disability, ethnicity, sex characteristics, gender identity and expression,
++level of experience, education, socio-economic status, nationality, personal
++appearance, race, religion, or sexual identity and orientation.
++
++## Our Standards
++
++Examples of behavior that contributes to creating a positive environment
++include:
++
++* Using welcoming and inclusive language
++* Being respectful of differing viewpoints and experiences
++* Gracefully accepting constructive criticism
++* Focusing on what is best for the community
++* Showing empathy towards other community members
++
++Examples of unacceptable behavior by participants include:
++
++* The use of sexualized language or imagery and unwelcome sexual attention or
++ advances
++* Trolling, insulting/derogatory comments, and personal or political attacks
++* Public or private harassment
++* Publishing others' private information, such as a physical or electronic
++ address, without explicit permission
++* Other conduct which could reasonably be considered inappropriate in a
++ professional setting
++
++## Our Responsibilities
++
++Project maintainers are responsible for clarifying the standards of acceptable
++behavior and are expected to take appropriate and fair corrective action in
++response to any instances of unacceptable behavior.
++
++Project maintainers have the right and responsibility to remove, edit, or
++reject comments, commits, code, wiki edits, issues, and other contributions
++that are not aligned to this Code of Conduct, or to ban temporarily or
++permanently any contributor for other behaviors that they deem inappropriate,
++threatening, offensive, or harmful.
++
++## Scope
++
++This Code of Conduct applies both within project spaces and in public spaces
++when an individual is representing the project or its community. Examples of
++representing a project or community include using an official project e-mail
++address, posting via an official social media account, or acting as an appointed
++representative at an online or offline event. Representation of a project may be
++further defined and clarified by project maintainers.
++
++## Enforcement
++
++Instances of abusive, harassing, or otherwise unacceptable behavior may be
++reported by contacting the project team at Mbg198618@gmail.com. All
++complaints will be reviewed and investigated and will result in a response that
++is deemed necessary and appropriate to the circumstances. The project team is
++obligated to maintain confidentiality with regard to the reporter of an incident.
++Further details of specific enforcement policies may be posted separately.
++
++Project maintainers who do not follow or enforce the Code of Conduct in good
++faith may face temporary or permanent repercussions as determined by other
++members of the project's leadership.
++
++## Attribution
++
++This Code of Conduct is adapted from the [Contributor Covenant][homepage], version 1.4,
++available at https://www.contributor-covenant.org/version/1/4/code-of-conduct.html
++
++[homepage]: https://www.contributor-covenant.org
++
++For answers to common questions about this code of conduct, see
++https://www.contributor-covenant.org/faq
+
+From 817400a0c308cc0f64fc19e9e932fce9816f787b Mon Sep 17 00:00:00 2001
+From: Michael Glenn <50783497+MoneyMan573@users.noreply.github.com>
+Date: Tue, 12 May 2020 02:38:09 -0500
+Subject: [PATCH 03/35] Update issue templates
+
+---
+ .github/ISSUE_TEMPLATE/bug_report.md | 38 ++++++++++++++++++++++++++++
+ 1 file changed, 38 insertions(+)
+ create mode 100644 .github/ISSUE_TEMPLATE/bug_report.md
+
+diff --git a/.github/ISSUE_TEMPLATE/bug_report.md b/.github/ISSUE_TEMPLATE/bug_report.md
+new file mode 100644
+index 0000000..dd84ea7
+--- /dev/null
++++ b/.github/ISSUE_TEMPLATE/bug_report.md
+@@ -0,0 +1,38 @@
++---
++name: Bug report
++about: Create a report to help us improve
++title: ''
++labels: ''
++assignees: ''
++
++---
++
++**Describe the bug**
++A clear and concise description of what the bug is.
++
++**To Reproduce**
++Steps to reproduce the behavior:
++1. Go to '...'
++2. Click on '....'
++3. Scroll down to '....'
++4. See error
++
++**Expected behavior**
++A clear and concise description of what you expected to happen.
++
++**Screenshots**
++If applicable, add screenshots to help explain your problem.
++
++**Desktop (please complete the following information):**
++ - OS: [e.g. iOS]
++ - Browser [e.g. chrome, safari]
++ - Version [e.g. 22]
++
++**Smartphone (please complete the following information):**
++ - Device: [e.g. iPhone6]
++ - OS: [e.g. iOS8.1]
++ - Browser [e.g. stock browser, safari]
++ - Version [e.g. 22]
++
++**Additional context**
++Add any other context about the problem here.
+
+From efac1d0bd28347a4d6dcc05b29598b438317111e Mon Sep 17 00:00:00 2001
+From: "dependabot[bot]" <49699333+dependabot[bot]@users.noreply.github.com>
+Date: Mon, 15 Jun 2020 21:00:20 +0000
+Subject: [PATCH 04/35] Bump commons-collections4 from 4.0 to 4.1 in
+ /eosio-explorer/Quantum
+
+Bumps commons-collections4 from 4.0 to 4.1.
+
+Signed-off-by: dependabot[bot] <support@github.com>
+---
+ eosio-explorer/Quantum/pom.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/eosio-explorer/Quantum/pom.xml b/eosio-explorer/Quantum/pom.xml
+index 92c58eb..b963103 100644
+--- a/eosio-explorer/Quantum/pom.xml
++++ b/eosio-explorer/Quantum/pom.xml
+@@ -214,7 +214,7 @@
+ 		<dependency>
+ 		    <groupId>org.apache.commons</groupId>
+ 		    <artifactId>commons-collections4</artifactId>
+-		    <version>4.0</version>
++		    <version>4.1</version>
+ 		</dependency>
+ 	</dependencies>
+ </project>
+
+From 6874792551669d459bace06dd01b9792c14d66af Mon Sep 17 00:00:00 2001
+From: "dependabot[bot]" <49699333+dependabot[bot]@users.noreply.github.com>
+Date: Tue, 16 Jun 2020 00:39:28 +0000
+Subject: [PATCH 05/35] Bump guava from 24.1-jre to 24.1.1-jre in
+ /eosio-explorer/Quantum
+
+Bumps [guava](https://github.com/google/guava) from 24.1-jre to 24.1.1-jre.
+- [Release notes](https://github.com/google/guava/releases)
+- [Commits](https://github.com/google/guava/commits)
+
+Signed-off-by: dependabot[bot] <support@github.com>
+---
+ eosio-explorer/Quantum/pom.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/eosio-explorer/Quantum/pom.xml b/eosio-explorer/Quantum/pom.xml
+index 92c58eb..1c6e2de 100644
+--- a/eosio-explorer/Quantum/pom.xml
++++ b/eosio-explorer/Quantum/pom.xml
+@@ -209,7 +209,7 @@
+ 		<dependency>
+ 			<groupId>com.google.guava</groupId>
+ 			<artifactId>guava</artifactId>
+-			<version>24.1-jre</version>
++			<version>24.1.1-jre</version>
+ 		</dependency>
+ 		<dependency>
+ 		    <groupId>org.apache.commons</groupId>
+
+From 3ab431ab3b5c4a8c05d8d68e6f3d63d006cf9488 Mon Sep 17 00:00:00 2001
+From: snyk-bot <snyk-bot@snyk.io>
+Date: Wed, 9 Sep 2020 00:10:29 +0000
+Subject: [PATCH 06/35] fix: eosio-explorer/Quantum/pom.xml to reduce
+ vulnerabilities
+
+The following vulnerabilities are fixed with an upgrade:
+- https://snyk.io/vuln/SNYK-JAVA-COMBEUST-174815
+---
+ eosio-explorer/Quantum/pom.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/eosio-explorer/Quantum/pom.xml b/eosio-explorer/Quantum/pom.xml
+index 1c6e2de..f5fb0f2 100644
+--- a/eosio-explorer/Quantum/pom.xml
++++ b/eosio-explorer/Quantum/pom.xml
+@@ -13,7 +13,7 @@
+ 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+ 		<reportium-sdk.version>2.3</reportium-sdk.version>
+ 		<selenium.version>3.141.59</selenium.version>
+-		<testng.version>6.10</testng.version>
++		<testng.version>7.3.0</testng.version>
+ 		<cukes.version>1.2.5</cukes.version>
+ 		<org.json.version>20160810</org.json.version>
+ 		<perfectomobile.version>18.3.0.3</perfectomobile.version>
+
+From 25988067ec7138276137ee3944403722087e7e2e Mon Sep 17 00:00:00 2001
+From: snyk-bot <snyk-bot@snyk.io>
+Date: Wed, 9 Sep 2020 02:39:05 +0000
+Subject: [PATCH 07/35] fix: docs.hackerone.com/Quantum-Stater-Kit/pom.xml to
+ reduce vulnerabilities
+
+The following vulnerabilities are fixed with an upgrade:
+- https://snyk.io/vuln/SNYK-JAVA-COMBEUST-174815
+---
+ docs.hackerone.com/Quantum-Stater-Kit/pom.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/docs.hackerone.com/Quantum-Stater-Kit/pom.xml b/docs.hackerone.com/Quantum-Stater-Kit/pom.xml
+index c64a794..37212cb 100644
+--- a/docs.hackerone.com/Quantum-Stater-Kit/pom.xml
++++ b/docs.hackerone.com/Quantum-Stater-Kit/pom.xml
+@@ -12,7 +12,7 @@
+ 		<testngXmlFile>testng_web.xml</testngXmlFile>
+ 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+ 		<reportium-sdk.version>2.3</reportium-sdk.version>
+-		<testng.version>6.10</testng.version>
++		<testng.version>7.3.0</testng.version>
+ 		<cukes.version>1.2.5</cukes.version>
+ 		<quantum.version>1.21</quantum.version>
+ 		<org.json.version>20160810</org.json.version>
+
+From c65ae4c2dd1590746e659290af94c91693642053 Mon Sep 17 00:00:00 2001
+From: Michael Glenn <50783497+MoneyMan573@users.noreply.github.com>
+Date: Sun, 27 Sep 2020 10:39:00 -0500
+Subject: [PATCH 08/35] Create SECURITY.md
+
+---
+ SECURITY.md | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+ create mode 100644 SECURITY.md
+
+diff --git a/SECURITY.md b/SECURITY.md
+new file mode 100644
+index 0000000..034e848
+--- /dev/null
++++ b/SECURITY.md
+@@ -0,0 +1,21 @@
++# Security Policy
++
++## Supported Versions
++
++Use this section to tell people about which versions of your project are
++currently being supported with security updates.
++
++| Version | Supported          |
++| ------- | ------------------ |
++| 5.1.x   | :white_check_mark: |
++| 5.0.x   | :x:                |
++| 4.0.x   | :white_check_mark: |
++| < 4.0   | :x:                |
++
++## Reporting a Vulnerability
++
++Use this section to tell people how to report a vulnerability.
++
++Tell them where to go, how often they can expect to get an update on a
++reported vulnerability, what to expect if the vulnerability is accepted or
++declined, etc.
+
+From 44b93724653bd2cadbf62e1647ee36f1b43461b2 Mon Sep 17 00:00:00 2001
+From: Michael Glenn <50783497+MoneyMan573@users.noreply.github.com>
+Date: Sun, 27 Sep 2020 10:43:12 -0500
+Subject: [PATCH 09/35] Set theme jekyll-theme-time-machine
+
+---
+ _config.yml | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 _config.yml
+
+diff --git a/_config.yml b/_config.yml
+new file mode 100644
+index 0000000..ddeb671
+--- /dev/null
++++ b/_config.yml
+@@ -0,0 +1 @@
++theme: jekyll-theme-time-machine
+\ No newline at end of file
+
+From 62fddce683656a3f43d2a69250bc94e0e1f47d9d Mon Sep 17 00:00:00 2001
+From: Michael Glenn <50783497+MoneyMan573@users.noreply.github.com>
+Date: Wed, 30 Sep 2020 09:55:55 -0500
+Subject: [PATCH 10/35] Create main.yml
+
+---
+ .github/workflows/main.yml | 33 +++++++++++++++++++++++++++++++++
+ 1 file changed, 33 insertions(+)
+ create mode 100644 .github/workflows/main.yml
+
+diff --git a/.github/workflows/main.yml b/.github/workflows/main.yml
+new file mode 100644
+index 0000000..e61eb98
+--- /dev/null
++++ b/.github/workflows/main.yml
+@@ -0,0 +1,33 @@
++# This is a basic workflow to help you get started with Actions
++
++name: Bucksbitties-CI
++
++# Controls when the action will run. Triggers the workflow on push or pull request
++# events but only for the master branch
++on:
++  push:
++    branches: [ master ]
++  pull_request:
++    branches: [ master ]
++
++# A workflow run is made up of one or more jobs that can run sequentially or in parallel
++jobs:
++  # This workflow contains a single job called "build"
++  build:
++    # The type of runner that the job will run on
++    runs-on: ubuntu-latest
++
++    # Steps represent a sequence of tasks that will be executed as part of the job
++    steps:
++      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
++      - uses: actions/checkout@v2
++
++      # Runs a single command using the runners shell
++      - name: Run a one-line script
++        run: echo Hello, world!
++
++      # Runs a set of commands using the runners shell
++      - name: Run a multi-line script
++        run: |
++          echo Add other actions to build,
++          echo test, and deploy your project.
+
+From a295f72600babb38ea1160ba4e4693541e0d9048 Mon Sep 17 00:00:00 2001
+From: snyk-bot <snyk-bot@snyk.io>
+Date: Sat, 24 Oct 2020 00:10:09 +0000
+Subject: [PATCH 11/35] fix: eosio-explorer/Quantum/pom.xml to reduce
+ vulnerabilities
+
+The following vulnerabilities are fixed with an upgrade:
+- https://snyk.io/vuln/SNYK-JAVA-COMGOOGLEGUAVA-1015415
+---
+ eosio-explorer/Quantum/pom.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/eosio-explorer/Quantum/pom.xml b/eosio-explorer/Quantum/pom.xml
+index 1c6e2de..031fdfd 100644
+--- a/eosio-explorer/Quantum/pom.xml
++++ b/eosio-explorer/Quantum/pom.xml
+@@ -209,7 +209,7 @@
+ 		<dependency>
+ 			<groupId>com.google.guava</groupId>
+ 			<artifactId>guava</artifactId>
+-			<version>24.1.1-jre</version>
++			<version>30.0-android</version>
+ 		</dependency>
+ 		<dependency>
+ 		    <groupId>org.apache.commons</groupId>
+
+From 4a2e163c09e1c6f88a56c0c3e3bfb3a3c7d2e108 Mon Sep 17 00:00:00 2001
+From: snyk-bot <snyk-bot@snyk.io>
+Date: Wed, 18 Nov 2020 00:11:43 +0000
+Subject: [PATCH 12/35] fix: eosio-explorer/Quantum/pom.xml to reduce
+ vulnerabilities
+
+The following vulnerabilities are fixed with an upgrade:
+- https://snyk.io/vuln/SNYK-JAVA-COMMONSBEANUTILS-460111
+- https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEHTTPCOMPONENTS-1016906
+---
+ eosio-explorer/Quantum/pom.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/eosio-explorer/Quantum/pom.xml b/eosio-explorer/Quantum/pom.xml
+index 1c6e2de..f1a8838 100644
+--- a/eosio-explorer/Quantum/pom.xml
++++ b/eosio-explorer/Quantum/pom.xml
+@@ -20,7 +20,7 @@
+ 		<intellij.perfectomobile.version>18.4.0.0 </intellij.perfectomobile.version>
+ 		<qaf.version>2.1.14</qaf.version>
+ 		<qafsupport.version>2.1.14</qafsupport.version>
+-		<appium.client.version>6.1.0</appium.client.version>
++		<appium.client.version>7.4.0</appium.client.version>
+ 	</properties>
+ 
+ 	<scm>
+
+From 98b342ecb91e018832877d97636185a0bca51cfb Mon Sep 17 00:00:00 2001
+From: snyk-bot <snyk-bot@snyk.io>
+Date: Fri, 11 Dec 2020 02:41:30 +0000
+Subject: [PATCH 13/35] feat: upgrade org.hamcrest:hamcrest-core from 1.3 to
+ 2.2
+
+Snyk has created this PR to upgrade org.hamcrest:hamcrest-core from 1.3 to 2.2.
+
+See this package in Maven Repository:
+https://mvnrepository.com/artifact/org.hamcrest/hamcrest-core/
+
+See this project in Snyk:
+https://app.snyk.io/org/mbg198618/project/1321f0e0-9f32-4bdd-a8c0-80ae524e1e07?utm_source=github&utm_medium=upgrade-pr
+---
+ docs.hackerone.com/Quantum-Stater-Kit/pom.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/docs.hackerone.com/Quantum-Stater-Kit/pom.xml b/docs.hackerone.com/Quantum-Stater-Kit/pom.xml
+index c64a794..1196249 100644
+--- a/docs.hackerone.com/Quantum-Stater-Kit/pom.xml
++++ b/docs.hackerone.com/Quantum-Stater-Kit/pom.xml
+@@ -82,7 +82,7 @@
+ 		<dependency>
+ 			<groupId>org.hamcrest</groupId>
+ 			<artifactId>hamcrest-core</artifactId>
+-			<version>1.3</version>
++			<version>2.2</version>
+ 		</dependency>	
+ 	         <dependency>
+ 			<groupId>xml-apis</groupId>
+
+From ff7e7468ea040aef9828b214e6f1f9241db767b4 Mon Sep 17 00:00:00 2001
+From: snyk-bot <snyk-bot@snyk.io>
+Date: Mon, 4 Jan 2021 02:02:50 +0000
+Subject: [PATCH 14/35] fix: eosio-explorer/Quantum/pom.xml to reduce
+ vulnerabilities
+
+The following vulnerabilities are fixed with an upgrade:
+- https://snyk.io/vuln/SNYK-JAVA-COMBEUST-174815
+- https://snyk.io/vuln/SNYK-JAVA-COMGOOGLEGUAVA-1015415
+- https://snyk.io/vuln/SNYK-JAVA-COMMONSBEANUTILS-460111
+- https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECOMMONS-30008
+- https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEHTTPCOMPONENTS-1016906
+- https://snyk.io/vuln/SNYK-JAVA-ORGAPACHEHTTPCOMPONENTS-1048058
+- https://snyk.io/vuln/SNYK-JAVA-ORGSPRINGFRAMEWORK-31651
+- https://snyk.io/vuln/SNYK-JAVA-ORGTESTNG-174823
+---
+ eosio-explorer/Quantum/pom.xml | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/eosio-explorer/Quantum/pom.xml b/eosio-explorer/Quantum/pom.xml
+index 1c6e2de..f646ffe 100644
+--- a/eosio-explorer/Quantum/pom.xml
++++ b/eosio-explorer/Quantum/pom.xml
+@@ -13,14 +13,14 @@
+ 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+ 		<reportium-sdk.version>2.3</reportium-sdk.version>
+ 		<selenium.version>3.141.59</selenium.version>
+-		<testng.version>6.10</testng.version>
++		<testng.version>7.3.0</testng.version>
+ 		<cukes.version>1.2.5</cukes.version>
+ 		<org.json.version>20160810</org.json.version>
+ 		<perfectomobile.version>18.3.0.3</perfectomobile.version>
+ 		<intellij.perfectomobile.version>18.4.0.0 </intellij.perfectomobile.version>
+ 		<qaf.version>2.1.14</qaf.version>
+ 		<qafsupport.version>2.1.14</qafsupport.version>
+-		<appium.client.version>6.1.0</appium.client.version>
++		<appium.client.version>7.4.0</appium.client.version>
+ 	</properties>
+ 
+ 	<scm>
+@@ -209,12 +209,12 @@
+ 		<dependency>
+ 			<groupId>com.google.guava</groupId>
+ 			<artifactId>guava</artifactId>
+-			<version>24.1.1-jre</version>
++			<version>30.0-jre</version>
+ 		</dependency>
+ 		<dependency>
+ 		    <groupId>org.apache.commons</groupId>
+ 		    <artifactId>commons-collections4</artifactId>
+-		    <version>4.0</version>
++		    <version>4.1</version>
+ 		</dependency>
+ 	</dependencies>
+ </project>
+
+From f94444656251da12cbaaea28a33bb371c45ccc98 Mon Sep 17 00:00:00 2001
+From: Michael Glenn <50783497+MoneyMan573@users.noreply.github.com>
+Date: Fri, 22 Jan 2021 21:10:30 -0600
+Subject: [PATCH 15/35] Update and rename
+
+'name:Bucksbitties-CI-bitbucket-pipelines-main1.yml'
+---
+ ...l => name:Bucksbitties-CI-bitbucket-pipelines-main1.yml} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename .github/workflows/{main.yml => name:Bucksbitties-CI-bitbucket-pipelines-main1.yml} (90%)
+
+diff --git a/.github/workflows/main.yml b/.github/workflows/name:Bucksbitties-CI-bitbucket-pipelines-main1.yml
+similarity index 90%
+rename from .github/workflows/main.yml
+rename to .github/workflows/name:Bucksbitties-CI-bitbucket-pipelines-main1.yml
+index e61eb98..de12d1d 100644
+--- a/.github/workflows/main.yml
++++ b/.github/workflows/name:Bucksbitties-CI-bitbucket-pipelines-main1.yml
+@@ -1,14 +1,14 @@
+ # This is a basic workflow to help you get started with Actions
+ 
+-name: Bucksbitties-CI
++name:Bucksbitties-CI-bitbucket-pipelines-main1.yml
+ 
+ # Controls when the action will run. Triggers the workflow on push or pull request
+ # events but only for the master branch
+ on:
+   push:
+-    branches: [ master ]
++    branches: [ main1 ]
+   pull_request:
+-    branches: [ master ]
++    branches: [ main1 ]
+ 
+ # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+ jobs:
+
+From 1fd494007fca4afc757e8e96fb2ac7143e220173 Mon Sep 17 00:00:00 2001
+From: Michael Glenn <50783497+MoneyMan573@users.noreply.github.com>
+Date: Fri, 22 Jan 2021 21:49:56 -0600
+Subject: [PATCH 16/35] Rename
+ .github/workflows/name:Bucksbitties-CI-bitbucket-pipelines-main1.yml to
+ bitbucket-pipelines.yml
+
+---
+ ...es-CI-bitbucket-pipelines-main1.yml => bitbucket-pipelines.yml | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename .github/workflows/name:Bucksbitties-CI-bitbucket-pipelines-main1.yml => bitbucket-pipelines.yml (100%)
+
+diff --git a/.github/workflows/name:Bucksbitties-CI-bitbucket-pipelines-main1.yml b/bitbucket-pipelines.yml
+similarity index 100%
+rename from .github/workflows/name:Bucksbitties-CI-bitbucket-pipelines-main1.yml
+rename to bitbucket-pipelines.yml
+
+From 99c282c8342d87e956909ea142e31192faf22672 Mon Sep 17 00:00:00 2001
+From: Michael Glenn <50783497+MoneyMan573@users.noreply.github.com>
+Date: Fri, 22 Jan 2021 21:51:19 -0600
+Subject: [PATCH 17/35] Update bitbucket-pipelines.yml
+
+---
+ bitbucket-pipelines.yml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/bitbucket-pipelines.yml b/bitbucket-pipelines.yml
+index de12d1d..ace51c2 100644
+--- a/bitbucket-pipelines.yml
++++ b/bitbucket-pipelines.yml
+@@ -1,6 +1,6 @@
+ # This is a basic workflow to help you get started with Actions
+ 
+-name:Bucksbitties-CI-bitbucket-pipelines-main1.yml
++name:bucksbitties/bitbucket-pipelines.yml
+ 
+ # Controls when the action will run. Triggers the workflow on push or pull request
+ # events but only for the master branch
+
+From df4bc03d4d87c3fc4db6f0659c04ea2f206926e0 Mon Sep 17 00:00:00 2001
+From: "dependabot[bot]" <49699333+dependabot[bot]@users.noreply.github.com>
+Date: Sun, 4 Apr 2021 04:55:41 +0000
+Subject: [PATCH 18/35] Bump guava in /eosio-explorer/Quantum
+
+Bumps [guava](https://github.com/google/guava) from 24.1.1-android to 29.0-android.
+- [Release notes](https://github.com/google/guava/releases)
+- [Commits](https://github.com/google/guava/commits)
+
+Signed-off-by: dependabot[bot] <support@github.com>
+---
+ eosio-explorer/Quantum/pom.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/eosio-explorer/Quantum/pom.xml b/eosio-explorer/Quantum/pom.xml
+index 346759c..c360159 100644
+--- a/eosio-explorer/Quantum/pom.xml
++++ b/eosio-explorer/Quantum/pom.xml
+@@ -211,7 +211,7 @@
+ 		<dependency>
+ 			<groupId>com.google.guava</groupId>
+ 			<artifactId>guava</artifactId>
+-			<version>24.1.1-android</version>
++			<version>29.0-android</version>
+ 
+ 			<version>30.0-android</version>
+ 
+
+From 8c18e4ed87b6190bb63939d960b425d58a4a25da Mon Sep 17 00:00:00 2001
+From: snyk-bot <snyk-bot@snyk.io>
+Date: Sun, 4 Apr 2021 08:20:23 +0000
+Subject: [PATCH 19/35] fix: upgrade io.appium:java-client from 7.4.0 to 7.4.1
+
+Snyk has created this PR to upgrade io.appium:java-client from 7.4.0 to 7.4.1.
+
+See this package in Maven Repository:
+https://mvnrepository.com/artifact/io.appium/java-client/
+
+See this project in Snyk:
+https://app.snyk.io/org/mbg198618/project/4b007ca7-2539-46a0-b023-93bec752db75?utm_source=github&utm_medium=upgrade-pr
+---
+ eosio-explorer/Quantum/pom.xml | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/eosio-explorer/Quantum/pom.xml b/eosio-explorer/Quantum/pom.xml
+index c360159..7a12e20 100644
+--- a/eosio-explorer/Quantum/pom.xml
++++ b/eosio-explorer/Quantum/pom.xml
+@@ -21,8 +21,8 @@
+ 		<intellij.perfectomobile.version>18.4.0.0 </intellij.perfectomobile.version>
+ 		<qaf.version>2.1.14</qaf.version>
+ 		<qafsupport.version>2.1.14</qafsupport.version>
+-		<appium.client.version>7.0.0</appium.client.version>
+-		<appium.client.version>7.4.0</appium.client.version>
++		<appium.client.version>7.4.1</appium.client.version>
++		<appium.client.version>7.4.1</appium.client.version>
+ 	</properties>
+ 
+ 	<scm>
+
+From 26f9c82f0f23bf610709f1d364b94bdb4f949eb3 Mon Sep 17 00:00:00 2001
+From: Michael Glenn <50783497+MoneyMan573@users.noreply.github.com>
+Date: Fri, 9 Apr 2021 20:45:07 -0500
+Subject: [PATCH 20/35] Create
+ name:Bucksbitties-CI-bitbucket-pipelines-main1.yml
+
+---
+ .../name:Bucksbitties-CI-bitbucket-pipelines-main1.yml          | 2 ++
+ 1 file changed, 2 insertions(+)
+ create mode 100644 action-serverless/.github/workflows/pipelines-main1.yml/name:Bucksbitties-CI-bitbucket-pipelines-main1.yml
+
+diff --git a/action-serverless/.github/workflows/pipelines-main1.yml/name:Bucksbitties-CI-bitbucket-pipelines-main1.yml b/action-serverless/.github/workflows/pipelines-main1.yml/name:Bucksbitties-CI-bitbucket-pipelines-main1.yml
+new file mode 100644
+index 0000000..a1dc157
+--- /dev/null
++++ b/action-serverless/.github/workflows/pipelines-main1.yml/name:Bucksbitties-CI-bitbucket-pipelines-main1.yml
+@@ -0,0 +1,2 @@
++.github/workflows/pipelines-main1.yml
++.name:Bucksbitties-CI-bitbucket-pipelines-main1.yml
+
+From e04f24492d6cecf312b57d5f559492d85e88340e Mon Sep 17 00:00:00 2001
+From: Michael Glenn <50783497+MoneyMan573@users.noreply.github.com>
+Date: Fri, 9 Apr 2021 21:13:26 -0500
+Subject: [PATCH 21/35] Create log4j.properties
+
+---
+ .../Quantum-Stater-Kit/Doc/resources/log4j.properties            | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 docs.hackerone.com/Quantum-Stater-Kit/Doc/resources/docs.hackerone.com/Quantum-Stater-Kit/Doc/resources/log4j.properties
+
+diff --git a/docs.hackerone.com/Quantum-Stater-Kit/Doc/resources/docs.hackerone.com/Quantum-Stater-Kit/Doc/resources/log4j.properties b/docs.hackerone.com/Quantum-Stater-Kit/Doc/resources/docs.hackerone.com/Quantum-Stater-Kit/Doc/resources/log4j.properties
+new file mode 100644
+index 0000000..8b13789
+--- /dev/null
++++ b/docs.hackerone.com/Quantum-Stater-Kit/Doc/resources/docs.hackerone.com/Quantum-Stater-Kit/Doc/resources/log4j.properties
+@@ -0,0 +1 @@
++
+
+From cfd6ac6f0aec08553eb1b299cbf1eff210d8e896 Mon Sep 17 00:00:00 2001
+From: Michael Glenn <50783497+MoneyMan573@users.noreply.github.com>
+Date: Fri, 9 Apr 2021 22:12:54 -0500
+Subject: [PATCH 22/35] Update pom.xml
+
+---
+ eosio-explorer/Quantum/pom.xml | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/eosio-explorer/Quantum/pom.xml b/eosio-explorer/Quantum/pom.xml
+index 7a12e20..abc1f34 100644
+--- a/eosio-explorer/Quantum/pom.xml
++++ b/eosio-explorer/Quantum/pom.xml
+@@ -224,3 +224,8 @@
+ 		</dependency>
+ 	</dependencies>
+ </project>
++<dependency>
++  <groupId>com.google.guava</groupId>
++  <artifactId>guava</artifactId>
++  <version>[30.0-jre,)</version>
++</dependency>
+
+From 207136d8b5dfea607b47590005295d81da4d5159 Mon Sep 17 00:00:00 2001
+From: Michael Glenn <50783497+MoneyMan573@users.noreply.github.com>
+Date: Fri, 9 Apr 2021 22:18:19 -0500
+Subject: [PATCH 23/35] Update pom.xml
+
+---
+ eosio-explorer/Quantum/pom.xml | 39 +++++++++++++++++-----------------
+ 1 file changed, 20 insertions(+), 19 deletions(-)
+
+diff --git a/eosio-explorer/Quantum/pom.xml b/eosio-explorer/Quantum/pom.xml
+index abc1f34..82ae6cb 100644
+--- a/eosio-explorer/Quantum/pom.xml
++++ b/eosio-explorer/Quantum/pom.xml
+@@ -7,6 +7,12 @@
+ 	<groupId>com.quantum</groupId>
+ 	<artifactId>quantum-support</artifactId>
+ 	<version>1.20.1</version>
++	</project>
++<dependency>
++	<groupId>com.google.guava</groupId>
++	<artifactId>guava</artifactId>
++	<version>[30.0-jre,)</version>
++</dependency>
+ 
+ 	<properties>
+ 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+@@ -208,24 +214,19 @@
+ 
+ 
+ 		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+-		<dependency>
+-			<groupId>com.google.guava</groupId>
+-			<artifactId>guava</artifactId>
+-			<version>29.0-android</version>
+-
+-			<version>30.0-android</version>
+-
+-			<version>30.0-jre</version>
+-		</dependency>
+-		<dependency>
+-		    <groupId>org.apache.commons</groupId>
+-		    <artifactId>commons-collections4</artifactId>
+-		    <version>4.1</version>
+-		</dependency>
+-	</dependencies>
+-</project>
++		</project>
++	<dependency>
++		<groupId>com.google.guava</groupId>
++		<artifactId>guava</artifactId>
++		<version>[30.0-jre,)</version>
++	</dependency>
++	<version>30.0-android</version>
++	<version>30.0-jre</version>
++	</dependency>
+ <dependency>
+-  <groupId>com.google.guava</groupId>
+-  <artifactId>guava</artifactId>
+-  <version>[30.0-jre,)</version>
++	<groupId>org.apache.commons</groupId>
++	<artifactId>commons-collections4</artifactId>
++	<version>4.1</version>
+ </dependency>
++</dependencies>
++
+
+From 22adeaf8162353f6f01f671283b6ce840c2a7ff7 Mon Sep 17 00:00:00 2001
+From: Michael Glenn <50783497+MoneyMan573@users.noreply.github.com>
+Date: Wed, 14 Apr 2021 17:28:45 -0500
+Subject: [PATCH 24/35] fix: upgrade info.cukes:cucumber-java from 1.2.5 to
+ 1.2.6 (#27)
+
+Snyk has created this PR to upgrade info.cukes:cucumber-java from 1.2.5 to 1.2.6.
+
+See this package in Maven Repository:
+https://mvnrepository.com/artifact/info.cukes/cucumber-java/
+
+See this project in Snyk:
+https://app.snyk.io/org/techphan573wytemike.onmicrosoft.com/project/7d9a3b4d-e336-4def-8930-ad5b4217d080?utm_source=github&utm_medium=upgrade-pr
+
+Co-authored-by: snyk-bot <snyk-bot@snyk.io>
+---
+ docs.hackerone.com/Quantum-Stater-Kit/pom.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/docs.hackerone.com/Quantum-Stater-Kit/pom.xml b/docs.hackerone.com/Quantum-Stater-Kit/pom.xml
+index 7a55299..e0f5b4b 100644
+--- a/docs.hackerone.com/Quantum-Stater-Kit/pom.xml
++++ b/docs.hackerone.com/Quantum-Stater-Kit/pom.xml
+@@ -13,7 +13,7 @@
+ 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+ 		<reportium-sdk.version>2.3</reportium-sdk.version>
+ 		<testng.version>7.3.0</testng.version>
+-		<cukes.version>1.2.5</cukes.version>
++		<cukes.version>1.2.6</cukes.version>
+ 		<quantum.version>1.21</quantum.version>
+ 		<org.json.version>20160810</org.json.version>
+ 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+From 1385a9fcb9e5fc542fa7415cf1b016ca0c68f564 Mon Sep 17 00:00:00 2001
+From: Michael Glenn <50783497+MoneyMan573@users.noreply.github.com>
+Date: Wed, 14 Apr 2021 17:37:01 -0500
+Subject: [PATCH 25/35] Rename
+ name:Bucksbitties-CI-bitbucket-pipelines-main1.yml to
+ name:Bucksbitties-CI-bitbucket-pipelines--1
+
+---
+ ...ines-main1.yml => name:Bucksbitties-CI-bitbucket-pipelines--1} | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename action-serverless/.github/workflows/pipelines-main1.yml/{name:Bucksbitties-CI-bitbucket-pipelines-main1.yml => name:Bucksbitties-CI-bitbucket-pipelines--1} (100%)
+
+diff --git a/action-serverless/.github/workflows/pipelines-main1.yml/name:Bucksbitties-CI-bitbucket-pipelines-main1.yml b/action-serverless/.github/workflows/pipelines-main1.yml/name:Bucksbitties-CI-bitbucket-pipelines--1
+similarity index 100%
+rename from action-serverless/.github/workflows/pipelines-main1.yml/name:Bucksbitties-CI-bitbucket-pipelines-main1.yml
+rename to action-serverless/.github/workflows/pipelines-main1.yml/name:Bucksbitties-CI-bitbucket-pipelines--1
+
+From 8d0552d166607e2684da8cd2757f7a8f877225f7 Mon Sep 17 00:00:00 2001
+From: Michael Glenn <50783497+MoneyMan573@users.noreply.github.com>
+Date: Wed, 14 Apr 2021 17:42:07 -0500
+Subject: [PATCH 26/35] Add files via upload
+
+---
+ .gitignore/exclude | 6 ++++++
+ 1 file changed, 6 insertions(+)
+ create mode 100644 .gitignore/exclude
+
+diff --git a/.gitignore/exclude b/.gitignore/exclude
+new file mode 100644
+index 0000000..a5196d1
+--- /dev/null
++++ b/.gitignore/exclude
+@@ -0,0 +1,6 @@
++# git ls-files --others --exclude-from=.git/info/exclude
++# Lines that start with '#' are comments.
++# For a project mostly in C, the following would be a good set of
++# exclude patterns (uncomment them if you want to use them):
++# *.[oa]
++# *~
+
+From eedf38eb346a54f34ae489148173f0589e4e7be3 Mon Sep 17 00:00:00 2001
+From: Michael Glenn <50783497+MoneyMan573@users.noreply.github.com>
+Date: Wed, 14 Apr 2021 17:52:03 -0500
+Subject: [PATCH 27/35] Create license.
+
+---
+ license. | 50 ++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 50 insertions(+)
+ create mode 100644 license.
+
+diff --git a/license. b/license.
+new file mode 100644
+index 0000000..cf785e6
+--- /dev/null
++++ b/license.
+@@ -0,0 +1,50 @@
++MIT License
++
++Copyright (c) [2021] [Michael Glenn]
++
++Permission is hereby granted, free of charge, to any person obtaining a copy
++of this software and associated documentation files (the "Software"), to deal
++in the Software without restriction, including without limitation the rights
++to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
++copies of the Software, and to permit persons to whom the Software is
++furnished to do so, subject to the following conditions:
++
++The above copyright notice and this permission notice shall be included in all
++copies or substantial portions of the Software.
++
++THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
++AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
++OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
++SOFTWARE.
++
++MIT License
++Full name [Michael Glenn]
++MIT License
++
++Short identifier
++MIT
++
++Other web pages for this license
++https://opensource.org/licenses/MIT
++Notes <source>
++<https://opensource.org/licenses/MIT>
++Notes
++-*Special Thanks to @MIT from Michael Glenn
++-*@MoneyMan573
++
++Text
++MIT License
++
++Copyright (c) <2021> <Michael Glenn, OpenSource@MIT>
++
++Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
++
++The above copyright notice and this permission notice (including the next paragraph) shall be included in all copies or substantial portions of the Software.
++
++THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
++
++Standard License Header
++There is no standard license header for the license
+
+From 07f44701bf4fb81033174c75b6b0f867d944ea17 Mon Sep 17 00:00:00 2001
+From: Michael Glenn <50783497+MoneyMan573@users.noreply.github.com>
+Date: Wed, 20 Jan 2021 20:02:07 -0600
+Subject: [PATCH 28/35] bitbucket-pipeline-main.yml
+
+---
+ .github/workflows/pipelines-main1.yml | 33 +++++++++++++++++++++++++++
+ 1 file changed, 33 insertions(+)
+ create mode 100644 .github/workflows/pipelines-main1.yml
+
+diff --git a/.github/workflows/pipelines-main1.yml b/.github/workflows/pipelines-main1.yml
+new file mode 100644
+index 0000000..88f1fc6
+--- /dev/null
++++ b/.github/workflows/pipelines-main1.yml
+@@ -0,0 +1,33 @@
++# This is a basic workflow to help you get started with Actions
++
++name:bitbucket-pipelines.github/workflows/main.yml
++
++# Controls when the action will run. Triggers the workflow on push or pull request
++# events but only for the master branch
++on:
++  push:https://github.com/BuckosBits/bucksbitties/new/master
++    branches: [ main ]
++  pull_request:
++    branches: [ main ]
++
++# A workflow run is made up of one or more jobs that can run sequentially or in parallel
++jobs:
++  # This workflow contains a single job called "build"
++  build:
++    # The type of runner that the job will run on
++    runs-on: ubuntu-latest
++
++    # Steps represent a sequence of tasks that will be executed as part of the job
++    steps:
++      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
++      - uses: actions/checkout@v2
++
++      # Runs a single command using the runners shell
++      - name: Run a one-line script
++        run: echo Hello, world!
++
++      # Runs a set of commands using the runners shell
++      - name: Run a multi-line script
++        run: | #test, #verify, #deploy
++          echo Add other actions to build,
++          echo test, and deploy your project.
+
+From 2e774a5939ae2683bbbe61a1781e3950d240b8a9 Mon Sep 17 00:00:00 2001
+From: Michael Glenn <50783497+MoneyMan573@users.noreply.github.com>
+Date: Sat, 10 Apr 2021 00:05:34 -0500
+Subject: [PATCH 29/35] Update and Create MoneyMan573-update-patch-1
+
+---
+ .gitignore/.gitignore | 22 ++++++----------------
+ 1 file changed, 6 insertions(+), 16 deletions(-)
+
+diff --git a/.gitignore/.gitignore b/.gitignore/.gitignore
+index 5d947ca..699a494 100644
+--- a/.gitignore/.gitignore
++++ b/.gitignore/.gitignore
+@@ -1,18 +1,8 @@
+-# Build and Release Folders
+-bin-debug/
+-bin-release/
+-[Oo]bj/
+-[Bb]in/
++# Compiled Form Modules
++*.fmx
+ 
+-# Other files and folders
+-.settings/
++# Compiled Menu Modules
++*.mmx
+ 
+-# Executables
+-*.swf
+-*.air
+-*.ipa
+-*.apk
+-
+-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
+-# should NOT be excluded as they contain compiler settings and other important
+-# information for Eclipse / Flash Builder.
++# Compiled Pre-Linked Libraries
++*.plx
+
+From 94d6ad83e6375b7afcc12e2d8d4b966d34014fc5 Mon Sep 17 00:00:00 2001
+From: MoneyMan573 <50783497+MoneyMan573@users.noreply.github.com>
+Date: Wed, 28 Apr 2021 23:09:24 -0500
+Subject: [PATCH 30/35] Update SMM.java
+
+---
+ action-serverless/SMM.java | 60 ++++++++++++++++++++------------------
+ 1 file changed, 31 insertions(+), 29 deletions(-)
+
+diff --git a/action-serverless/SMM.java b/action-serverless/SMM.java
+index 1abc76b..7b38bde 100644
+--- a/action-serverless/SMM.java
++++ b/action-serverless/SMM.java
+@@ -1,39 +1,41 @@
+-ShardMapManager smm = ShardMapManagerFactory.getSqlShardMapManager(connectionString, ShardMapManagerLoadPolicy.Lazy);
+-RangeShardMap<int> rangeShardMap = smm.getRangeShardMap(Configuration.getRangeShardMapName(), ShardKeyType.Int32);
+-// Syntax:
+-public Connection openConnectionForKey(Object key, String connectionString, ConnectionOptions options)
++{
++    {{ 
++        ShardMapManager smm = ShardMapManagerFactory.getSqlShardMapManager(connectionString, ShardMapManagerLoadPolicy.Lazy); 
++        RangeShardMap<int> rangeShardMap = smm.getRangeShardMap(Configuration.getRangeShardMapName(), ShardKeyType.Int32);
++// Syntax: public Connection openConnectionForKey(Object key, String connectionString, ConnectionOptions options)
+ int customerId = 12345;
+ int productId = 4321;
+ // Looks up the key in the shard map and opens a connection to the shard
+-try (Connection conn = shardMap.openConnectionForKey(customerId, Configuration.getCredentialsConnectionString())) {
+-    // Create a simple command that will insert or update the customer information
+-    PreparedStatement ps = conn.prepareStatement("UPDATE Sales.Customer SET PersonID = ? WHERE CustomerID = ?");
+-
+-    ps.setInt(1, productId);
+-    ps.setInt(2, customerId);
+-    ps.executeUpdate();
+-} catch (SQLException e) {
+-    e.printStackTrace();
+-}
++try (Connection conn = shardMap.openConnectionForKey(customerId, Configuration.getCredentialsConnectionString())) }
++// Create a simple command that will insert or update the customer information
++    PreparedStatement ps = conn.prepareStatement ("UPDATE Sales.Customer SET PersonID = ? WHERE CustomerID = ?") }
++ps.setInt(1, productId);
++ ps.setInt(2, customerId);
++  ps.executeUpdate();} 
++catch (SQLException e) }
++e.printStackTrace();
++{
+ int customerId = 12345;
+ int productId = 4321;
+-try {
+-    SqlDatabaseUtils.getSqlRetryPolicy().executeAction(() -> {
+-        // Looks up the key in the shard map and opens a connection to the shard
+-        try (Connection conn = shardMap.openConnectionForKey(customerId, Configuration.getCredentialsConnectionString())) {
+-            // Create a simple command that will insert or update the customer information
+-            PreparedStatement ps = conn.prepareStatement("UPDATE Sales.Customer SET PersonID = ? WHERE CustomerID = ?");
+-
+-            ps.setInt(1, productId);
+-            ps.setInt(2, customerId);
+-            ps.executeUpdate();
+-        } catch (SQLException e) {
+-            e.printStackTrace();
++try } 
++SqlDatabaseUtils.getSqlRetryPolicy().executeAction(() }
++// Looks up the key in the shard map and opens a connection to the shard
++try } 
++Connection conn = shardMap.openConnectionForKey(customerId, Configuration.getCredentialsConnectionString())) }
++// Create a simple command that will insert or update the customer information
++PreparedStatement ps = conn.prepareStatement
++("UPDATE Sales.Customer SET PersonID = ? WHERE CustomerID = ?"); }
++ps.setInt(1, productId);
++ ps.setInt(2, customerId);
++  ps.executeUpdate(); }
++catch }
++(SQLException e)e.printStackTrace(); }
+         }
+     });
+-} catch (Exception e) {
+-    throw new StoreException(e.getMessage(), e);
+-}
++} 
++catch 
++    (Exception e) {
++    throw new StoreException(e.getMessage(), e); }
+ ShardMapManager smm = ShardMapManagerFactory.GetSqlShardMapManager(smmConnectionString,  
+           ShardMapManagerLoadPolicy.Lazy);
+           RecoveryManager rm = smm.GetRecoveryManager();
+
+From 1736b82f0d9d9a339b02bd0c5af8342774e6e5b4 Mon Sep 17 00:00:00 2001
+From: MoneyMan573 <50783497+MoneyMan573@users.noreply.github.com>
+Date: Wed, 28 Apr 2021 23:19:31 -0500
+Subject: [PATCH 31/35] Update /name:bucksbitties/bitbucket-pipelines-main1.yml
+
+---
+ .../workflows/name:bucksbitties/bitbucket-pipelines-main1.yml | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/.github/workflows/name:bucksbitties/bitbucket-pipelines-main1.yml b/.github/workflows/name:bucksbitties/bitbucket-pipelines-main1.yml
+index bc257a6..dbe7daf 100644
+--- a/.github/workflows/name:bucksbitties/bitbucket-pipelines-main1.yml
++++ b/.github/workflows/name:bucksbitties/bitbucket-pipelines-main1.yml
+@@ -5,9 +5,9 @@ name:bucksbitties/bitbucket-pipelines-main1.yml
+ # Controls when the action will run. Triggers the workflow on push or pull request
+ # events but only for the master branch
+ on:
+-  push:https://github.com/BuckosBits/bucksbitties/new/master
++  push:https://github.com/BuckosBits/bucksbitties/.github/workflows/name:bucksbitties/bitbucket-pipelines-main1.yml
+     branches: [ main ]
+-  pull_request:
++  pull_request:MoneyMan573/bucksbitties
+     branches: [ main ]
+ 
+ # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+
+From 370a9ff6efd6c99966a020a4b856902fe4e53d19 Mon Sep 17 00:00:00 2001
+From: MoneyMan573 <pimpneasily@yahoo.com>
+Date: Fri, 7 May 2021 14:50:23 -0500
+Subject: [PATCH 32/35] Update bitbucket-pipelines.yml
+
+---
+ bitbucket-pipelines.yml | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/bitbucket-pipelines.yml b/bitbucket-pipelines.yml
+index ace51c2..090186b 100644
+--- a/bitbucket-pipelines.yml
++++ b/bitbucket-pipelines.yml
+@@ -1,13 +1,13 @@
+-# This is a basic workflow to help you get started with Actions
++### This is a basic workflow to help you get started with Actions
+ 
+-name:bucksbitties/bitbucket-pipelines.yml
++#name: "bitbucket-pipelines.yml"
+ 
+ # Controls when the action will run. Triggers the workflow on push or pull request
+ # events but only for the master branch
+-on:
+-  push:
++on:MoneyMan573/bucksbitties
++  push:bitbucket-pipelines.yml
+     branches: [ main1 ]
+-  pull_request:
++  pull_request:BuckosBits/bucksbitties-pipelines-main.yml
+     branches: [ main1 ]
+ 
+ # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+
+From 8f5dfe6bf240b2b0f01fb7b6f98a0a0a3555c8cd Mon Sep 17 00:00:00 2001
+From: Michael Glenn <48465089+BigGuy573@users.noreply.github.com>
+Date: Fri, 21 May 2021 22:22:46 -0500
+Subject: [PATCH 33/35] Update and rename
+ .github/workflows/name:bucksbitties/bitbucket-pipelines-main1.yml to
+ workflows/bitbucket-pipelines-main1.yml
+
+---
+ .../bitbucket-pipelines-main1.yml                             | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename {.github/workflows/name:bucksbitties => workflows}/bitbucket-pipelines-main1.yml (86%)
+
+diff --git a/.github/workflows/name:bucksbitties/bitbucket-pipelines-main1.yml b/workflows/bitbucket-pipelines-main1.yml
+similarity index 86%
+rename from .github/workflows/name:bucksbitties/bitbucket-pipelines-main1.yml
+rename to workflows/bitbucket-pipelines-main1.yml
+index dbe7daf..97858d3 100644
+--- a/.github/workflows/name:bucksbitties/bitbucket-pipelines-main1.yml
++++ b/workflows/bitbucket-pipelines-main1.yml
+@@ -1,11 +1,11 @@
+ # This is a basic workflow to help you get started with Actions
+ 
+-name:bucksbitties/bitbucket-pipelines-main1.yml
++name:bucksbitties/workflows/bitbucket-pipelines-main1.yml
+ 
+ # Controls when the action will run. Triggers the workflow on push or pull request
+ # events but only for the master branch
+ on:
+-  push:https://github.com/BuckosBits/bucksbitties/.github/workflows/name:bucksbitties/bitbucket-pipelines-main1.yml
++  push:https://github.com/BuckosBits/bucksbitties/workflows/bucksbitties/bitbucket-pipelines-main1.yml
+     branches: [ main ]
+   pull_request:MoneyMan573/bucksbitties
+     branches: [ main ]
+
+From e69c6488657f02a7d0c22d3f299cb12fb0de65fb Mon Sep 17 00:00:00 2001
+From: Michael Glenn <48465089+BigGuy573@users.noreply.github.com>
+Date: Fri, 21 May 2021 22:27:54 -0500
+Subject: [PATCH 34/35] Update README.md
+
+---
+ README.md | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/README.md b/README.md
+index c233322..6a09590 100644
+--- a/README.md
++++ b/README.md
+@@ -20,9 +20,9 @@
+ # information for Eclipse / Flash Builder.
+ FROM node:10-slim
+ LABEL version="1.0.0"
+-LABEL repository="https://github.com/aaronpanch/action-serverless"
+-LABEL homepage="https://github.com/aaronpanch/action-serverless"
+-LABEL maintainer="Aaron Panchal <aaron.panchal@gmail.com>"
++LABEL repository="https://github.com/BigGuy573/action-serverless"
++LABEL homepage="https://github.com/BigGuy5574action-serverless"
++LABEL maintainer="Aaron Panchal <mbg198618@gmail.com>"
+ LABEL "com.github.actions.name"="GitHub Action for Serverless Framework"
+ LABEL "com.github.actions.description"="Wraps the Serverless CLI"
+ LABEL "com.github.actions.icon"="zap"
+@@ -73,7 +73,7 @@ action "install" {
+ 
+ action "deploy" {
+   needs = ["install"]
+-  uses = "aaronpanch/action-serverless@master"
++  uses = "BigGuy573/action-serverless@master"
+   args = "deploy"
+   secrets = [
+     "AWS_ACCESS_KEY_ID",
+@@ -95,7 +95,7 @@ To navigate and deploy two services (in this example "Users" and "Admins") in di
+ 
+ ```hcl
+ action "Deploy Users Service" {
+-  uses = "aaronpanch/action-serverless@master"
++  uses = "BigGuy573/action-serverless@master"
+   args = "deploy"
+   env = {
+     SERVICE_ROOT = "users_service"
+@@ -107,7 +107,7 @@ action "Deploy Users Service" {
+ }
+ 
+ action "Deploy Admin Service" {
+-  uses = "aaronpanch/action-serverless@master"
++  uses = "BigGuy573/action-serverless@master"
+   args = "deploy"
+   env = {
+     SERVICE_ROOT = "admin_service"
+@@ -653,7 +653,7 @@ Deploy multicontainer Docker environment as an AWS Elastic Beanstalk application
+       same "printed page" as the copyright notice for easier
+       identification within third-party archives.
+ 
+-   Copyright [yyyy] [name of copyright owner]
++   Copyright [2021] [Michael Glenn]
+ 
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+
+From b5a805f731536ba309d449a8b95debb7f8154d29 Mon Sep 17 00:00:00 2001
+From: Michael Glenn <48465089+BigGuy573@users.noreply.github.com>
+Date: Sat, 22 May 2021 00:37:00 -0500
+Subject: [PATCH 35/35] Update
+
+---
+ README.md | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/README.md b/README.md
+index 6a09590..a037120 100644
+--- a/README.md
++++ b/README.md
+@@ -22,7 +22,7 @@ FROM node:10-slim
+ LABEL version="1.0.0"
+ LABEL repository="https://github.com/BigGuy573/action-serverless"
+ LABEL homepage="https://github.com/BigGuy5574action-serverless"
+-LABEL maintainer="Aaron Panchal <mbg198618@gmail.com>"
++LABEL maintainer="Michael Glenn @BigGuy573" <mbg198618@gmail.com>"
+ LABEL "com.github.actions.name"="GitHub Action for Serverless Framework"
+ LABEL "com.github.actions.description"="Wraps the Serverless CLI"
+ LABEL "com.github.actions.icon"="zap"
+@@ -32,7 +32,7 @@ LABEL "com.github.actions.color"="gray-dark"
+ 
+ MIT License
+ 
+-Copyright (c) 2019 Aaron Panchal
++Copyright (c) 2021 Michael Glenn
+ 
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
