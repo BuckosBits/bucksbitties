@@ -19,7 +19,7 @@ CMD ["help"]
 FROM microsoft/dotnet:2.2-runtime AS base
 WORKDIR /app
 
-FROM microsoft/dotnet:2.2-sdk AS build
+FROM microsoft/dotnet:latest AS build
 WORKDIR /src/Fabrikam.Workflow.Service
 
 COPY Fabrikam.Workflow.Service/Fabrikam.Workflow.Service.csproj .
