@@ -1,0 +1,190 @@
+{
+        "manifestVersion": 1,
+        "id": "vsts-extensions-myExtensions",
+        "version": "1.0.0",
+        "name": "My First Set of Widgets",
+        "description": "Samples containing different widgets extending dashboards",
+        "publisher": "fabrikam",
+        "categories": ["Azure Boards"],
+        "targets": [
+            {
+                "id": "Microsoft.VisualStudio.Services"
+            }
+        ],
+        "icons": {
+            "default": "img/logo.png"
+        },
+        "contributions": [
+            {
+                "id": "HelloWorldWidget",
+                "type": "ms.vss-dashboards-web.widget",
+                "targets": [
+                    "ms.vss-dashboards-web.widget-catalog"
+                ],
+                "properties": {
+                    "name": "Hello World Widget",
+                    "description": "My first widget",
+                    "catalogIconUrl": "img/CatalogIcon.png",
+                    "previewImageUrl": "img/preview.png",                            
+                    "uri": "hello-world.html",
+                    "supportedSizes": [
+                         {
+                                "rowSpan": 1,
+                                "columnSpan": 2
+                            }
+                        ],
+                    "supportedScopes": ["project_team"]
+                }
+            }
+        ],
+        "files": [
+            {
+                "path": "hello-world.html", "addressable": true
+            },
+            {
+                "path": "sdk/scripts", "addressable": true
+            },
+            {
+                "path": "img", "addressable": true
+            }
+        ]
+    }
+{
+    ...,
+    "scopes":[
+        "vso.work"
+    ]
+}
+{
+     ...,
+     "contributions":[
+         ...,
+        {
+             "id": "HelloWorldWidget2",
+             "type": "ms.vss-dashboards-web.widget",
+             "targets": [
+                 "ms.vss-dashboards-web.widget-catalog"
+             ],
+             "properties": {
+                 "name": "Hello World Widget 2 (with API)",
+                 "description": "My second widget",
+                 "previewImageUrl": "img/preview2.png",                            
+                 "uri": "hello-world2.html",
+                 "supportedSizes": [
+                      {
+                             "rowSpan": 1,
+                             "columnSpan": 2
+                         }
+                     ],
+                 "supportedScopes": ["project_team"]
+             }
+         }
+
+     ],
+     "files": [
+         {
+             "path": "hello-world.html", "addressable": true
+         },
+         {
+             "path": "hello-world2.html", "addressable": true
+         },      
+         {
+             "path": "sdk/scripts", "addressable": true
+         },
+         {
+             "path": "img", "addressable": true
+         }
+     ],
+     "scopes":[
+         "vso.work"
+     ]
+ }
+{
+    ...
+    "contributions": [
+        ... , 
+        {
+             "id": "HelloWorldWidget3",
+             "type": "ms.vss-dashboards-web.widget",
+             "targets": [
+                 "ms.vss-dashboards-web.widget-catalog",
+                 "fabrikam.vsts-extensions-myExtensions.HelloWorldWidget.Configuration"
+             ],
+             "properties": {
+                 "name": "Hello World Widget 3 (with config)",
+                 "description": "My third widget",
+                 "previewImageUrl": "img/preview3.png",                       
+                 "uri": "hello-world3.html",
+                 "supportedSizes": [
+                      {
+                             "rowSpan": 1,
+                             "columnSpan": 2
+                         }
+                     ],
+                 "supportedScopes": ["project_team"]
+             }
+         },
+         {
+             "id": "HelloWorldWidget.Configuration",
+             "type": "ms.vss-dashboards-web.widget-configuration",
+             "targets": [ "ms.vss-dashboards-web.widget-configuration" ],
+             "properties": {
+                 "name": "HelloWorldWidget Configuration",
+                 "description": "Configures HelloWorldWidget",
+                 "uri": "configuration.html"
+             }
+         }
+    ],
+    "files": [
+            {
+                "path": "hello-world.html", "addressable": true
+            },
+             {
+                "path": "hello-world2.html", "addressable": true
+            },
+            {
+                "path": "hello-world3.html", "addressable": true
+            },
+            {
+                "path": "configuration.html", "addressable": true
+            },
+            {
+                "path": "sdk/scripts", "addressable": true
+            },
+            {
+                "path": "img", "addressable": true
+            }
+        ],
+        ...     
+}
+{
+    ...
+    "contributions": [
+        ... , 
+        {
+             "id": "HelloWorldWidget3",
+             "type": "ms.vss-dashboards-web.widget",
+             "targets": [
+                 "ms.vss-dashboards-web.widget-catalog",  "fabrikam.vsts-extensions-myExtensions.HelloWorldWidget.Configuration"
+             ],
+             "properties": {
+                 "name": "Hello World Widget 3 (with config)",
+                 "description": "My third widget",
+                 "previewImageUrl": "img/preview3.png",                       
+                 "uri": "hello-world3.html",
+                 "isNameConfigurable": true,
+                 "supportedSizes": [
+                    {
+                        "rowSpan": 1,
+                        "columnSpan": 2
+                    },
+                    {
+                        "rowSpan": 2,
+                        "columnSpan": 2
+                    }
+                 ],
+                 "supportedScopes": ["project_team"]
+             }
+         },
+         ...
+}

@@ -1,0 +1,121 @@
+$ serverless deploy
+# Serverless: Packaging service...
+# Serverless: Excluding development dependencies...
+# Serverless: Uploading CloudFormation file to S3...
+# Serverless: Uploading artifacts...
+# Serverless: Uploading service .zip file to S3 (357.34 KB)...
+# Serverless: Validating template...
+# Serverless: Updating Stack...
+# Serverless: Checking Stack update progress...
+# ..............
+# Serverless: Stack update finished...
+# Service Information
+# service: graphql-api
+# stage: dev
+# region: us-east-1
+# stack: graphql-api-dev
+# api keys:
+#   None
+# endpoints:
+#   GET - https://9qdmq5nvql.execute-api.us-east-1.amazonaws.com/dev/query
+# functions:
+#   query: graphql-api-dev-query
+
+$ curl -G 'https://9qdmq5nvql.execute-api.us-east-1.amazonaws.com/dev/query' --data-urlencode 'query={greeting(firstName: "Jeremy")}'
+# {"data":{"greeting":"Hello, Jeremy."}}
+$ sls deploy
+... snip ...
+Service Information
+service: serverless-flask
+stage: dev
+region: us-east-1
+stack: serverless-flask-dev
+api keys:
+  None
+endpoints:
+  ANY - https://bl4r0gjjv5.execute-api.us-east-1.amazonaws.com/dev
+  ANY - https://bl4r0gjjv5.execute-api.us-east-1.amazonaws.com/dev/{proxy+}
+functions:
+  app: serverless-flask-dev-app
+$ sls deploy
+$ sls dynamodb install
+$ sls dynamodb start
+Dynamodb Local Started, Visit: http://localhost:8000/shell
+Serverless: DynamoDB - created table users-table-dev
+$ serverless install --url https://github.com/alexdebrie/serverless-flask --name my-flask-app
+$ cd my-flask-app && npm run setup
+$ sls deploy
+... snip ...
+Service Information
+service: my-express-application
+stage: dev
+region: us-east-1
+stack: my-express-application-dev
+api keys:
+  None
+endpoints:
+  ANY - https://bl4r0gjjv5.execute-api.us-east-1.amazonaws.com/dev
+  ANY - https://bl4r0gjjv5.execute-api.us-east-1.amazonaws.com/dev/{proxy+}
+functions:
+  app: my-express-application-dev-app
+$ sls deploy
+$ sls dynamodb install
+// index.js
+
+const serverless = require('serverless-http');
+const bodyParser = require('body-parser');
+const express = require('express')
+const app = express()
+const AWS = require('aws-sdk');
+
+const USERS_TABLE = process.env.USERS_TABLE;
+
+const IS_OFFLINE = process.env.IS_OFFLINE;
+let dynamoDb;
+if (IS_OFFLINE === 'true') {
+  dynamoDb = new AWS.DynamoDB.DocumentClient({
+    region: 'localhost',
+    endpoint: 'http://localhost:8000'
+  })
+  console.log(dynamoDb);
+} else {
+  dynamoDb = new AWS.DynamoDB.DocumentClient();
+};
+
+app.use(bodyParser.json({ strict: false }));
+
+... rest of application code ...
+$ sls offline start
+Dynamodb Local Started, Visit: http://localhost:8000/shell
+Serverless: DynamoDB - created table users-table-dev
+Serverless: Starting Offline: dev/us-east-1.
+
+Serverless: Routes for app:
+Serverless: ANY /
+Serverless: ANY /{proxy*}
+
+Serverless: Routes for getUser:
+Serverless: GET /users/{proxy*}
+
+Serverless: Routes for createUser:
+Serverless: POST /users
+
+Serverless: Offline listening on http://localhost:3000
+$ curl -H "Content-Type: application/json" -X POST http://localhost:3000/users -d '{"userId": "michaelglenn1", "name": "Michael Glenn"}'
+{"userId":"michaelglenn1","name":"Michael Glenn"}
+$ curl -H "Content-Type: application/json" -X GET http://localhost:3000/users/michaelglenn1
+{"userId":"michaelglenn1","name":"Michael Glenn"}
+helm install $HELM_CHARTS/package/ \
+     --set image.tag=0.1.0 \
+     --set image.repository=package \
+     --set dockerregistry=$ACR_SERVER \
+     --namespace backend \
+     --name package-v0.1.0
+helm install <package-chart-name> --version <desiredVersion>
+$ kubectl rollout history deployments/delivery-v010 -n backend
+deployment.extensions/delivery-v010
+REVISION  CHANGE-CAUSE
+1         Initial deployment
+~$ helm list
+NAME            REVISION    UPDATED                     STATUS        CHART            APP VERSION     NAMESPACE
+delivery-v0.1.0 1           Sun Apr  7 00:25:30 2019    DEPLOYED      delivery-v0.1.0  v0.1.0          backend

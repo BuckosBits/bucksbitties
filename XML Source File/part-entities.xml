@@ -1,0 +1,183 @@
+<!-- $Date: 1998/09/28 08:19:26 $ $Revisions:$ -->
+<!-- 
+  ****************************************************** 
+  | Major                                   |
+  ******************************************************
+-->
+<!ENTITY toc                  SYSTEM "toc.xml">
+<!ENTITY index                SYSTEM "index.xml">
+<!ENTITY idl                  SYSTEM "idl.xml">
+<!ENTITY java-binding         SYSTEM "java-binding.xml">
+<!ENTITY ecma-binding         SYSTEM "ecma-binding.xml">
+<!ENTITY introduction         SYSTEM "introduction.xml">
+<!ENTITY contributors         SYSTEM "contributors.xml">
+<!ENTITY glossary             SYSTEM "glossary.xml">
+<!ENTITY production           SYSTEM "production.xml">
+<!ENTITY object-index         SYSTEM "object-index.xml">
+<!ENTITY tutorial             SYSTEM "tutorial.xml">
+<!ENTITY definition-index     SYSTEM "definition-index.xml">
+<!ENTITY level-one-core       SYSTEM "level-one-core.xml">
+<!ENTITY level-one-html       SYSTEM "level-one-html.xml">
+<!ENTITY copyright            SYSTEM "copyright.xml">
+<!ENTITY references           SYSTEM "references.xml">
+
+<!-- 
+  ****************************************************** 
+  | Object definitions for level one core              |
+  ******************************************************
+-->
+<!ENTITY level-one-core-dom 
+              SYSTEM "definitions/level-one-core/dom.xml">
+<!ENTITY level-one-exceptions
+              SYSTEM "definitions/level-one-core/exceptions.xml">
+<!ENTITY level-one-core-document 
+              SYSTEM "definitions/level-one-core/document.xml">
+<!ENTITY level-one-core-node 
+              SYSTEM "definitions/level-one-core/node.xml">
+<!ENTITY level-one-core-node-list
+              SYSTEM "definitions/level-one-core/node-list.xml">
+<!ENTITY level-one-core-named-node-map
+              SYSTEM "definitions/level-one-core/named-node-map.xml">
+<!ENTITY level-one-core-element
+              SYSTEM "definitions/level-one-core/element.xml">
+<!ENTITY level-one-core-attribute
+              SYSTEM "definitions/level-one-core/attribute.xml">
+<!ENTITY level-one-core-text
+              SYSTEM "definitions/level-one-core/text.xml">
+<!ENTITY level-one-core-comment
+              SYSTEM "definitions/level-one-core/comment.xml">
+<!ENTITY level-one-core-pi
+              SYSTEM "definitions/level-one-core/pi.xml">
+<!ENTITY level-one-core-cdata-section
+              SYSTEM "definitions/level-one-core/cdata-section.xml">
+<!ENTITY level-one-core-doctype
+              SYSTEM "definitions/level-one-core/doctype.xml">
+<!ENTITY level-one-core-entity-reference
+              SYSTEM "definitions/level-one-core/entity-reference.xml">
+<!ENTITY level-one-core-entity
+              SYSTEM "definitions/level-one-core/entity.xml">
+<!ENTITY level-one-core-data 
+              SYSTEM "definitions/level-one-core/data.xml">
+<!ENTITY level-one-core-notation 
+              SYSTEM "definitions/level-one-core/notation.xml">
+
+<!-- 
+  ****************************************************** 
+  | Object definitions for level one html              |
+  ******************************************************
+-->
+
+<!ENTITY level-one-html-entities 
+	SYSTEM "definitions/level-one-html/entities.xml">
+<!ENTITY level-one-html-htmlanchorelement 
+	SYSTEM "definitions/level-one-html/htmlanchorelement.xml">
+<!ENTITY level-one-html-htmlappletelement 
+	SYSTEM "definitions/level-one-html/htmlappletelement.xml">
+<!ENTITY level-one-html-htmlareaelement 
+	SYSTEM "definitions/level-one-html/htmlareaelement.xml">
+<!ENTITY level-one-html-htmlbaseelement 
+	SYSTEM "definitions/level-one-html/htmlbaseelement.xml">
+<!ENTITY level-one-html-htmlbasefontelement 
+	SYSTEM "definitions/level-one-html/htmlbasefontelement.xml">
+<!ENTITY level-one-html-htmlblockquoteelement
+	SYSTEM "definitions/level-one-html/htmlblockquoteelement.xml">
+<!ENTITY level-one-html-htmlbodyelement 
+	SYSTEM "definitions/level-one-html/htmlbodyelement.xml">
+<!ENTITY level-one-html-htmlbrelement 
+	SYSTEM "definitions/level-one-html/htmlbrelement.xml">
+<!ENTITY level-one-html-htmlbuttonelement 
+	SYSTEM "definitions/level-one-html/htmlbuttonelement.xml">
+<!ENTITY level-one-html-htmlcollection 
+	SYSTEM "definitions/level-one-html/htmlcollection.xml">
+<!ENTITY level-one-html-htmldirectoryelement 
+	SYSTEM "definitions/level-one-html/htmldirectoryelement.xml">
+<!ENTITY level-one-html-htmldivelement 
+	SYSTEM "definitions/level-one-html/htmldivelement.xml">
+<!ENTITY level-one-html-htmldlistelement 
+	SYSTEM "definitions/level-one-html/htmldlistelement.xml">
+<!ENTITY level-one-html-htmldocument 
+	SYSTEM "definitions/level-one-html/htmldocument.xml">
+<!ENTITY level-one-html-htmlelement 
+	SYSTEM "definitions/level-one-html/htmlelement.xml">
+<!ENTITY level-one-html-htmlfieldsetelement 
+	SYSTEM "definitions/level-one-html/htmlfieldsetelement.xml">
+<!ENTITY level-one-html-htmlfontelement 
+	SYSTEM "definitions/level-one-html/htmlfontelement.xml">
+<!ENTITY level-one-html-htmlformelement 
+	SYSTEM "definitions/level-one-html/htmlformelement.xml">
+<!ENTITY level-one-html-htmlframeelement 
+	SYSTEM "definitions/level-one-html/htmlframeelement.xml">
+<!ENTITY level-one-html-htmlframesetelement 
+	SYSTEM "definitions/level-one-html/htmlframesetelement.xml">
+<!ENTITY level-one-html-htmlheadelement 
+	SYSTEM "definitions/level-one-html/htmlheadelement.xml">
+<!ENTITY level-one-html-htmlheadingelement 
+	SYSTEM "definitions/level-one-html/htmlheadingelement.xml">
+<!ENTITY level-one-html-htmlhrelement 
+	SYSTEM "definitions/level-one-html/htmlhrelement.xml">
+<!ENTITY level-one-html-htmlhtmlelement 
+	SYSTEM "definitions/level-one-html/htmlhtmlelement.xml">
+<!ENTITY level-one-html-htmliframeelement 
+	SYSTEM "definitions/level-one-html/htmliframeelement.xml">
+<!ENTITY level-one-html-htmlimageelement 
+	SYSTEM "definitions/level-one-html/htmlimageelement.xml">
+<!ENTITY level-one-html-htmlinputelement 
+	SYSTEM "definitions/level-one-html/htmlinputelement.xml">
+<!ENTITY level-one-html-htmlisindexelement 
+	SYSTEM "definitions/level-one-html/htmlisindexelement.xml">
+<!ENTITY level-one-html-htmllabelelement 
+	SYSTEM "definitions/level-one-html/htmllabelelement.xml">
+<!ENTITY level-one-html-htmllegendelement 
+	SYSTEM "definitions/level-one-html/htmllegendelement.xml">
+<!ENTITY level-one-html-htmllielement 
+	SYSTEM "definitions/level-one-html/htmllielement.xml">
+<!ENTITY level-one-html-htmllinkelement 
+	SYSTEM "definitions/level-one-html/htmllinkelement.xml">
+<!ENTITY level-one-html-htmlmapelement 
+	SYSTEM "definitions/level-one-html/htmlmapelement.xml">
+<!ENTITY level-one-html-htmlmenuelement 
+	SYSTEM "definitions/level-one-html/htmlmenuelement.xml">
+<!ENTITY level-one-html-htmlmetaelement 
+	SYSTEM "definitions/level-one-html/htmlmetaelement.xml">
+<!ENTITY level-one-html-htmlmodelement 
+	SYSTEM "definitions/level-one-html/htmlmodelement.xml">
+<!ENTITY level-one-html-htmlobjectelement 
+	SYSTEM "definitions/level-one-html/htmlobjectelement.xml">
+<!ENTITY level-one-html-htmlolistelement 
+	SYSTEM "definitions/level-one-html/htmlolistelement.xml">
+<!ENTITY level-one-html-htmloptgroupelement 
+	SYSTEM "definitions/level-one-html/htmloptgroupelement.xml">
+<!ENTITY level-one-html-htmloptionelement 
+	SYSTEM "definitions/level-one-html/htmloptionelement.xml">
+<!ENTITY level-one-html-htmlparagraphelement 
+	SYSTEM "definitions/level-one-html/htmlparagraphelement.xml">
+<!ENTITY level-one-html-htmlparamelement 
+	SYSTEM "definitions/level-one-html/htmlparamelement.xml">
+<!ENTITY level-one-html-htmlpreelement 
+	SYSTEM "definitions/level-one-html/htmlpreelement.xml">
+<!ENTITY level-one-html-htmlquoteelement 
+	SYSTEM "definitions/level-one-html/htmlquoteelement.xml">
+<!ENTITY level-one-html-htmlscriptelement 
+	SYSTEM "definitions/level-one-html/htmlscriptelement.xml">
+<!ENTITY level-one-html-htmlselectelement 
+	SYSTEM "definitions/level-one-html/htmlselectelement.xml">
+<!ENTITY level-one-html-htmlstyleelement 
+	SYSTEM "definitions/level-one-html/htmlstyleelement.xml">
+<!ENTITY level-one-html-htmltablecaptionelement 
+	SYSTEM "definitions/level-one-html/htmltablecaptionelement.xml">
+<!ENTITY level-one-html-htmltablecellelement 
+	SYSTEM "definitions/level-one-html/htmltablecellelement.xml">
+<!ENTITY level-one-html-htmltablecolelement 
+	SYSTEM "definitions/level-one-html/htmltablecolelement.xml">
+<!ENTITY level-one-html-htmltableelement 
+	SYSTEM "definitions/level-one-html/htmltableelement.xml">
+<!ENTITY level-one-html-htmltablerowelement 
+	SYSTEM "definitions/level-one-html/htmltablerowelement.xml">
+<!ENTITY level-one-html-htmltablesectionelement 
+	SYSTEM "definitions/level-one-html/htmltablesectionelement.xml">
+<!ENTITY level-one-html-htmltextareaelement 
+	SYSTEM "definitions/level-one-html/htmltextareaelement.xml">
+<!ENTITY level-one-html-htmltitleelement 
+	SYSTEM "definitions/level-one-html/htmltitleelement.xml">
+<!ENTITY level-one-html-htmlulistelement 
+	SYSTEM "definitions/level-one-html/htmlulistelement.xml">

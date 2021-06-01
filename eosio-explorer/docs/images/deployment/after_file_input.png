@@ -1,0 +1,456 @@
+<h1 align="center">EOSIO Explorer</h1>
+<p align="center">
+  A full web application to communicate with EOSIO blockchain in a local development environment built using React.
+</p>
+<p align="center">
+  <img alt="NPM Version" src="https://img.shields.io/npm/v/eosio-explorer.svg">
+</p>
+
+## Quick Start
+1. `yarn install` to install all the dependencies
+2. `yarn start` to run in development mode
+## Table of Contents
+
+## Build and Serve
+In production environment, `serve.js` is the file used to serve both API calls and the static files in the `build/...` files. During development, `src/setupProxy.js` is used to proxy the API calls to a background `serve.js` process. More details available in the [package.json](package.json), check `prestart`.
+* [Overview](#overview)
+   * [Features](#features)
+   * [Platform Support](#platform-support)
+   * [Required Tools](#required-tools)
+* [Installation](#installation)
+   * [For Users](#for-users)
+   * [For Contributors](#for-contributors)
+   * [OS Platform Specific](#os-platform-specific)
+* [Usage](#usage)
+* [Links to Documentation](#links-to-documentation)
+* [Contributing](#contributing)
+* [License](#license)
+* [Important](#important)
+
+To build from source, run `yarn run build` to create a static distribution for a production environment. To serve, you can do `node serve.js` directly.
+## Overview
+
+## Documentation
+The EOSIO Explorer is a full web application that allows developers to bootstrap their smart contract development by providing them the ability to communicate with the EOSIO blockchain in a local development environment. The goal of this application is to provide app developers for the EOSIO blockchain (consisting of smart contract developers and front-end developers) a quick and easy way to create the local development environment required to make and test such applications on the EOSIO blockchain. 
+
+The application provides developers the ability to review changes and updates that occur within the blockchain based on their own work, and has the capacity to allow teams of developers to work on the same instance of the blockchain. This is to add an extra layer of ease for application development especially as a way to allow both smart contract developers and front-end developers to work together more closely. For example, front-end developers can test by connecting their applications to the blockchain instantiated by this tool, and perform tests which smart contract developers can review instantly on the tool to determine if behavior is expected or not. 
+
+The goal of this application is to enhance the user experience when developing EOSIO-based blockchain applications while at the same time lowering the barrier to entry for newcomers to EOSIO-based blockchain development.
+
+### :warning: Disclaimer :warning:
+
+The EOSIO Explorer is designed specifically to be a tool for local development. Therefore, numerous things must be kept in mind:
+
+1. **Wallet keys used for this tool may be compromised** if your machine is not properly secure.
+2. **The tool is not compatible with the EOSIO Mainnet**
+3. Tools that do not match the versions listed in [required tools](#required-tools) or OSes not listed in the [platform support list](#platform-support) may cause issues
+
+### Features
+
+1. :zap: Smart contract deployment to a connected EOSIO Blockchain
+2. :key: Ability to create accounts with `active` and `owner` permissions on a locally created EOSIO Blockchain (:closed_lock_with_key: Private keys stored locally)
+3. :octocat: Ability to push actions from a deployed smart contract to a connected EOSIO Blockchain
+4. :telescope: Automatically updating lists for blocks produced, transactions performed, actions pushed, etc.
+5. :sunglasses: Search for and review accounts and deployed smart contracts on the connected EOSIO Blockchain
+6. :electric_plug: Simple way to connect to a different `nodeos` instance after opening the tool
+
+### Platform Support
+
+* Amazon Linux 2
+* CentOS 7
+* Ubuntu 16.04
+* Ubuntu 18.04
+* MacOS 10.14 (Mojave) 
+
+### Required Tools
+
+* [Yarn](https://yarnpkg.com/lang/en/) with support at `^1.15.2` (latest stable)
+* [Docker](https://www.docker.com/) with support at Docker Engine `18.09.2` (latest stable)
+* [Node.JS](https://nodejs.org/en/) with support at `^10.15.3` LTS (latest stable)
+
+## Installation
+
+### For Users
+
+```bash
+yarn global add eosio-explorer
+```
+
+This will create a globally installed instance of the tool which you can run anywhere.
+
+If you wish to install the tool without `global`, then you can do the following instead:
+
+```bash
+git clone https://github.com/EOSIO/eosio-explorer.git
+yarn install
+```
+
+### For Contributors
+
+See: [Development](./docs/development.md)
+
+### OS Platform Specific 
+
+#### Ubuntu 18.04 / Ubuntu 16.04
+
+If you want to start the tool with the bundled UI, you will need to make sure your machine or server can open headless Chrome in a sandbox. 
+
+#### Amazon Linux 2 (AMI)
+
+Out of the box, Amazon Linux will use an outdated version of Docker which this application currently does not support.
+
+In order to install the tool properly, you will need to manually install the latest stable version of Docker using binaries.
+
+Finally, this requires the instance to be able to run or open headless Chrome in a sandbox.
+
+#### CentOS 7
+
+The tool requires starting a sandbox for headless Chrome, which can get complicated when attempting to run the tool on a variety of instances that don't specifically open a browser.
+
+In CentOS specifically, `SELinux` impedes this process ([original issue](https://github.com/GoogleChrome/puppeteer/issues/2857#issuecomment-446983425)).
+
+You will need to create an exception within SELinux. Setting the following boolean will fix this particular issue:
+```bash
+setsebool -P unconfined_chrome_sandbox_transition 0
+```
+
+Alternatively, though not necessarily recommended, you can disable `SELinux` entirely. 
+
+## Usage
+
+After installation of the application, depending on how you have installed the tool, can be run in different ways.
+
+```bash
+Installed with global:                eosio-explorer <command>
+Installed via cloning the repository: yarn eosio-explorer <command>
+Run the tool with the specified command
+Commands:
+  init              Initialize the tool by installing all dependencies, setting up 
+                    all Docker containers, etc.
+                    Available flags:
+                    -dev / --develop - Starts the tool in development mode
+                    -s / --sample-data - Starts the tool with pre-existing sample accounts 
+                                         and smart contracts
+  start             Start the tool, assumes the dependencies and Docker images are already prepared
+                    Available flags:
+                    -dev / --develop - Starts the tool in development mode
+                    -d / --delete - Removes existing Docker containers
+                    --init - Builds a production-ready version of the web tool, 
+                             and opens the tool with cleared local storage
+                    -s / --sample-data - Starts the tool with pre-existing 
+                                         sample accounts and smart contracts
+  start_gui         Starts the web tool locally without touching the nodeos and MongoDB containers.
+                    Available flags:
+                    -dev / --develop - Starts the tool in development mode
+                    --clear-browser-storage - Clears the local storage
+  pause_dockers     Pause any currently running Docker containers
+  remove_dockers    Remove any currently present Docker containers
+```
+
+## Links to Documentation
+
+* [Main Documentation](./docs)
+* [Development](./docs/development.md)
+
+## Want to help?
+## Contributing
+@@ -1,7 +1,8 @@
+# Docs
+This folder contains the documentation on how to use and navigate the application.
+# EOSIO Explorer Documentation
+
+## Contents
+You can view documentation on everything related to the EOSIO Explorer web tool here.
+
+## Documentation for Users
+
+* Inspect Pages
+    * [Info Page](./pages/info-page.md)
+    * [Block List Page](./pages/block-list-page.md)
+        * [Block Detail Page](./pages/detail-pages/block-detail-page.md)
+    * [Transaction List Page](./pages/transaction-list-page.md)
+        * [Transaction Detail Page](./pages/detail-pages/transaction-detail-page.md)
+    * [Action List Page](./pages/action-list-page.md)
+        * [Action Detail Page](./pages/detail-pages/action-detail-page.md)
+    * [Account Detail Page](./pages/detail-pages/account-detail-page.md)
+    * [Smart Contract Detail Page](./pages/detail-pages/smart-contract-detail-page.md)
+* Interact Pages
+    * [Manage Accounts Page](./pages/interact/manage-accounts-page.md)
+    * [Smart Contract Deployment Page](./pages/interact/deployment-page.md)
+    * [Push Action Page](./pages/interact/push-action-page.md)
+* Guides
+    * Managing Accounts
+        * [Create Account](./guides/permissions/create_account.md)
+        * [Importing Keys](./guides/permissions/import_account.md)
+    * [Deploying a Smart Contract](./guides/deployment)
+        * [Step 1: Select File Entry Point](./guides/deployment/step-one.md)
+        * [Step 2: ABI File (Optional)](./guides/deployment/step-two.md)
+        * [Step 3: Deploy](./guides/deployment/step-three.md)
+
+## Documentation for Contributors and Developers
+
+* [Development](development.md)
+* [Contributing to the Project](../../../CONTRIBUTING.md)
+# Start Development
+
+If you want to develop on this application ( etc. adding a new feature, bug fixing... ), please follow these steps to setup your local development environment.
+
+Make sure `node.js`, `yarn`, `docker` are installed properly and we assume you are using macOS Mojave or more to do the development.
+Make sure `node.js`, `yarn`, `docker` are installed properly and we assume you are using macOS Mojave or higher to do the development.
+
+## Steps:
+## Steps
+
+### eosio-toppings
+
+`eosio-toppings` is a monorepo with all the dependecies required for this app, you may need to make changes also in these dependecies while your development.
+1. git clone https://github.com/EOSIO/eosio-toppings
+2. cd into `eosio-toppings` ( eosio-toppings repository project root)
+3. cd into each of the below packages folder and run `yarn link` in each folder. A "success Registered" message should be shown each time you do `yarn link`
+    - packages/api-eosio-compiler
+    - packages/api-mongodb-plugin
+    - packages/api-rpc
+    - packages/docker-eosio-nodeos
+    - packages/docker-mongodb
+4. Run `yarn install`
+
+### eosio-explorer
+
+1. git clone https://github.com/EOSIO/eosio-explorer
+2. cd into `eosio-explorer` ( eosio-explorer repository project root)
+3. Make symlinks to above local `eosio-toppings` dependecies. Run below commands. "success Using linked package" messages should be shown.
+    - `yarn link @eosio-toppings/api-eosio-compiler`
+    - `yarn link @eosio-toppings/api-mongodb-plugin`
+    - `yarn link @eosio-toppings/api-rpc`
+    - `yarn link @eosio-toppings/docker-e osio-nodeos`
+    - `yarn link @eosio-toppings/docker-eosio-nodeos`
+    - `yarn link @eosio-toppings/docker-mongodb`
+4. Run`yarn install`
+4. Run `yarn install`
+5. Run `yarn eosio-explorer init` to initialize and start the app.
+6. Stop the app by `Ctrl + C`. Run `yarn eosio-explorer start -dev` to start the app in development mode.
+
+The setup development environment is finished. You can now start modifying the sources code in both repositories for the development at your local.
+6. (Optional) - If your tool is already running, stop the app by `Ctrl + C`. 
+7. Run `yarn eosio-explorer start -dev` to start the app in development mode.
+
+The setup development environment is finished. You can now start modifying the sources code in both repositories for the development in your local machine.
+
+# Topics
+
+## UI - create-react-app
+This application is bootstrapped with `create-react-app` version 2. Therefore, if you have used CRA in the past, contributing to the development of this tool would not be too difficult.
+## Import by Absolute Path
+Adding `src` to `NODE_PATH` in the `.env` file would allow you to require/import by absolute path under the `./src` folder.
+## CSS and Styling
+This application makes use of Bootstrap by means of `reactstrap` to render Bootstrap components and to make use of various SASS modules from the Bootstrap SASS library. A reset stylesheet has already been included and can be viewed [here](../src/app/reset.scss).
+### Custom Mixins and Variables
+To allow custom mixins and variables, please ensure that `SASS_PATH` environment variable contains `src/scss`. If you wish to import Bootstrap's CSS library also, you will need to add `node_modules` to the environment variable also. It should look like this:
+```
+SASS_PATH=node_modules:src/scss
+```
+Then, you can add mixins and variables into the `src/scss` folder according to typical conventions, for example prefixing files with `_` (underscore) to indicate it is a library CSS. Include the path in the `package.json` build script.
+## Extending Source
+The source, at its core, is composed of three things:
+1. Pages - What the user sees when they navigate to a particular URL. A page should be created when you wish to display something at a new URL / route.
+2. Components - The building blocks of the page and the template. Individual parts that will be used throughout the site should be placed here/
+3. Templates - A wrapper by which common components are shown in a particular layout which is used frequently. For example, it is common to have the same header and footer in different pages of the website. The page component should almost always be inside a template component.
+Prerendering is done using `react-snap` by crawling all routes and prerendering the pages into `.html` files.
+### Routing
+To simulate browser URL behavior and the History API, the application makes use of `react-router` in tandem with `react-router-dom`. In order to include the route for new pages, you will need to add a new `<Route>` component which links to the new page inside the `<Switch>` component. Redirects can be done using `<Redirect>`.
+If you want to add some extra behavior before switching to a new page with the router, you can use `<WillRoute>` to do so.
+### Component Creation
+The complex nature of the tool means that the implementation of certain behaviors may also be quite complex. To tackle the requirements of the tool, data flow is managed with a combination of Redux, RxJS and `redux-observable`. Looking at an existing component is the best way to learn how to work with these things.
+A good starting point is viewing the [source for the Blocklist visualizer](../src/pages/BlocklistPage/components/Blocklist).
+[Home](../..) > Guides > Deployment
+
+# Introduction
+
+The deployment process is composed of three steps, one of which is optional. Each of the steps is covered as part of a basic guide on how to use the [Deploy Contracts Page](../../pages/interact/deployment-page.md).
+
+The deployment flow is simple:
+
+1. The user [selects the entry file](step-one.md) which the compiler uses as the basis for ABI compilation.
+2. The user can optionally [compile/generate/import](step-two.md) the ABI file, depending on their needs.
+3. The user [deploys](step-three.md) the contract source code.
+
+Instructions are also available inside the page as a quick reference. 
+
+## Compiler Service
+
+As part of the local service tool, a Node.JS service will be started in conjunction with the tool that is responsible for smart contract compilation and deployment. You can view the source code for it [here](https://github.com/EOSIO/eosio-toppings/tree/master/packages/api-eosio-compiler). Whenever the guide mentions a "compiler", this is service is what will be used to perform those specific actions.
+[Home](../..) > Guides > [Deployment](README.md) > Step 1
+
+Step 1: Select File Entry Point --> [Step 2: ABI File (Optional)](step-two.md) --> [Step 3: Deploy](step-three.md)
+
+# Step 1: Select File Entry Point
+
+The first step takes place within the panel indicated as "Select File Entry Point." The intructions indicated in the [index](README.md) are also visible in this page.
+
+You should see a blank portion where you can drag and drop a `.cpp` file or browse for it with the file viewer as follows:
+
+![Empty File Viewer](../../images/deployment/step1_before.png)
+
+## Select File and Enter Root Folder Path
+
+In this section you must specify two things:
+
+1. The file which contains the main entry source for the compiler
+2. The folder that contains the file in (1) and its dependencies.
+
+The root folder **must** be written as an absolute file path, as the compiler performs compilation locally in your machine and must be able to access your file system.
+
+For demonstration purposes, assume we are a user, `test.account`, who wants to deploy or compile a contract named `Characters`. 
+
+We would need to pass a file, in this case called `Characters.cpp`, and also pass the absolute folder path containing this file. In this case, the file is in: `/Users/jonathan.cardenas/eosio-dapp-boilerplate-hk/seraph/docker/contracts`.
+
+The section would look like this:
+
+![File Viewer](../../images/deployment/step1_after.png)
+
+:warning: Disclaimer :warning:
+
+1. The file you select in this dropzone will be treated as the entry file point and point of reference for all local dependencies by the compiler.
+2. The root folder path you specify in the input field will be treated as the **root** directory of the smart contract source code.
+3. Be sure to organize your files and folders properly so that they are correctly found.
+4. **If you update the `.cpp` file you're using in this section, you do NOT need to enter the file in this section again**. The compiler will use the latest version of your `.cpp` file
+
+After verifying, move on to either [Step Two](step-two.md) or if you do not need to import an ABI file and do not wish to verify the compiled ABI file, move straight to [Step Three](step-three.md).
+[Home](../..) > Guides > [Deployment](README.md) > Step 2
+
+[Step 1: Select File Entry Point](step-one.md) --> [Step 2: ABI File (Optional)](step-two.md) --> Step 3: Deploy
+
+# Step 3: Deploy
+
+Whether you have decided to skip [Step Two](step-two.md) or not, you will need to deploy your smart contract.
+
+Assuming we would like to deploy the smart contract named `Characters`, with our own `Characters.abi` file imported, the screen should indicate the following:
+
+![After Successful Import](../../images/deployment/imported_abi.png)
+
+Under the Step 3 panel header, you can choose with the dropdown menu which permission to deploy the smart contract under.
+
+:warning: Disclaimer :warning: - If you are running this in your own local `nodeos` instance which ships with this tool, you will not be able to deploy as `eosio` because it currently uses the EOSIO blockchain system contracts which are critical to performing actions such as creation of new accounts.
+
+After clicking Deploy, the compiler will try to do one of two things depending on whether you did [Step Two](step-two.md) or not.
+
+If you went to Step Two:
+
+* The compiler will re-generate the `.abi` and `.wasm` files, if successful it will deploy to the blockchain using `setabi` and `setcode` from the system contracts. This occurs if you did not import an ABI file.
+* If you imported an ABI file, the compiler will use the provided ABI file instead of the generated `.abi` file, but will still use the generated `.wasm` file. If generation of the `.wasm` file is successful, deployment moves on as normal.
+
+If you skipped Step Two, the compiler will simply just create the `.abi` and `.wasm` files and deploy if successful. You should only do this if you are sure your smart contract produces a valid `.abi` file.
+[Home](../..) > Guides > [Deployment](README.md) > Step 2
+
+[Step 1: Select File Entry Point](step-one.md) --> Step 2: ABI File (Optional) --> [Step 3: Deploy](step-three.md)
+
+# Step 2: ABI File (Optional)
+
+After specifying your file entry point as in [Step One](step-one.md), you can scroll down to move to Step 2, where you will see the following:
+
+![ABI Viewer](../../images/deployment/after_file_input.png)
+
+If you want to deploy right away, you can ignore this page and move to [Step Three](step-three.md). If you want to check if you can generate the ABI file from your smart contract, read further.
+
+## Generate the ABI File for Verification
+
+Clicking the "Generate ABI" button will cause the compiler to receive the entry file you specified in [Step One](step-one.md), as well as any other `.cpp` or `.hpp` files in the folder you provided. The compiler will then attempt to use `eosio-cpp` under the hood to generate a `.wasm` and `.abi` file. If both files are available, the compilation is successful and the contents of the `.abi` file are given to the tool to display. It will look something like this:
+
+![After Successful Compile](../../images/deployment/compiled.png)
+
+In the section adjacent to this panel, logs for compilation and/or deployment are also available for viewing. If there are warnings or errors originating from the compiler, they will be presented in this section as follows:
+
+![Compile Log](../../images/deployment/compiled_log.png)
+
+## Import the ABI File for Deployment
+
+Sometimes, the ABI file you generate won't be correct, or you wish to use a file that you have prepared in advance instead. Then you can click "Import ABI" instead to have the compiler use your imported ABI file:
+
+![Import ABI](../../images/deployment/import_file_input.png)
+
+After supplying the desired `.abi` file, the import should be successful and your view will change:
+
+![After Successful Import](../../images/deployment/imported_abi.png)
+
+A pill next to the panel for [Step Three](step-three.md) will denote that you are using an imported ABI file. 
+
+You can now proceed to [Step Three](step-three.md) to deploy your smart contract.
+[Home](../..) > Guides > Create Account
+
+# Create Account 
+
+To create an account, inside the [Manage Accounts Page](../../pages/interact/manage-accounts-page.md), you need to click the "CREATE ACCOUNT" button as displayed below:
+
+![Create Account Button](../../images/permissions/create_acc_button.png)
+
+## Creating the Account
+
+After clicking the button you will see a panel that looks like this:
+
+![Create Account Panel](../../images/permissions/create_acc_panel.png)
+
+All you need to do is enter an account name in the field based on the following restrictions:
+
+* The name cannot start with a capital letter
+* In fact, the name cannot contain any capital letters. Lower case only please (`[a-z]`)
+* The only numbers you can use are the numbers `1` to `5`
+* The only special character you can use is `.`
+
+Starting your account name with an illegal character will be escaped by the blockchain and turned into `.`, otherwise they get ignored completely.
+
+## On Success
+
+On successfully creating the account, you will be able to see it in your list of permissions that you can set as default, as follows:
+
+![Create Account Result](../../images/permissions/create_acc_result.png)
+[Home](../..) > Guides > Import Account Keys
+
+# Import Account Keys
+
+Sometimes, you will be working in a team for your application on the EOSIO blockchain. In this scenario, it is likely that you will see accounts owned by other users.
+
+Alternatively, you are using the tool to work on multiple nodes and are only connected to one of them at a time. The tool stores private keys **locally**, so every time you change your connected `nodeos` instance or reset your connection/permissions, you will lose the private keys currently stored in local storage. Therefore, be sure that you have backed up your keys prior to them so you can use this feature to import those keys and restore access to your account(s).
+
+The account list will be visible in a panel as shown below:
+
+![Accounts to Import Panel](../../images/permissions/import_acc.png)
+
+After checking which account you want to import keys for, click the "IMPORT KEYS" button corresponding to that account.
+
+## Importing Keys
+
+After clicking the button, you will see a panel that looks as follows:
+
+![Import Keys Panel](../../images/permissions/import_keys_before.png)
+
+The fields to enter your private keys will likely be empty. You will have to enter your private keys here, though the import will fail **if your private keys does not properly match the public keys displayed**.
+
+Finally, you should ensure your private keys are in `base58 WIF` format. `WIF` is short for `Wallet Import Format` and makes it easier for users to copy and paste these types of private keys.
+
+:warning: Disclaimer :warning:
+
+1. Any keys shown in this guide are **purely** for demonstration purposes. Do not use them for your own purposes.
+2. Do not blindly share your private keys with anyone else, or leave them exposed.
+
+## On Success
+
+After successfully importing the keys, you will see the success messsage:
+
+![Import Keys Panel](../../images/permissions/import_keys_after.png)
+
+Afterwards, you can see the new account in the main list of accounts.
+
+
+Interested in contributing? That's awesome! Please view the following links for more information on contributing to the project.
+
+[Contribution Guidelines](./CONTRIBUTING.md)
+
+Interested in contributing? That's awesome! Here are some [Contribution Guidelines](./CONTRIBUTING.md) and the [Code of Conduct](./CONTRIBUTING.md#conduct).
+[Code of Conduct](./CONTRIBUTING.md#conduct)
+
+## License
+
+[MIT](./LICENSE)
+## Important
+See LICENSE for copyright and license terms.  Block.one makes its contribution on a voluntary basis as a member of the EOSIO community and is not responsible for ensuring the overall performance of the software or any related applications.  We make no representation, warranty, guarantee or undertaking in respect of the software or any related documentation, whether expressed or implied, including but not limited to the warranties or merchantability, fitness for a particular purpose and noninfringement. In no event shall we be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or documentation or the use or other dealings in the software or documentation.  Any test results or performance figures are indicative and will not reflect performance under all conditions.  Any reference to any third party or third-party product, service or other resource is not an endorsement or recommendation by Block.one.  We are not responsible, and disclaim any and all responsibility and liability, for your use of or reliance on any of these resources. Third-party resources may be updated, changed or terminated at any time, so the information here may be out of date or inaccurate.
+Wallets and related components are complex software that require the highest levels of security.  If incorrectly built or used, they may compromise users’ private keys and digital assets. Wallet applications and related components should undergo thorough security evaluations before being used.  Only experienced developers should work with this software.

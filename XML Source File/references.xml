@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: references.xml,v 1.2 1998/10/01 09:01:05 lehors Exp $ -->
+<!--
+ *************************************************************************
+ * BEGINNING OF REFERENCES                                               *
+ *************************************************************************
+-->
+<div1 role="references" id="ID-419945794">
+  <head>References</head>
+
+<blist>
+<bibl id='XML' key='XML'>
+W3C (World Wide Web Consortium) <emph>Extensible Markup Language (XML)
+1.0</emph>. See <loc
+href='http://www.w3.org/TR/REC-xml'>http://www.w3.org/TR/REC-xml</loc>.
+</bibl>
+
+<bibl id='HTML40' key='HTML4.0'>
+W3C (World Wide Web Consortium) <emph>HTML 4.0 Specification</emph>. See <loc
+href='http://www.w3.org/TR/REC-html40'>http://www.w3.org/TR/REC-html40</loc>.
+</bibl>
+
+<bibl id='Unicode' key='Unicode'>The Unicode Consortium.
+<emph>The Unicode Standard, Version 2.0.</emph>
+Reading, Mass.:  Addison-Wesley Developers Press, 1996.</bibl>
+
+<bibl id='CORBA' key='CORBA'>
+OMG (Object Management Group) <emph>The Common Object Request Broker:
+Architecture and Specification</emph>. See <loc
+href='http://www.omg.org/corba/corbiiop.htm'>http://www.omg.org/corba/corbiiop.htm</loc>.
+</bibl>
+
+<bibl id='Java' key='Java'>
+Sun <emph>The Java Language Specification</emph>. See <loc
+href='http://java.sun.com/docs/books/jls/'>http://java.sun.com/docs/books/jls/</loc>.
+</bibl>
+
+<bibl id='ECMAScript' key='ECMAScript'>
+ECMA (European Computer Manufacturers Association) <emph>ECMAScript Language
+Specification</emph>. See <loc
+href='http://www.ecma.ch/stand/ECMA-262.htm'>http://www.ecma.ch/stand/ECMA-262.htm</loc>.
+</bibl>
+</blist>
+
+</div1>
+<!--
+ *************************************************************************
+ * END OF REFERENCES                                                     *
+ *************************************************************************
+-->

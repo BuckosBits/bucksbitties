@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Date: 1998/08/31 09:38:02 $ $Revisions:$ -->
+<div1 role="contributors" id="contributors">
+<head>Contributors</head>
+  <p>Members of the DOM Working Group and Interest Group contributing 
+    to this specification were:</p>
+  <orglist>
+    <member>
+      <name>Lauren Wood</name>
+      <affiliation>SoftQuad, Inc.</affiliation><role>
+	chair</role>
+    </member>
+    <member>
+      <name>Arnaud Le Hors</name>
+      <affiliation>W3C</affiliation><role>W3C
+	staff contact</role>
+    </member>
+    <member>
+      <name>Andrew Watson</name>
+      <affiliation>Object Management Group</affiliation>
+    </member>
+    <member>
+      <name>Bill Smith</name>
+      <affiliation>Sun</affiliation>
+    </member>
+    <member>
+      <name>Chris Lovett</name>
+      <affiliation>Microsoft</affiliation>
+    </member>
+    <member>
+      <name>Chris Wilson</name>
+      <affiliation>Microsoft</affiliation>
+    </member>
+    <member>
+      <name>David Brownell</name>
+      <affiliation>Sun</affiliation>
+    </member>
+    <member>
+      <name>David Singer</name>
+      <affiliation>IBM</affiliation>
+    </member>
+    <member>
+      <name>Don Park</name>
+      <affiliation>invited</affiliation>
+    </member>
+    <member>
+      <name>Eric Vasilik</name>
+      <affiliation>Microsoft</affiliation>
+    </member>
+    <member>
+      <name>Gavin Nicol</name>
+      <affiliation>INSO</affiliation>
+    </member>
+    <member>
+      <name>Ian Jacobs</name>
+      <affiliation>W3C</affiliation>
+    </member>
+    <member>
+      <name>James Clark</name>
+      <affiliation>invited</affiliation>
+    </member>
+    <member>
+      <name>Jared Sorensen</name>
+      <affiliation>Novell</affiliation>
+    </member>
+    <member>
+      <name>Jonathan Robie</name>
+      <affiliation>Texcel</affiliation>
+    </member>
+    <member>
+      <name>Mike Champion</name>
+      <affiliation>ArborText</affiliation>
+    </member>
+    <member>
+      <name>Paul Grosso</name>
+      <affiliation>ArborText</affiliation>
+    </member>
+    <member>
+      <name>Peter Sharpe</name>
+      <affiliation>SoftQuad, Inc.</affiliation>
+    </member>
+    <member>
+      <name>Phil Karlton</name>
+      <affiliation>Netscape</affiliation>
+    </member>
+    <member>
+      <name>Ray Whitmer</name>
+      <affiliation>iMall</affiliation>
+    </member>
+    <member>
+      <name>Rich Rollman</name>
+      <affiliation>Microsoft</affiliation>
+    </member>
+    <member>
+      <name>Rick Gessner</name>
+      <affiliation>Netscape</affiliation>
+    </member>
+    <member>
+      <name>Robert Sutor</name>
+      <affiliation>IBM</affiliation>
+    </member>
+    <member>
+      <name>Scott Isaacs</name>
+      <affiliation>Microsoft</affiliation>
+    </member>
+    <member>
+      <name>Sharon Adler</name>
+      <affiliation>INSO</affiliation>
+    </member>
+    <member>
+      <name>Steve Byrne</name>
+      <affiliation>JavaSoft</affiliation>
+    </member>
+    <member>
+      <name>Tim Bray</name>
+      <affiliation>invited</affiliation>
+    </member>
+    <member>
+      <name>Tom Pixley</name>
+      <affiliation>Netscape</affiliation>
+    </member>
+    <member>
+      <name>Vidur Apparao</name>
+      <affiliation>Netscape</affiliation>
+    </member>
+  </orglist>
+</div1>

@@ -1,0 +1,11 @@
+$ npm install --save express serverless-http
+# app.js
+
+const serverless = require('serverless-http'); <-- Add this.
+const express = require('express')
+const app = express()
+... All your Express code ...
+
+
+module.exports.handler = serverless(app); <-- Add this.
+```

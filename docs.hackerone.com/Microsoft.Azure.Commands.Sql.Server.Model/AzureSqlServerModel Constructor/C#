@@ -1,0 +1,45 @@
+public AzureSqlServerModel ();
+ShardMapManager smm = ShardMapManagerFactory.GetSqlShardMapManager(smmConnectionString, ShardMapManagerLoadPolicy.Lazy);
+RangeShardMap<int> customerShardMap = smm.GetRangeShardMap<int>("customerMap");
+// Syntax:
+public SqlConnection OpenConnectionForKey<TKey>(TKey key, string connectionString, ConnectionOptions options)
+int customerId = 12345;
+int newPersonId = 4321;
+
+// Connect to the shard for that customer ID. No need to call a SqlConnection
+// constructor followed by the Open method.
+using (SqlConnection conn = customerShardMap.OpenConnectionForKey(customerId, Configuration.GetCredentialsConnectionString(), ConnectionOptions.Validate))
+{
+    // Execute a simple command.
+    SqlCommand cmd = conn.CreateCommand();
+    cmd.CommandText = @"UPDATE Sales.Customer
+                        SET PersonID = @newPersonID WHERE CustomerID = @customerID";
+
+    cmd.Parameters.AddWithValue("@customerID", customerId);cmd.Parameters.AddWithValue("@newPersonID", newPersonId);
+    cmd.ExecuteNonQuery();
+}
+int customerId = 12345;
+int newPersonId = 4321;
+
+Configuration.SqlRetryPolicy.ExecuteAction(() -> {
+
+    // Connect to the shard for a customer ID.
+    using (SqlConnection conn = customerShardMap.OpenConnectionForKey(customerId, Configuration.GetCredentialsConnectionString(), ConnectionOptions.Validate))
+    {
+        // Execute a simple command
+        SqlCommand cmd = conn.CreateCommand();
+
+        cmd.CommandText = @"UPDATE Sales.Customer
+                            SET PersonID = @newPersonID
+                            WHERE CustomerID = @customerID";
+
+        cmd.Parameters.AddWithValue("@customerID", customerId);
+        cmd.Parameters.AddWithValue("@newPersonID", newPersonId);
+        cmd.ExecuteNonQuery();
+
+        Console.WriteLine("Update completed");
+    }
+});
+TEST_CONN_USER
+TEST_CONN_PASSWORD
+TEST_CONN_SERVER_NAME

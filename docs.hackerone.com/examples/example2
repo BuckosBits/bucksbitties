@@ -1,0 +1,8 @@
+ Get-AzSqlServer `
+           -ResourceGroupName "ResourceGroup01" `
+           -ServerName "Server01" `
+           | Enable-AzSqlServerAdvancedThreatProtection
+
+ResourceGroupName	         : ResourceGroup01
+ServerName		             : Server01
+IsEnabled		             : True

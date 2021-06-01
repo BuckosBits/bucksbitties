@@ -1,0 +1,2 @@
+$ mkdir my-flask-application && cd my-flask-application
+$ npm init -f

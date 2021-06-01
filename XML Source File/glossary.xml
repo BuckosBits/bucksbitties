@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ new terms on 30 July, 1998
+	equivalence
+
+ new terms on 17 July, 1998
+	COM
+	CORBA
+	convenience
+	data model
+	inheritance
+	interface
+	method
+	object model
+-->
+<!--
+ *************************************************************************
+ * BEGINNING OF DOM GLOSSARY                                             *
+ *************************************************************************
+-->
+<div1 role="gloss" id="glossary">
+  <head>Glossary</head>
+  <orglist role="editors">
+    <member>
+      <name>Robert S. Sutor</name>
+      <affiliation>IBM Research</affiliation>
+    </member>
+  </orglist>
+  <p>Several of the following term definitions have been borrowed or
+    modified from similar definitions in other W3C or standards documents.
+    See the links within the definitions for more information.</p>
+  <glist>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-ancestor">ancestor</label>
+      <def><p>An <term>ancestor</term> node of any node A is any node
+	  above A in a tree model of a document, where "above" means
+	  "toward the root."
+	</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-18971795">API</label>
+      <def><p>An <term>API</term> is an application programming
+	  interface, a set of functions or methods used to access some
+	  functionality.</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-967918554">child</label>
+      <def><p>A <term>child</term> is an immediate descendant node of
+	  a node.</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-1359195223">client application</label>
+      <def><p>A [client] application is any software that uses the
+	  Document Object Model programming interfaces provided by the
+	  hosting implementation to accomplish useful work. Some
+	  examples of client applications are scripts within an HTML
+	  or XML document.</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-COM">COM</label>
+      <def><p><term>COM</term> is <loc href="http://www.microsoft.com/com">Microsoft's
+      Component Object Model,</loc>
+	  a technology for building applications from binary software components.
+	</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-635131714">content model</label>
+      <def><p>The <term>content model</term> is a simple grammar
+	  governing the allowed types of the child elements and the
+	  order in which they appear. See [<loc
+	    href="&xml-spec;#sec3.2">XML</loc>]
+	</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-1584078473">context</label>
+      <def><p>A <term>context </term>specifies an access pattern (or
+	  path): a set of interfaces which give you a way to interact
+	  with a model. For example, imagine a model with different
+	  colored arcs connecting data nodes. A context might be a
+	  sheet of colored acetate that is placed over the model
+	  allowing you a partial view of the total information in the
+	  model.</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-convenience">convenience</label>
+      <def><p>A <term>convenience method</term> is an operation on an
+      object that could be accomplished by a program consisting of
+      more basic operations on the object. Convenience methods are
+      usually provided to make the API easier and simpler to use or to
+	  allow specific programs to create more optimized implementations
+	  for common operations. A similar definition holds for a
+	  <term>convenience property</term>.
+      </p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-1417685053">cooked model</label>
+      <def><p>A model for a document that represents the document
+	  after it has been manipulated in some way. For example, any
+	  combination of any of the following transformations would
+	  create a cooked model:
+	  <olist>
+	    <item><p>Expansion of internal text entities.</p></item>
+	    <item><p>Expansion of external entities.</p></item>
+	    <item><p>Model augmentation with style-specified generated
+		text.</p></item>
+	    <item><p>Execution of style-specified
+		reordering.</p></item>
+	    <item><p>Execution of scripts.</p></item>
+	  </olist> A browser might only be able to provide access to a
+	  cooked model, while an editor might provide access to a
+	  cooked or the initial structure model (also known as the
+	  <term>uncooked model</term>) for a document. </p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-CORBA">CORBA</label>
+      <def><p><term>CORBA</term> is the <term>Common Object Request Broker
+	  Architecture</term> from the <loc href="http://www.omg.org">OMG</loc>.
+	  This architecture is a collection of objects and libraries that allow
+	  the creation of applications containing objects that make and receive
+	  requests and responses in a distributed environment.
+	</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-1251291633">cursor</label>
+      <def><p>A <term>cursor </term>is an object representation of a
+	  node. It may possess information about context and the path
+	  traversed to reach the node.</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-datamodel">data model</label>
+      <def><p>A <term>data model</term>
+      is a collection of descriptions of data structures and their contained
+	  fields, together with the operations or functions that manipulate them.
+	  </p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-1642568302">deprecation</label>
+      <def><p>When new releases of specifications are released, some older
+	  features may be marked as being <term>deprecated</term>. This
+	  means that new work should not use the features and that
+	  although they are supported in the current release, they may
+	  not be supported or available in future releases.</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-2033844972">descendant</label>
+      <def><p>A <term>descendant</term> node of any node A is any node
+	  below A in a tree model of a document, where "above" means
+	  "toward the root."</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-835308083">ECMAScript</label>
+      <def><p>The programming language defined by the <loc
+	    href="&ecma-262;">ECMA-262</loc> standard.  As stated in
+	  the standard, the originating technology for ECMAScript was
+	  <loc href="&javascript;">JavaScript.</loc> Note that in the
+	  ECMAScript binding, the word &quot;property&quot; is used in
+	  the same sense as the IDL term
+	  &quot;attribute.&quot;</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-1784254842">element</label>
+      <def><p>Each document contains one or more elements, the
+	  boundaries of which are either delimited by start-tags and
+	  end-tags, or, for empty elements by an empty-element tag.
+	  Each element has a type, identified by name, and may have a
+	  set of attributes. Each attribute has a name and a value.
+	  [<loc href="&xml-spec;#sec-logical-struct">XML</loc>]
+	</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-1617861422">event propagation, also
+        known as event bubbling</label>
+      <def><p>This is the idea that an event can affect one object and
+	  a set of related objects. Any of the potentially affected
+	  objects can block the event or substitute a different one
+	  (upward event propagation). The event is broadcast from the
+	  node at which it originates to every parent node.</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-equivalentNodes">equivalence</label>
+      <def>
+      <p>Two nodes are <term>equivalent</term> if they have the
+      same node type and same node name. Also, if the nodes
+	  contain data, that must be the same. Finally, if the nodes have
+	  attributes then collection of attribute names must be the same
+	  and the attributes corresponding by name must be equivalent as nodes.
+	  </p>
+
+      <p>Two nodes are <term>deeply equivalent</term> if they are
+	  <term>equivalent</term>, the child node lists are equivalent
+	  are equivalent as NodeList objects, and the pairs of equivalent
+	  attributes must in fact be deeply equivalent. </p>
+
+      <p>Two NodeList objects are <term>equivalent</term> if they
+	  have the same length,	and the nodes corresponding by index
+	  are deeply equivalent. </p>
+
+      <p>Two NamedNodeMap objects are <term>equivalent</term> if they are
+	  have the same length,	they have same collection of names,
+	  and the nodes corresponding by name in the maps
+	  are deeply equivalent. </p>
+
+	  <p>Two DocumentType nodes are <term>equivalent</term> if they are equivalent
+	  as nodes, have the same names, and have equivalent entities and attributes
+	  NamedNodeMap objects.
+	  </p>
+
+	  </def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-2009138091">hosting implementation</label>
+      <def><p>A [hosting] implementation is a software module that
+	  provides an implementation of the DOM interfaces so that a
+	  client application can use them. Some examples of hosting
+	  implementations are browsers, editors and document
+	  repositories.</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-810601202">HTML</label>
+      <def><p>The HyperText Markup Language (<term>HTML</term>) is a
+	  simple markup language used to create hypertext documents
+	  that are portable from one platform to another. HTML
+	  documents are SGML documents with generic semantics that are
+	  appropriate for representing information from a wide range
+	  of applications. [<loc href="&html-3.2;">HTML 3.2</loc>]
+	  [<loc href="&html-4.0;">HTML4.0</loc>]</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-1759547961">IDL</label>
+      <def><p>An Interface Definition Language (<term>IDL</term>) is
+	  used to define the interfaces for accessing and operating
+	  upon objects. Examples of IDLs are the <loc
+	    href="&omg;">Object Management Group's IDL</loc>, <loc
+	    href="&msidl;">Microsoft's IDL</loc>, and Sun's <loc
+	    href="&javaidl;">Java IDL</loc>.</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-1593154541">implementor</label>
+      <def><p>Companies, organizations, and individuals that claim to
+	  support the Document Object Model as an API for their
+	  products.</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-inheritance">inheritance</label>
+      <def><p>In object-oriented programming, the ability to create new
+	  classes (or interfaces) that contain all the methods and properties
+	  of another class (or interface), plus additional methods and properties.
+	  If class (or interface) D inherits from class (or interface) B, then
+	  D is said to be <term>derived</term> from B. B is said to be a <term>base</term>
+	  class (or interface) for D.
+	  Some programming languages allow for multiple inheritance, that is, inheritance
+	  from more than one class or interface.
+      </p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-1984431211">initial structure model</label>
+      <def><p>Also known as the <term>raw structure model</term> or
+	  the <term>uncooked model</term>, this represents the
+	  document before it has been modified by entity expansions,
+	  generated text, style-specified reordering, or the execution
+	  of scripts. In some implementations, this might correspond
+	  to the &quot;initial parse tree&quot; for the document, if
+	  it ever exists. Note that a given implementation might not
+	  be able to provide access to the initial structure model for
+	  a document, though an editor probably would.</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-interface">interface</label>
+      <def><p>An <term>interface</term> is a declaration of a set of
+      methods with no information given about their implementation.
+	  In object systems that support interfaces and inheritance,
+	  interfaces can usually inherit from one another.
+      </p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-228224232">language binding</label>
+      <def><p>A programming <term>language binding</term> for an IDL
+	  specification is an implementation of the interfaces in the
+	  specification for the given language. For example, a Java
+	  language binding for the Document Object Model IDL
+	  specification would implement the concrete Java classes that
+	  provide the functionality exposed by the
+	  interfaces.</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-method">method</label>
+      <def><p>A <term>method</term> is an operation or function that is
+	  associated with an object and is allowed to manipulate the
+	  object's data.
+      </p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-1177170991">model</label>
+      <def><p>A <term>model</term> is the actual data representation
+	  for the information at hand. Examples are the structural
+	  model and the style model representing the parse structure
+	  and the style information associated with a document. The
+	  model might be a tree, or a directed graph, or something
+	  else.</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-objectmodel">object model</label>
+      <def><p>An <term>object model</term>
+	  is a collection of
+	  descriptions of classes or interfaces,
+	  together with their member data, member functions,
+	  and class-static operations.
+	</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-parent">parent</label>
+      <def><p>A <term>parent</term> is an immediate ancestor node of a
+	  node.</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-2126117750">root node</label>
+      <def><p>The <term>root node</term> is the unique node that is
+	  not a child of any other node. All other nodes are children
+	  or other descendents of the root node. [<loc
+	    href="&xml-spec;#sec2.1">XML</loc>]</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-sibling">sibling</label>
+      <def><p>Two nodes are <term>siblings</term> if they have the
+	  same parent node.</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-369910772">string comparison</label>
+      <def><p>When string matching is required, it is to occur as
+	  though the comparison was between 2 sequences of code points
+	  from the Unicode 2.0 standard.</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-1318857531">tag valid document</label>
+      <def><p>A document is <term>tag valid</term> if all begin and
+	  end tags are properly balanced and nested.</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-1710134200">type valid document</label>
+      <def><p>A document is <term>type valid</term> if it conforms to
+	  an explicit DTD.</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-511597311">uncooked model</label>
+      <def><p>See initial structure model.</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-902873981">well-formed document</label>
+      <def><p>A document is <term>well-formed</term> if it is tag
+	  valid and entities are limited to single elements (i.e.,
+	  single sub-trees).</p></def>
+    </gitem>
+<!-- ................................................................ -->
+    <gitem>
+      <label id="ID-1271965095">XML</label>
+      <def><p>Extensible Markup Language (<term>XML</term>) is an
+	  extremely simple dialect of SGML which is completely
+	  described in this document. The goal is to enable generic
+	  SGML to be served, received, and processed on the Web in the
+	  way that is now possible with HTML. XML has been designed
+	  for ease of implementation and for interoperability with
+	  both SGML and HTML. [<loc
+	    href="&xml-spec;">XML</loc>]</p></def>
+    </gitem>
+<!-- ................................................................ -->
+  </glist>
+</div1>
+<!--
+ *************************************************************************
+ * END OF DOM GLOSSARY                                                   *
+ *************************************************************************
+-->
+

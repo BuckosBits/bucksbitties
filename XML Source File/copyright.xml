@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: copyright.xml,v 1.1 1998/09/01 14:47:48 lehors Exp $ -->
+<!--
+ *************************************************************************
+ * BEGINNING OF COPYRIGHT NOTICE                                         *
+ *************************************************************************
+-->
+<div1 id="ID-419945774">
+  <head>Copyright Notice</head>
+
+<p role='important'>Copyright &copy; 1998 <loc href="http://www.w3.org/">World Wide
+Web Consortium</loc>, (<loc href="http://www.lcs.mit.edu/">Massachusetts
+Institute of Technology</loc>, <loc href="http://www.inria.fr/">Institut
+National de Recherche en Informatique et en Automatique</loc>, <loc
+href="http://www.keio.ac.jp/">Keio University</loc>).  All Rights
+Reserved.</p>
+
+<p>Documents on the <loc href="http://www.w3.org/">W3C</loc> site are
+provided by the copyright holders under the following license. By
+obtaining, using and/or copying this document, or the W3C document
+from which this statement is linked, you agree that you have read,
+understood, and will comply with the following terms and
+conditions:</p>
+
+<p>Permission to use, copy, and distribute the contents of this
+document, or the W3C document from which this statement is linked, in
+any medium for any purpose and without fee or royalty is hereby
+granted, provided that you include the following on <emph>ALL</emph> copies
+of the document, or portions thereof, that you use:
+
+<olist>
+  <item><p>A link or URI to the original W3C document.</p></item>
+
+  <item><p>The pre-existing copyright notice of the original author, if it
+  doesn't exist, a notice of the form: &quot;Copyright &copy; <loc
+  href="http://www.w3.org/">World Wide Web Consortium</loc>, (<loc
+  href="http://www.lcs.mit.edu/">Massachusetts Institute of
+  Technology</loc>, <loc href="http://www.inria.fr/">Institut National de
+  Recherche en Informatique et en Automatique</loc>, <loc
+  href="http://www.keio.ac.jp/">Keio University</loc>). All Rights
+  Reserved.&quot; </p></item>
+
+  <item><p><emph>If it exists</emph>, the STATUS of the W3C document.</p></item>
+</olist></p>
+
+<p>When space permits, inclusion of the full text of this
+<emph role='important'>NOTICE</emph> should be provided. In addition, credit shall be
+attributed to the copyright holders for any software, documents, or
+other items or products that you create pursuant to the implementation
+of the contents of this document, or any portion thereof. </p>
+
+<p>No right to create modifications or derivatives is granted pursuant
+to this license.</p>
+
+<p role='important'>THIS DOCUMENT IS PROVIDED &quot;AS IS,&quot; AND COPYRIGHT HOLDERS
+MAKE NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR IMPLIED, INCLUDING,
+BUT NOT LIMITED TO, WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE, NON-INFRINGEMENT, OR TITLE; THAT THE CONTENTS OF
+THE DOCUMENT ARE SUITABLE FOR ANY PURPOSE; NOR THAT THE IMPLEMENTATION
+OF SUCH CONTENTS WILL NOT INFRINGE ANY THIRD PARTY PATENTS,
+COPYRIGHTS, TRADEMARKS OR OTHER RIGHTS.</p>
+
+<p role='important'>COPYRIGHT HOLDERS WILL NOT BE LIABLE FOR ANY DIRECT, INDIRECT,
+SPECIAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF ANY USE OF THE
+DOCUMENT OR THE PERFORMANCE OR IMPLEMENTATION OF THE CONTENTS
+THEREOF.</p>
+
+<p>The name and trademarks of copyright holders may NOT be used in
+advertising or publicity pertaining to this document or its contents
+without specific, written prior permission. Title to copyright in this
+document will at all times remain with copyright holders. </p>
+</div1>
+<!--
+ *************************************************************************
+ * END OF COPYRIGHT NOTICE                                               *
+ *************************************************************************
+-->

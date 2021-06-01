@@ -1,0 +1,714 @@
+Authentication methods
+The purpose of this section is to describe how to authenticate when making API calls using the Bitbucket REST API.
+On this page
+
+Oauth 2
+Making requests
+Repository cloning
+Refresh tokens
+Scopes
+App passwords
+Basic auth
+Bitbucket Cloud OAuth 2.0
+Our OAuth 2 implementation is merged in with our existing OAuth 1 in such a way that existing OAuth 1 consumers automatically become valid OAuth 2 clients. The only thing you need to do is edit your existing consumer and configure a callback URL.
+Once that is in place, you'll have the following 2 URLs:
+https://bitbucket.org/site/oauth2/authorize
+https://bitbucket.org/site/oauth2/access_token
+For obtaining access/bearer tokens, we support all 4 of RFC-6749's grant flows, plus a custom Bitbucket flow for exchanging JWT tokens for access tokens:
+1. Authorization Code Grant (4.1)
+The full-blown 3-LO flow. Request authorization from the end user by sending their browser to:
+https://bitbucket.org/site/oauth2/authorize?client_id={client_id}&response_type=code
+The callback includes the ?code={} query parameter that you can swap for an access token:
+$ curl -X POST -u "client_id:secret" \
+  https://bitbucket.org/site/oauth2/access_token \
+  -d grant_type=authorization_code -d code={code}
+2. Implicit Grant (4.2)
+This flow is useful for browser-based add-ons that operate without server-side backends.
+Request the end user for authorization by directing the browser to:
+https://bitbucket.org/site/oauth2/authorize?client_id={client_id}&response_type=token
+That will redirect to your preconfigured callback URL with a fragment containing the access token (#access_token={token}&token_type=bearer) where your page's js can pull it out of the URL.
+3. Resource Owner Password Credentials Grant (4.3)
+Useful if you have the end user's password but you want to use a more secure end user access token instead. This method will not work when the user has two-step verification enabled.
+$ curl -X POST -u "client_id:secret" \
+  https://bitbucket.org/site/oauth2/access_token -d grant_type=password \
+  -d username={username} -d password={password}
+4. Client Credentials Grant (4.4)
+Somewhat like our existing "2-LO" flow for OAuth 1. Obtain an access token that represents not an end user, but the owner of the client/consumer:
+$ curl -X POST -u "client_id:secret" \
+  https://bitbucket.org/site/oauth2/access_token \
+  -d grant_type=client_credentials
+5. Bitbucket Cloud JWT Grant (urn:bitbucket:oauth2:jwt)
+If your Atlassian Connect add-on uses JWT authentication, you can swap a JWT for an OAuth access token. The resulting access token represents the account for which the add-on is installed.
+Make sure you send the JWT token in the Authorization request header using the "JWT" scheme (case sensitive). Note that this custom scheme makes this different from HTTP Basic Auth (and so you cannot use "curl -u").
+$ curl -X POST -H "Authorization: JWT {jwt_token}" \
+  https://bitbucket.org/site/oauth2/access_token \
+  -d grant_type=urn:bitbucket:oauth2:jwt
+Making Requests
+Once you have an access token, as per RFC-6750, you can use it in a request in any of the following ways (in decreasing order of desirability):
+Send it in a request header: Authorization: Bearer {access_token}
+Include it in a (application/x-www-form-urlencoded) POST body as access_token={access_token}
+Put it in the query string of a non-POST: ?access_token={access_token}
+Repository Cloning
+Since add-ons will not be able to upload their own SSH keys to clone with, access tokens can be used as Basic HTTP Auth credentials to clone securely over HTTPS. This is much like GitHub, yet slightly different:
+$ git clone https://x-token-auth:{access_token}@bitbucket.org/user/repo.git
+The literal string x-token-auth as a substitute for username is required (note the difference with GitHub where the actual token is in the username field).
+Refresh Tokens
+Our access tokens expire in one hour. When this happens you'll get 401 responses.
+Most access tokens grant responses (Implicit and JWT excluded). Therefore, you should include a refresh token that can then be used to generate a new access token, without the need for end user participation:
+$ curl -X POST -u "client_id:secret" \
+  https://bitbucket.org/site/oauth2/access_token \
+  -d grant_type=refresh_token -d refresh_token={refresh_token}
+Scopes for the Bitbucket Cloud REST API
+Bitbucket's API applies a number of privilege scopes to endpoints. In order to access an endpoint, a request will need to have the necessary scopes.
+Scopes are declared in the descriptor as a list of strings, with each string being the name of a unique scope.
+A descriptor lacking the scopes element is implicitly assumed to require all scopes and as a result, Bitbucket will require end users authorizing/installing the add-on to explicitly accept all scopes.
+Our best practice suggests you add the scopes your add-on needs, but no more than it needs.
+Invalid scope strings will cause the descriptor to be rejected and the installation to fail.
+Following is the set of all currently available scopes.
+repository
+Gives the add-on read access to all the repositories the authorizing user has access to. Note that this scope does not give access to a repository's pull requests.
+access to the repo's source code
+clone over https
+access the the file browsing API
+download zip archives of the repo's contents
+the ability to view and use the issue tracker on any repo (created issues, comment, vote, etc)
+the ability to view and use the wiki on any repo (create/edit pages)
+repository:write
+Gives the add-on write (not admin) access to all the repositories the authorizing user has access to. No distinction is made between public or private repos. This scope implies repository, which does not need to be requested separately. This scope alone does not give access to the pull requests API.
+push access over https
+fork repos
+repository:admin
+Gives the add-on admin access to all the repositories the authorizing user has access to. No distinction is made between public or private repos. This scope does not imply repository or repository:write. It gives access to the admin features of a repo only, not direct access to its contents. Of course it can be (mis)used to grant read access to another user account who can then clone the repo, but repos that need to read of write source code would also request explicit read or write. This scope comes with access to the following functionality:
+view and manipulate committer mappings
+list and edit deploy keys
+ability to delete the repo
+view and edit repo permissions
+view and edit branch permissions
+import and export the issue tracker
+enable and disable the issue tracker
+list and edit issue tracker version, milestones and components
+enable and disable the wiki
+list and edit default reviewers
+list and edit repo links (Jira/Bamboo/Custom)
+list and edit the repository web hooks
+initiate a repo ownership transfer
+snippet
+Gives the add-on read access to all the snippets the authorizing user has access to. No distinction is made between public and private snippets (public snippets are accessible without any form of authentication).
+view any snippet
+create snippet comments
+snippet:write
+Gives the add-on write access to all the snippets the authorizing user can edit. No distinction is made between public and private snippets (public snippets are accessible without any form of authentication). This implies the Snippet Read scope which does not need to be requested separately.
+edit snippets
+delete snippets
+issue
+Ability to interact with issue trackers the way non-repo members can. This scope does not imply any other scopes and does not give implicit access to the repository the issue is attached to.
+view, list and search issues
+create new issues
+comment on issues
+watch issues
+vote for issues
+issue:write
+This implies issue, but adds the ability to transition and delete issues. This scope does not imply any other scopes and does not give implicit access to the repository the issue is attached to.
+transition issues
+delete issues
+wiki
+Gives access to wikis. No distinction is made between read and write as wikis are always editable by anyone. This scope does not imply any other scopes and does not give implicit access to the repository the wiki is attached to.
+view wikis
+create pages
+edit pages
+push to wikis
+clone wikis
+pullrequest
+Gives the add-on read access to pull requests. This scope implies repository, giving read access to the pull request's destination repository.
+see and list pull requests
+create and resolve tasks
+pullrequest:write
+Implies pullrequest but adds the ability to create, merge and decline pull requests. This scope implies repository:write, giving write access to the pull request's destination repository. This is necessary to facilitate merging.
+merge pull requests
+decline pull requests
+create pull requests
+comment on pull requests
+approve pull requests
+email
+Ability to see the user's primary email address. This should make it easier to use Bitbucket Cloud as a login provider to add-ons or external applications.
+account
+Ability to see all the user's account information. Note that this does not include any ability to mutate any of the data.
+see all email addresses
+language
+location
+website
+full name
+SSH keys
+user groups
+account:write
+Ability to change properties on the user's account.
+delete the authorizing user's account
+manage the user's groups
+manupilate a user's email addresses
+change username, display name and avatar
+team
+The ability to find out what teams the current user is part of. This is covered by the teams endpoint.
+information about all the groups and teams I am a member or admin of
+team:write
+Implies team, but adds the ability to manage the teams that the authorizing user is an admin on.
+manage team permissions
+webhook
+Gives access to webhooks. This scope is required for any webhook related operation.
+This scope gives read access to existing webhook subscriptions on all resources you can access, without needing further scopes. This means that a client can list all existing webhook subscriptions on repository foo/bar (assuming the principal user has access to this repo). The additional repository scope is not required for this.
+Likewise, existing webhook subscriptions for a repo's issue tracker can be retrieved without holding the issue scope. All that is required is the webhook scope.
+However, to create a webhook for issue:created, the client will need to have both the webhook as well as issue scope.
+list webhook subscriptions on any accessible repository, user, team, or snippet
+create/update/delete webhook subscriptions
+App passwords
+App passwords allow two-step verification users to make API calls to their Bitbucket account through apps such as Sourcetree.
+Some important points about app passwords:
+You cannot view an app password or adjust permissions after you create the app password. Because app passwords are encrypted on our database and cannot be viewed by anyone. They are essentially designed to be disposable. If you need to change the scopes or lost the password just create a new one.
+You cannot use them to log into your Bitbucket account.
+You cannot use app passwords to manage team actions.
+App passwords are tied to an individual account's credentials and should not be shared. If you're sharing your app password you're essentially giving direct, authenticated, access to everything that password has been scoped to do with the Bitbucket API's.
+You can use them for API call authentication, even if you don't have two-step verification enabled.
+You can set permission scopes (specific access rights) for each app password.
+Create an app password
+To create an app password:
+Select Avatar > Bitbucket settings.
+Click App passwords in the Access management section.
+Click Create app password.
+Give the app password a name related to the application that will use the password.
+Select the specific access and permissions you want this application password to have.
+Copy the generated password and either record or paste it into the application you want to give access. The password is only displayed this one time.
+That's all there is to creating an app password. See your applications documentation for how to apply the app password for a specific application.
+Basic auth
+Basic HTTP Authentication as per RFC-2617 (Digest not supported). Note that Basic Auth with username and password as credentials is only available on accounts that have 2-factor-auth / 2-step-verification disabled. If you use 2fa, you should authenticate using OAuth2 instead.
+URI, UUID, and structures
+You should be familiar with REST architecture before writing an integration. Read this overview page to gain a good understanding of Bitbucket's REST implementation.
+On this page
+
+URI structure
+HTTP methods
+UUID
+User object and UUID
+Repository object and UUID
+Team object and UUID
+Standard error responses
+Standard ISO-8601 timestamps
+URI structure
+All Bitbucket Cloud requests start with the https://api.bitbucket.org/2.0 prefix (for the 2.0 API) and https://api.bitbucket.org/1.0 prefix (1.0 API).
+The next segment of the URI path depends on the endpoint of the request. For example, using the curl command and the repositories endpoint you can list all the issues on Bitbucket's tutorial repository:
+curl https://api.bitbucket.org/2.0/repositories/tutorials/tutorials.bitbucket.org
+Given a specific endpoint, you can then drill down to a particular aspect or resource of that endpoint. The issues resource on a repository is an example:
+curl https://api.bitbucket.org/1.0/repositories/tutorials/tutorials.bitbucket.org/issues
+HTTP methods
+A given endpoint or resource has a series of actions (or methods) associated with it. The Bitbucket service supports these standard HTTP methods:
+Call	Description
+GET	Retrieves information.
+PUT	Updates existing information.
+POST	Creates new information.
+DELETE	Removes existing information.
+For example, you can call use the POST action on the issues resource and create an issue on the issue tracker.
+Specifying content length
+
+You can get a 411 Length Required response. If this happens, the API requires a Content-Length header but the client is not sending it. You should add the header yourself, for example using the curl client:
+curl -r PUT --header "Content-Length: 0" -u user:pass https://api.bitbucket.org/1.0/emails/rap@atlassian.com
+Universally Unique Identifier
+UUID's provide a single point of recognition for users, teams, and repositories. The UUID is distinct from the username, team name, and repository name fields and remains the same even when those fields change. For example when a user changes their username or moves a repository you will need to modify calls which use those identifiers but not if you are pointing to the UUID.
+UUID examples and structure
+UUID's work with both the 1.0 and 2.0 APIs for the user, team, and repository objects. The following examples the following characters are replacements for curly brackets: %7B replaces { and %7D replaces }. You will see this structure in the following example sections.
+User object and UUID
+When you make a call using either the username or the UUID for that user the response is the same.
+Call with username:
+curl https://api.bitbucket.org/2.0/users/tutorials
+*Call with UUID for the user:
+curl https://api.bitbucket.org/2.0/users/%7Bc788b2da-b7a2-404c-9e26-d3f077557007%7D
+Response
+
+{
+    "username": "tutorials",
+    "nickname": "tutorials",
+    "account_status": "active",
+    "website": "https://tutorials.bitbucket.org/",
+    "display_name": "tutorials account",
+    "uuid": "{c788b2da-b7a2-404c-9e26-d3f077557007}",
+    "links": {
+        "self": {
+            "href": "https://api.bitbucket.org/2.0/users/tutorials"
+        },
+        "repositories": {
+            "href": "https://api.bitbucket.org/2.0/repositories/tutorials"
+        },
+        "html": {
+            "href": "https://bitbucket.org/tutorials"
+        },
+        "followers": {
+            "href": "https://api.bitbucket.org/2.0/users/tutorials/followers"
+        },
+        "avatar": {
+            "href": "https://bitbucket-assetroot.s3.amazonaws.com/c/photos/2013/Nov/25/tutorials-avatar-1563784409-6_avatar.png"
+        },
+        "following": {
+            "href": "https://api.bitbucket.org/2.0/users/tutorials/following"
+        }
+    },
+    "created_on": "2011-12-20T16:34:07.132459+00:00",
+    "location": "Santa Monica, CA",
+    "type": "user"
+}
+Repository object and UUID
+Once you have the UUID for a repository you no longer need a username or team name to make the API call so long as you use an empty field. This helps you resolve repositories no matter if the username or team name changes.
+Call with team name (1team) and repository name (moxie):
+curl https://api.bitbucket.org/2.0/repositories/1team/moxie
+Call with UUID and empty field:
+curl https://api.bitbucket.org/2.0/repositories/%7B%7D/%7B21fa9bf8-b5b2-4891-97ed-d590bad0f871%7D
+Call with UUID and teamname:
+curl https://api.bitbucket.org/2.0/repositories/1team/%7B21fa9bf8-b5b2-4891-97ed-d590bad0f871%7D
+Response
+
+{
+    "created_on": "2013-11-08T01:11:03.222520+00:00",
+    "description": "",
+    "fork_policy": "allow_forks",
+    "full_name": "1team/moxie",
+    "has_issues": false,
+    "has_wiki": false,
+    "is_private": false,
+    "language": "",
+    "links": {
+        "avatar": {
+            "href": "https://bitbucket.org/1team/moxie/avatar/32/"
+        },
+        "branches": {
+            "href": "https://api.bitbucket.org/2.0/repositories/1team/moxie/refs/branches"
+        },
+        "clone": [
+            {
+                "href": "https://bitbucket.org/1team/moxie.git",
+                "name": "https"
+            },
+            {
+                "href": "ssh://git@bitbucket.org/1team/moxie.git",
+                "name": "ssh"
+            }
+        ],
+        "commits": {
+            "href": "https://api.bitbucket.org/2.0/repositories/1team/moxie/commits"
+        },
+        "downloads": {
+            "href": "https://api.bitbucket.org/2.0/repositories/1team/moxie/downloads"
+        },
+        "forks": {
+            "href": "https://api.bitbucket.org/2.0/repositories/1team/moxie/forks"
+        },
+        "hooks": {
+            "href": "https://api.bitbucket.org/2.0/repositories/1team/moxie/hooks"
+        },
+        "html": {
+            "href": "https://bitbucket.org/1team/moxie"
+        },
+        "pullrequests": {
+            "href": "https://api.bitbucket.org/2.0/repositories/1team/moxie/pullrequests"
+        },
+        "self": {
+            "href": "https://api.bitbucket.org/2.0/repositories/1team/moxie"
+        },
+        "tags": {
+            "href": "https://api.bitbucket.org/2.0/repositories/1team/moxie/refs/tags"
+        },
+        "watchers": {
+            "href": "https://api.bitbucket.org/2.0/repositories/1team/moxie/watchers"
+        }
+    },
+    "name": "moxie",
+    "owner": {
+        "display_name": "the team",
+        "links": {
+            "avatar": {
+                "href": "https://bitbucket.org/account/1team/avatar/32/"
+            },
+            "html": {
+                "href": "https://bitbucket.org/1team/"
+            },
+            "self": {
+                "href": "https://api.bitbucket.org/2.0/teams/1team"
+            }
+        },
+        "type": "team",
+        "username": "1team",
+        "uuid": "{aa559944-83c9-4963-a9a8-69ac8d9cf5d2}"
+    },
+    "project": {
+        "key": "PROJ",
+        "links": {
+            "avatar": {
+                "href": "https://bitbucket.org/account/user/1team/projects/PROJ/avatar/32"
+            },
+            "html": {
+                "href": "https://bitbucket.org/account/user/1team/projects/PROJ"
+            }
+        },
+        "name": "Untitled project",
+        "type": "project",
+        "uuid": "{ab52aaeb-16ad-4fb0-bb1d-47e4f00367ff}"
+    },
+    "scm": "git",
+    "size": 33348,
+    "type": "repository",
+    "updated_on": "2013-11-08T01:11:03.263237+00:00",
+    "uuid": "{21fa9bf8-b5b2-4891-97ed-d590bad0f871}",
+    "website": ""
+}
+Team object and UUID
+This example shows a call for a list of team members using both the team name and with the UUID for the team object. As the call is unauthenticated in the following example the response object will only show members with public profiles. The response is the same in either case.
+Call with teamname
+
+curl https://api.bitbucket.org/2.0/teams/1team/members
+Call with UUID for team object
+
+curl https://api.bitbucket.org/2.0/teams/%7Baa559944-83c9-4963-a9a8-69ac8d9cf5d2%7D/members
+Response
+
+{
+    "page": 1,
+    "pagelen": 50,
+    "size": 2,
+    "values": [
+        {
+            "created_on": "2011-12-20T16:34:07.132459+00:00",
+            "display_name": "tutorials account",
+            "links": {
+                "avatar": {
+                    "href": "https://bitbucket.org/account/tutorials/avatar/32/"
+                },
+                "followers": {
+                    "href": "https://api.bitbucket.org/2.0/users/tutorials/followers"
+                },
+                "following": {
+                    "href": "https://api.bitbucket.org/2.0/users/tutorials/following"
+                },
+                "hooks": {
+                    "href": "https://api.bitbucket.org/2.0/users/tutorials/hooks"
+                },
+                "html": {
+                    "href": "https://bitbucket.org/tutorials/"
+                },
+                "repositories": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/tutorials"
+                },
+                "self": {
+                    "href": "https://api.bitbucket.org/2.0/users/tutorials"
+                },
+                "snippets": {
+                    "href": "https://api.bitbucket.org/2.0/snippets/tutorials"
+                }
+            },
+            "location": null,
+            "type": "user",
+            "username": "tutorials",
+            "nickname": "tutorials",
+            "account_status": "active",
+            "uuid": "{c788b2da-b7a2-404c-9e26-d3f077557007}",
+            "website": "https://tutorials.bitbucket.org/"
+        },
+        {
+            "created_on": "2013-12-10T14:44:13+00:00",
+            "display_name": "Dan Stevens [Atlassian]",
+            "links": {
+                "avatar": {
+                    "href": "https://bitbucket.org/account/dans9190/avatar/32/"
+                },
+                "followers": {
+                    "href": "https://api.bitbucket.org/2.0/users/dans9190/followers"
+                },
+                "following": {
+                    "href": "https://api.bitbucket.org/2.0/users/dans9190/following"
+                },
+                "hooks": {
+                    "href": "https://api.bitbucket.org/2.0/users/dans9190/hooks"
+                },
+                "html": {
+                    "href": "https://bitbucket.org/dans9190/"
+                },
+                "repositories": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/dans9190"
+                },
+                "self": {
+                    "href": "https://api.bitbucket.org/2.0/users/dans9190"
+                },
+                "snippets": {
+                    "href": "https://api.bitbucket.org/2.0/snippets/dans9190"
+                }
+            },
+            "location": null,
+            "type": "user",
+            "username": "dans9190",
+            "nickname": "dans9190",
+            "account_status": "active",
+            "uuid": "{1cd06601-cd0e-4fce-be03-e9ac226978b7}",
+            "website": ""
+        }
+    ]
+}
+Standardized error responses
+The 2.0 API standardizes the error response layout. The 2.0 API serves a JSON object along with the appropriate HTTP status code. The JSON object provides a detailed problem description.
+{
+    "type": "error",
+    "error": {
+        "message": "Bad request",
+        "fields": {
+            "src": [
+                "This field is required."
+            ]
+        },
+        "detail": "You must specify a valid source branch when creating a pull request.",
+        "id": "d23a1cc5178f7637f3d9bf2d13824258",
+        "data": {
+          "extra": "Optional, endpoint-specific data to further augment the error."
+        }
+    }
+}
+This object contains an error element which contains the following nested elements:
+Element	Description
+message	A short description of the problem. This element is always present. Its value may be localized.
+fields	This optional element is used in response to POST or PUT operations in which clients have provided invalid input. It contains a list of one or more client-provided fields that failed validation. The values may be localized.
+detail	An optional detailed explanation of the failure. Its value may be localized.
+id	An optional unique error identifier that identifies the error in Bitbucket's logging system. If you feel you hit a bug in an API and this field is provided, please mention it if you decide to contact support as it will greatly help us narrow down the problem.
+Standard ISO-8601 timestamps
+All 2.0 APIs use standardized ISO-8601 timestamps. In most cases, our APIs return UTC timestamps and for these, the timezone offset part will be 00:00. In rare cases where the original localized timestamp has significance, the timezone offset may identify the event's original timezone.
+Cors and hypermedia
+This section describes Cross-origin resource sharing (CORS), what content types we support in requests and responses, and hyperlinking resources in each json responses.
+On this page
+
+CORS
+Supported content types
+Resource links
+Cors
+The Bitbucket API supports Cross-origin resource sharing to allow requests for restricted resources across domains. For more information you can refer to:
+Wikipedia article on CORS
+W3C CORS recommendation
+Sending a general request from the api to bitbucket.com:
+curl -i https://api.bitbucket.org -H "origin: http://bitbucket.com"
+
+Gives this result:
+HTTP/1.1 302 FOUND
+Server: nginx/1.6.2
+Vary: Cookie
+Cache-Control: max-age=900
+Content-Type: text/html; charset=utf-8
+Strict-Transport-Security: max-age=31536000
+Date: Tue, 21 Jun 2016 17:54:37 GMT
+Location: http://confluence.atlassian.com/x/IYBGDQ
+X-Served-By: app-110
+X-Static-Version: 2c820eb0d2b3
+ETag: "d41d8cd98f00b204e9800998ecf8427e"
+X-Content-Type-Options: nosniff
+X-Render-Time: 0.00379920005798
+Connection: Keep-Alive
+X-Version: 2c820eb0d2b3
+X-Frame-Options: SAMEORIGIN
+X-Request-Count: 383
+X-Cache-Info: cached
+Content-Length: 0
+Sending the same request with the CORS check -X OPTIONS in the call:
+curl -i https://api.bitbucket.org -H "origin: http://bitbucket.com" -X OPTIONS
+
+Gives this result:
+HTTP/1.1 302 FOUND
+Server: nginx/1.6.2
+Vary: Cookie
+Cache-Control: max-age=900
+Content-Type: text/html; charset=utf-8
+Access-Control-Expose-Headers: Accept-Ranges, Content-Encoding, Content-Length, Content-Type, ETag, Last-Modified
+Strict-Transport-Security: max-age=31536000
+Date: Tue, 21 Jun 2016 18:04:30 GMT
+Access-Control-Max-Age: 86400
+Location: http://confluence.atlassian.com/x/IYBGDQ
+X-Served-By: app-111
+Access-Control-Allow-Origin: *
+X-Static-Version: 2c820eb0d2b3
+ETag: "d41d8cd98f00b204e9800998ecf8427e"
+X-Content-Type-Options: nosniff
+X-Render-Time: 0.00371098518372
+Connection: keep-alive
+X-Version: 2c820eb0d2b3
+X-Frame-Options: SAMEORIGIN
+X-Request-Count: 357
+Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS
+Access-Control-Allow-Headers: Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, Origin, Range, X-CsrftokenX-Requested-With
+X-Cache-Info: not cacheable; request wasn't a GET or HEAD
+Content-Length: 0
+Supported content types
+The default and primary content type for 2.0 APIs is JSON. This applies both to responses from the server and to the request bodies provided by the client.
+Unless documented otherwise, whenever creating a new (POST) or modifying an existing (PUT) object, your client must provide the object's normal representation. Not every object element can be mutated. For example, a repository's created_on date is an auto-generated, immutable field. Your client can omit immutable fields from a request body.
+In some cases, a resource might also accept regular application/x-www-url-form-encoded POST and PUT bodies. Such bodies can be more convenient in scripts and command line usage. Requests bodies can contain contain nested elements or they can be flat (without nested elements). Clients can send flat request bodies as either as application/json or as application/x-www-url-form-encoded. Nested objects always require JSON.
+Resource links
+Every 2.0 object contains a links element that points to related resources or alternate representations. Use links to quickly discover and traverse to related objects. Links serve a "self-documenting" function for each endpoint. For example, the following request for a specific user:
+$ curl https://api.bitbucket.org/2.0/users/tutorials
+
+{
+    "username": "tutorials",
+    "nickname": "tutorials",
+    "account_status": "active",
+    "website": "https://tutorials.bitbucket.org/",
+    "display_name": "tutorials account",
+    "uuid": "{c788b2da-b7a2-404c-9e26-d3f077557007}",
+    "links": {
+        "self": {
+            "href": "https://api.bitbucket.org/2.0/users/tutorials"
+        },
+        "repositories": {
+            "href": "https://api.bitbucket.org/2.0/repositories/tutorials"
+        },
+        "html": {
+            "href": "https://bitbucket.org/tutorials"
+        },
+        "followers": {
+            "href": "https://api.bitbucket.org/2.0/users/tutorials/followers"
+        },
+        "avatar": {
+            "href": "https://bitbucket-assetroot.s3.amazonaws.com/c/photos/2013/Nov/25/tutorials-avatar-1563784409-6_avatar.png"
+        },
+        "following": {
+            "href": "https://api.bitbucket.org/2.0/users/tutorials/following"
+        }
+    },
+    "created_on": "2011-12-20T16:34:07.132459+00:00",
+    "location": "Santa Monica, CA",
+    "type": "user"
+}
+Links can be actual REST API resources or they can be informational. In this example, informative resources include the user's avatar and the HTML URL for the user's Bitbucket account. Your client should avoid hardcoding an API's URL and instead use the URLs returned in API responses.
+A link's key is its rel (relationship) attribute and it contains a mandatory href element. For example, the following link:
+"self": {
+      "href": "https://api.bitbucket.org/api/2.0/users/tutorials"
+}
+The rel for this link is self and the href is https://api.bitbucket.org/api/2.0/users/tutorials. A single rel key can contain an list (array) of href objects. Your client should anticipate that any rel key can contain one or more href objects.
+Finally, links can also contain optional elements. Two common optional elements are the name element and the title element. They are often used to disambiguate links that share the same rel key. In the example below, the repository object that contains a clone link with two href objects. Each object contains the optional name element to clarify its use.
+"links": {
+  "self": {
+    "href": "https://api.bitbucket.org/2.0/repositories/evzijst/bitbucket"
+  },
+  "clone": [
+    {
+      "href": "https://api.bitbucket.org/evzijst/bitbucket.git",
+      "name": "https"
+    },
+    {
+      "href": "ssh://git@bitbucket.org/erik/bitbucket.git",
+      "name": "ssh"
+    }
+  ],
+  ...
+}
+Links can support URI Templates; Those that do contain a "templated": "true" element.
+- pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.0
+  variables:
+    AWS_ACCESS_KEY_ID: '<string>'
+    AWS_SECRET_ACCESS_KEY: '<string>'
+    AWS_DEFAULT_REGION: '<string>'
+    APPLICATION_NAME: '<string>'
+    ENVIRONMENT_NAME: '<string>'
+    ZIP_FILE: '<string>'
+    # S3_BUCKET: '<string>' # Optional.
+    # VERSION_LABEL: '<string>' # Optional.
+    # DESCRIPTION: '<string>' # Optional.
+    # WAIT: '<boolean>' # Optional.
+    # WAIT_INTERVAL: '<integer>' # Optional.
+    # COMMAND: '<string>' # Optional.
+    # DEBUG: '<boolean>' # Optional.
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+pool:
+  vmImage: 'Ubuntu 16.04'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '8.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install
+    cd function-app/GanacheFunction
+    npm install
+  displayName: 'Install project dependencies'
+
+- script: |
+    npx truffle compile
+    npx truffle test
+  displayName: 'Truffle Compile & Test'
+
+  # azure-pipelines.js - Publish Test Results in 
+- task: PublishTestResults@2
+  condition: always()
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/TEST-*.xml' 
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/full-$(Build.BuildId).zip'
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/function-app'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/function-app-$(Build.BuildId).zip'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    Open API Specification
+Bitbucket uses the Open API Specification (OAI, formerly known as Swagger) to describe its APIs. Our OAI specification schema is hosted at https://api.bitbucket.org/swagger.json and serves as the canonical definition and comprehensive declaration of all available endpoints.
+The OAI specification makes writing client applications easier by: auto-generating boilerplate code (like data object classes) and dealing with authentication and error handling.
+You can find a comprehensive set of open tools for the OAI specification at: https://github.com/swagger-api.
+JSON Schema
+Bitbucket uses JSON Schema to describe the layout of every type of object consumed or produced by the API. These schemas are collected under the #definitions element of our swagger.json file.
+When an endpoint expects an object as part of a POST or PUT, it also expects the object to validate against the JSON schemas. The same applies to objects returned by an endpoint.
+Condensed Versus Full Objects
+Most objects in Bitbucket come both in "full" and "partial" representation. The full representation is when all elements are included. This is the layout returned by a resource's self location (e.g. /2.0/repositories/foo/bar), as well as resource collection endpoints (e.g. /2.0/repositories).
+However, Bitbucket objects often embed other objects. For example, a repository object embeds a user object for its owner. Likewise, a pullrequest object embeds its repository object.
+These related objects are embedded, or inlined, to reduce the "chatter" when clients make frequent followup API calls to collect information on common, related information.
+Embedded related objects are typically limited in their fields to avoid such object graphs from becoming too deep and noisy. They often exclude their own nested objects in an attempt to strike a balance between performance and utility.
+An object's embedded or condensed representation tends to be standardized, meaning the fields included is the same set, regardless of where the object was embedded.
+Tags
+users	(No description)
+teams	(No description)
+repositories	(No description)
+source	
+Browse the source code in the repository and create new commits by uploading.
+refs	(No description)
+commits	(No description)
+pullrequests	(No description)
+issue_tracker	
+The issue resources provide functionality for getting information on issues in an issue tracker, creating new issues, updating them and deleting them.
+You can access public issues without authentication, but you can't gain access to private repositories' issues. By authenticating, you will get the ability to create issues, as well as access to updating data or deleting issues you have access to.
+wiki	(No description)
+downloads	(No description)
+snippets	(No description)
+webhooks	
+Webhooks provide a way to configure Bitbucket Cloud to make requests to your server (or another external service) whenever certain events occur in Bitbucket Cloud.
+A webhook consists of:
+A subject -- The resource that generates the events. Currently, this resource is the repository, user account, or team where you create the webhook.
+One or more event -- The default event is a repository push, but you can select multiple events that can trigger the webhook.
+A URL -- The endpoint where you want Bitbucket to send the event payloads when a matching event happens.
+There are two parts to getting a webhook to work: creating the webhook and triggering the webhook. After you create a webhook for an event, every time that event occurs, Bitbucket sends a payload request that describes the event to the specified URL. Thus, you can think of webhooks as a kind of notification system.
+Use webhooks to integrate applications with Bitbucket Cloud. The following use cases provides examples of when you would want to use webhooks:
+Every time a user pushes commits in a repository, you may want to notify your CI server to start a build.
+Every time a user pushes commits or creates a pull request, you may want to display a notification in your application.
+commitstatuses	
+Commit statuses provide a way to tag commits with meta data, like automated build results.
+branchrestrictions	
+Repository owners and administrators can set branch management rules on a repository that control what can be pushed by whom. Through these rules, you can enforce a project or team workflow. For example, owners or administrators can:
+Limit push powers
+Prevent branch (bookmark) deletion
+Prevent history re-writes (Git only)
+projects	
+Bitbucket Cloud projects make it easier for teams to focus on a goal, product, or process by organizing their repositories.
+pipelines	
+Bitbucket Pipelines brings continuous delivery to Bitbucket Cloud, empowering teams with full branching to deployment visibility and faster feedback loops.
+deployments	
+Teams are deploying code faster than ever, thanks to continuous delivery practices and tools like Bitbucket Pipelines. Bitbucket Deployments gives teams visibility into their deployment environments and helps teams to track how far changes have progressed in their deployment pipeline.

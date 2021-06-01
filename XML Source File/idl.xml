@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Date: 1998/08/31 09:38:21 $ $Revisions:$ -->
+<div1 role="idl" id="idl">
+  <head>IDL Definitions</head>
+  <p>This appendix contains the complete OMG IDL for the Level 1 Document
+    Object Model definitions. The definitions are divided into Core and
+    HTML.</p>
+  <p>The IDL files are also available as: <loc
+      href="idl.zip">&w3c.url;/idl.zip</loc></p>
+
+  <div2 id="ID-2094849111">
+    <head>Document Object Model Level 1 Core</head>
+    <!--
+    ******************************************************
+    | LEVEL ONE CORE OMG IDL DEFINITIONS                 |
+    ******************************************************
+    -->
+      <p>This section contains the OMG IDL definitions for the interfaces
+	in the Core Document Object Model specification, including the 
+        extended (XML) interfaces.
+      </p>
+      <?GENERATE-IDL ID-419945773?>
+  </div2>
+  <div2 id="ID-119394714">
+    <head>Document Object Model Level 1 HTML</head>
+    
+    <!--
+    ******************************************************
+    | LEVEL ONE HTML OMG IDL DEFINITIONS                 |
+    ******************************************************
+    -->
+      <?GENERATE-IDL ID-1342638483?>
+  </div2>
+</div1>

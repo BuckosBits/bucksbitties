@@ -1,0 +1,381 @@
+# serverless.yml
+service: graphql-api
+
+functions:
+  query:
+    handler: handler.query
+    events:
+      - http:
+          path: query
+          method: get
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  environment:
+    DYNAMODB_TABLE: ${self:service}-${self:provider.stage}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+        - dynamodb:UpdateItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+
+resources:
+  Resources:
+    NicknamesTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: firstName
+            AttributeType: S
+        KeySchema:
+          - AttributeName: firstName
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:provider.environment.DYNAMODB_TABLE}
+# serverless.yml
+
+service: serverless-flask
+
+plugins:
+  - serverless-python-requirements
+  - serverless-wsgi
+
+custom:
+  wsgi:
+    app: app.app
+    packRequirements: false
+  pythonRequirements:
+    dockerizePip: non-linux
+
+provider:
+  name: aws
+  runtime: python3.6
+  stage: dev
+  region: us-east-1
+
+functions:
+  app:
+    handler: wsgi.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
+$ virtualenv venv --python=python3
+$ source venv/bin/activate
+# serverless.yml
+
+service: serverless-flask
+
+plugins:
+  - serverless-python-requirements
+  - serverless-wsgi
+
+custom:
+  tableName: 'users-table-${self:provider.stage}'
+  wsgi:
+    app: app.app
+    packRequirements: false
+  pythonRequirements:
+    dockerizePip: non-linux
+
+provider:
+  name: aws
+  runtime: python3.6
+  stage: dev
+  region: us-east-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource:
+        - { "Fn::GetAtt": ["UsersDynamoDBTable", "Arn" ] }
+  environment:
+    USERS_TABLE: ${self:custom.tableName}
+
+functions:
+  app:
+    handler: wsgi.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
+
+resources:
+  Resources:
+    UsersDynamoDBTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: userId
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: userId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:custom.tableName}
+$ pip install boto3
+$ pip freeze > requirements.txt
+functions:
+  app:
+    handler: wsgi.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
+# serverless.yml
+
+functions:
+  app:
+    handler: wsgi.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
+  getUser:
+    handler: wsgi.handler
+    events:
+      - http: 'GET /users/{proxy+}'
+  createUser:
+    handler: wsgi.handler
+    events:
+      - http: 'POST /users'
+# serverless.yml
+
+plugins:
+  - serverless-python-requirements
+  - serverless-wsgi
+  - serverless-dynamodb-local
+
+custom:
+  tableName: 'users-table-${self:provider.stage}'
+  wsgi:
+    app: app.app
+    packRequirements: false
+  pythonRequirements:
+    dockerizePip: non-linux
+  dynamodb:
+    start:
+      migrate: true
+# serverless.yml
+
+service: serverless-flask
+
+plugins:
+  - serverless-python-requirements
+  - serverless-wsgi
+
+custom:
+  wsgi:
+    app: app.app
+    packRequirements: false
+  pythonRequirements:
+    dockerizePip: non-linux
+
+provider:
+  name: aws
+  runtime: python3.6
+  stage: dev
+  region: us-east-1
+
+functions:
+  app:
+    handler: wsgi.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
+# serverless.yml
+
+service: my-express-application
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: dev
+  region: us-east-1
+
+functions:
+  app:
+    handler: index.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
+$ sls deploy
+... snip ...
+Service Information
+service: my-express-application
+stage: dev
+region: us-east-1
+stack: my-express-application-dev
+api keys:
+  None
+endpoints:
+  ANY - https://bl4r0gjjv5.execute-api.us-east-1.amazonaws.com/dev
+  ANY - https://bl4r0gjjv5.execute-api.us-east-1.amazonaws.com/dev/{proxy+}
+functions:
+  app: my-express-application-dev-app
+functions:
+  app:
+    handler: index.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
+# serverless.yml
+
+functions:
+  app:
+    handler: index.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
+  getUser:
+    handler: index.handler
+    events:
+      - http: 'GET /users/{proxy+}'
+  createUser:
+    handler: index.handler
+    events:
+      - http: 'POST /users'
+# serverless.yml
+
+plugins:
+  - serverless-offline
+  $ sls offline start
+Serverless: Starting Offline: dev/us-east-1.
+
+Serverless: Routes for app:
+Serverless: ANY /
+Serverless: ANY /{proxy*}
+
+Serverless: Routes for getUser:
+Serverless: GET /users/{proxy*}
+
+Serverless: Routes for createUser:
+Serverless: POST /users
+
+Serverless: Offline listening on http://localhost:3000
+# serverless.yml
+
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline #serverless-offline needs to be last in the list
+
+custom:
+  tableName: 'users-table-${self:provider.stage}'
+  dynamodb:
+    start:
+      migrate: true
+# serverless.yml
+
+service: express-app
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: dev
+  region: us-east-1
+
+functions:
+  app:
+    handler: app.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
+trigger:
+  batch: true
+  branches:
+    include:
+    # for new release to production: release flow strategy
+    - release/delivery/v*
+    - refs/release/delivery/v*
+    - master
+    - feature/delivery/*
+    - topic/delivery/*
+  paths:
+    include:
+    - /src/shipping/delivery/
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ include "package.fullname" . | replace "." "" }}
+  labels:
+    app.kubernetes.io/name: {{ include "package.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+  annotations:
+    kubernetes.io/change-cause: {{ .Values.reason }}
+
+...
+
+  spec:
+      containers:
+      - name: &package-container_name fabrikam-package
+        image: {{ .Values.dockerregistry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        env:
+        - name: LOG_LEVEL
+          value: {{ .Values.log.level }}
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ include "delivery.fullname" . | replace "." "" }}
+  labels:
+     ...
+  annotations:
+    kubernetes.io/change-cause: {{ .Values.reason }}
+- task: Docker@1
+  inputs:
+    azureSubscriptionEndpoint: $(AzureSubscription)
+    azureContainerRegistry: $(AzureContainerRegistry)
+    arguments: '--pull --target testrunner'
+    dockerFile: $(System.DefaultWorkingDirectory)/$(dockerFileName)
+    imageName: '$(imageName)-test'
+- task: Docker@1
+  inputs:
+    azureSubscriptionEndpoint: $(AzureSubscription)
+    azureContainerRegistry: $(AzureContainerRegistry)
+    command: 'run'
+    containerName: testrunner
+    volumes: '$(System.DefaultWorkingDirectory)/TestResults:/app/tests/TestResults'
+    imageName: '$(imageName)-test'
+    runInBackground: false
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'VSTest'
+    testResultsFiles: 'TestResults/*.trx'
+    searchFolder: '$(System.DefaultWorkingDirectory)'
+    publishRunAttachments: true
+    - task: Docker@1
+  inputs:
+    azureSubscriptionEndpoint: $(AzureSubscription)
+    azureContainerRegistry: $(AzureContainerRegistry)
+    dockerFile: $(System.DefaultWorkingDirectory)/$(dockerFileName)
+    includeLatestTag: false
+    imageName: '$(imageName)'
+    - task: Docker@1
+  inputs:
+    azureSubscriptionEndpoint: $(AzureSubscription)
+    azureContainerRegistry: $(AzureContainerRegistry)
+    command: 'Push an image'
+    imageName: '$(imageName)'
+    includeSourceTags: false
+    - task: HelmDeploy@0
+  inputs:
+    command: package
+    chartPath: $(chartPath)
+    chartVersion: $(Build.SourceBranchName)
+    arguments: '--app-version $(Build.SourceBranchName)'
+    task: AzureCLI@1
+  inputs:
+    azureSubscription: $(AzureSubscription)
+    scriptLocation: inlineScript
+    inlineScript: |
+    az acr helm push $(System.ArtifactsDirectory)/$(repositoryName)-$(Build.SourceBranchName).tgz --name $(AzureContainerRegistry);
+    

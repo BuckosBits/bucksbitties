@@ -1,0 +1,27 @@
+// alter schema
+const schema = new GraphQLSchema({
+  query: new GraphQLObjectType({
+    /* unchanged */
+  }),
+  mutation: new GraphQLObjectType({
+    name: 'RootMutationType', // an arbitrary name
+    fields: {
+      changeNickname: {
+        args: {
+          // we need the user's first name as well as a preferred nickname
+          firstName: { name: 'firstName', type: new GraphQLNonNull(GraphQLString) },
+          nickname: { name: 'nickname', type: new GraphQLNonNull(GraphQLString) }
+        },
+        type: GraphQLString,
+        // update the nickname
+        resolve: (parent, args) => changeNickname(args.firstName, args.nickname)
+      }
+    }
+  })
+})
+$ curl -G 'https://9qdmq5nvql.execute-api.us-east-1.amazonaws.com/dev/query' --data-urlencode 'query={greeting(firstName: "Jeremy")}'
+# {"data":{"greeting":"Hello, Jeremy."}}
+$ curl -G 'https://9qdmq5nvql.execute-api.us-east-1.amazonaws.com/dev/query' --data-urlencode 'query=mutation {changeNickname(firstName:
+2"Jeremy", nickname: "Jer")}'
+$ curl -G 'https://9qdmq5nvql.execute-api.us-east-1.amazonaws.com/dev/query' --data-urlencode 'query={greeting(firstName: "Jeremy")}'
+# {"data":{"greeting":"Hello, Jer."}}

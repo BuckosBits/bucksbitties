@@ -1,0 +1,16 @@
+export BASE_DOMAIN=https://bl4r0gjjv5.execute-api.us-east-1.amazonaws.com/dev
+$ curl -H "Content-Type: application/json" -X POST ${BASE_DOMAIN}/users -d '{"userId": "michaelglenn1", "name": "Michael Glenn"}'
+{
+  "name": "Michael Glenn",
+  "userId": "michaelglenn1"
+}
+$ curl -H "Content-Type: application/json" -X GET ${BASE_DOMAIN}/users/michaelglenn1
+{
+  "name": "Michael Glenn",
+  "userId": "michaelglenn1"
+}
+export BASE_DOMAIN=https://bl4r0gjjv5.execute-api.us-east-1.amazonaws.com/dev
+$ curl -H "Content-Type: application/json" -X POST ${BASE_DOMAIN}/users -d '{"userId": "michaelglenn1", "name": "Michael Glenn"}'
+{"userId":"michaelglenn1","name":"Michael Glenn"}
+$ curl -H "Content-Type: application/json" -X GET ${BASE_DOMAIN}/users/michaelglenn1
+{"userId":"michaelglenn1","name":"Michael Glenn"}

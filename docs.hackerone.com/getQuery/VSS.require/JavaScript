@@ -1,0 +1,86 @@
+VSS.require(["TFS/Dashboards/WidgetHelpers", "TFS/WorkItemTracking/RestClient"], 
+    function (WidgetHelpers, TFS_Wit_WebApi) {
+        WidgetHelpers.IncludeWidgetStyles();
+        VSS.register("HelloWorldWidget2", function () { 
+            var projectId = VSS.getWebContext().project.id;
+
+            var getQueryInfo = function (widgetSettings) {
+                // Get a WIT client to make REST calls to Azure DevOps Services
+                return TFS_Wit_WebApi.getClient().getQuery(projectId, "Shared Queries/Feedback")
+                    .then(function (query) {
+                        // Do something with the query
+
+                        return WidgetHelpers.WidgetStatusHelper.Success();
+                    }, function (error) {                            
+                        return WidgetHelpers.WidgetStatusHelper.Failure(error.message);
+                    });
+            }
+
+            return {
+                load: function (widgetSettings) {
+                    // Set your title
+                    var $title = $('h2.title');
+                    $title.text('Hello World');
+
+                    return getQueryInfo(widgetSettings);
+                }
+            }
+        });
+        VSS.notifyLoadSucceeded();
+    });
+// Create a list with query details                                
+    var $list = $('<ul>');                                
+    $list.append($('<li>').text("Query Id: " + query.id));
+    $list.append($('<li>').text("Query Name: " + query.name));
+    $list.append($('<li>').text("Created By: " + ( query.createdBy? query.createdBy.displayName: "<unknown>" ) ) );                                                            
+
+    // Append the list to the query-info-container
+    var $container = $('#query-info-container');
+    $container.empty();
+    $container.append($list);
+$queryDropdown.on("change", function () {
+     var customSettings = {
+        data: JSON.stringify({
+                queryPath: $queryDropdown.val()
+            })
+     };
+     var eventName = WidgetHelpers.WidgetEvent.ConfigurationChange;
+     var eventArgs = WidgetHelpers.WidgetEvent.Args(customSettings);
+     widgetConfigurationContext.notify(eventName, eventArgs);
+ });
+return {
+    load: function (widgetSettings) {
+        // Set your title
+        var $title = $('h2.title');
+        $title.text('Hello World');
+
+        return getQueryInfo(widgetSettings);
+    },
+    reload: function (widgetSettings) {
+        return getQueryInfo(widgetSettings);
+    }
+}
+var settings = JSON.parse(widgetSettings.customSettings.data);
+if (!settings || !settings.queryPath) {
+    var $container = $('#query-info-container');
+    $container.empty();
+    $container.text("Sorry nothing to show, please configure a query path.");
+
+    return WidgetHelpers.WidgetStatusHelper.Success();
+}
+return {
+    load: function (widgetSettings) {
+        // Set your title
+        var $title = $('h2.title');
+        $title.text(widgetSettings.name);
+
+        return getQueryInfo(widgetSettings);
+    },
+    reload: function (widgetSettings) {
+        // Set your title
+        var $title = $('h2.title');
+        $title.text(widgetSettings.name);
+
+        return getQueryInfo(widgetSettings);
+    }
+}

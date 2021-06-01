@@ -1,0 +1,5 @@
+Cloning a repository with an access token
+Since add-ons will not be able to upload their own SSH keys to clone with, access tokens can be used as Basic HTTP Auth credentials to clone securely over HTTPS.
+
+$ git clone https://x-token-auth:{access_token}@bitbucket.org/user/repo.git
+The literal string x-token-auth as a substitute for username is required.

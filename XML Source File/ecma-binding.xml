@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Date: 1998/08/31 09:38:09 $ $Revisions:$ -->
+<div1 role="ecma-binding" id="ecma-binding">
+  <head>ECMA Script Language Binding</head>
+  <p>This appendix contains the complete ECMA Script binding for the Level 1
+    Document Object Model definitions. The definitions are divided into Core
+    and HTML.</p>
+  <div2 id="ID-1370785602">
+    <head>Document Object Model Level 1 Core</head>
+    <!--
+    ******************************************************
+    | LEVEL ONE CORE ECMA SCRIPT BINDINGS                |
+    ******************************************************
+    -->
+      <?GENERATE-ECMA ID-419945773?>
+  </div2>
+  <div2 id="ID-2017288232">
+    <head>Document Object Model Level 1 HTML</head>
+    <!--
+    ******************************************************
+    | ELEVEL ONE HTML CMASCRIPT BINDINGS                 |
+    ******************************************************
+    -->
+      <?GENERATE-ECMA ID-1342638483?>
+  </div2>
+</div1>
