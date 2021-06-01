@@ -31,11 +31,12 @@ jobs:
         run: | #test, #verify, #deploy
           echo Add other actions to build,
           echo test, and deploy your project.
+# <<<<<<< MoneyMan573/BuckosBits/bucksbitties
 >
 
 <# This is a basic workflow to help you get started with Actions
 
-name:.github.com-BuckosBits-MoneyMan573.main1.yml/pipelines-main.yml
+name:.github.com-BuckosBits-# #  # MoneyMan573.main1.yml/pipelines-main.yml
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -66,3 +67,5 @@ jobs:
         run: | #test, #verify, #deploy
           echo Add other actions to build,
           echo test, and deploy your project.>
+# =======
+# >>>>>>> master
