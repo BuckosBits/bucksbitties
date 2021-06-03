@@ -19,24 +19,29 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<reportium-sdk.version>2.3</reportium-sdk.version>
 		<selenium.version>3.141.59</selenium.version>
-# <<<<<<< MoneyMan573/BuckosBits/bucksbitties
+  MoneyMan573/BuckosBits/bucksbitties
 		<testng.version>7.0.0</testng.version>
 		<testng.version>7.3.0</testng.version>
-# =======
-# <<<<<<< master
+ =======
+ master
 		<testng.version>7.0.0</testng.version>
 		<testng.version>7.3.0</testng.version>
-# =======
+=======
 		<testng.version>6.14.3</testng.version>
-# >>>>>>> BigGuy573/bucksbitties-pipelines.yml
-# >>>>>>> master
+BigGuy573/bucksbitties-pipelines.yml
+master
 		<cukes.version>1.2.5</cukes.version>
 		<org.json.version>20160810</org.json.version>
 		<perfectomobile.version>18.3.0.3</perfectomobile.version>
 		<intellij.perfectomobile.version>18.4.0.0 </intellij.perfectomobile.version>
+snyk-upgrade-8862bb7375710e4faecebac8c03dad6b
+		<qaf.version>2.1.15</qaf.version>
+		<qafsupport.version>2.1.14</qafsupport.version>
+=======
 		<qaf.version>2.1.14</qaf.version>
-<<snyk-upgrade-ac062f24aaf9863e4ba1ca52b97aad87
+snyk-upgrade-ac062f24aaf9863e4ba1ca52b97aad87
 		<qafsupport.version>2.1.15</qafsupport.version>
+ master
 		<appium.client.version>6.1.0</appium.client.version>
 =======
 		<qafsupport.version>2.1.14</qafsupport.version>
