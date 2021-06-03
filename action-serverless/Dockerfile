@@ -10,7 +10,7 @@ LABEL "com.github.actions.description"="Wraps the Serverless CLI"
 LABEL "com.github.actions.icon"="zap"
 LABEL "com.github.actions.color"="gray-dark"
 
-# Install serverless globally
+Install serverless globally
 RUN yarn global add serverless
 
 ADD "entrypoint.sh" "/entrypoint.sh"
@@ -19,7 +19,11 @@ CMD ["help"]
 FROM microsoft/dotnet:2.2-runtime AS base
 WORKDIR /app
 
+snyk-fix-536dc407daa53e7b32d8a944b2572feb
+FROM microsoft/dotnet:2-sdk AS build
+<=======
 FROM microsoft/dotnet:latest AS build
+master
 WORKDIR /src/Fabrikam.Workflow.Service
 
 COPY Fabrikam.Workflow.Service/Fabrikam.Workflow.Service.csproj .
