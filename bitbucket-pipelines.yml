@@ -1,4 +1,7 @@
+# <<<<<<< MoneyMan573/BuckosBits/bucksbitties
+# =======
 # <<<<<<< master
+# >>>>>>> master
 ### This is a basic workflow to help you get started with Actions
 
 #name: "bitbucket-pipelines.yml"
@@ -32,6 +35,8 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+# <<<<<<< MoneyMan573/BuckosBits/bucksbitties
+# =======
 #=======
 README.md
 Bitbucket Pipelines Pipe: SonarCloud scan
@@ -93,3 +98,4 @@ the version of the pipe
 relevant logs and error messages
 steps to reproduce
 # >>>>>>> BigGuy573/bucksbitties-pipelines.yml
+# >>>>>>> master
