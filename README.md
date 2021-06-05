@@ -19,31 +19,32 @@
 
 # information for Eclipse / Flash Builder.
 FROM node:10-slim
-# <<<<<<< BigGuy573/BuckosBits/master/MoneyMan573.main.yml
+#
+"github.com/BigGuy573/BuckosBits/bucksbitties/.github/workflows/bitbucket-bucksbitties-pipelines./main1.yml"
 LABEL version="1.0.0"
 LABEL repository="https://github.com/BigGuy573/action-serverless"
-# <<<<<<< MoneyMan573/BuckosBits/bucksbitties
+# MoneyMan573/BuckosBits/bucksbitties
 LABEL homepage="https://github.com/BigGuy5574action-serverless"
 LABEL maintainer="Michael Glenn @BigGuy573" <mbg198618@gmail.com>"
-# =======
-# <<<<<<< BuckosBits/bucksbitties/MoneyMan573/bucksbitties/main.yml
+# 
+# BuckosBits/bucksbitties/MoneyMan573/bucksbitties/main.yml
 LABEL homepage="https://github.com/BigGuy573/action-serverless"
 LABEL maintainer="Michael Glenn @BigGuy573" <mbg198618@gmail.com>"
-# =======
+# 
 LABEL homepage="https://github.com/BigGuy5574action-serverless"
 LABEL maintainer="Michael Glenn @BigGuy573" <mbg198618@gmail.com>"
-# =======
+#
 LABEL version="v2.0"
 LABEL repository="https://github.com/BuckosBits/bucksbitties
 LABEL homepage="https://github.com/BuckosBits/bucksbitties
 LABEL maintainer="Michael Glenn <mbg198618@gmail.com>"
-# >>>>>>> master
-# >>>>>>> master
-# >>>>>>> master
-LABEL "com.github.actions.name"="GitHub Action for Serverless Framework"
-LABEL "com.github.actions.description"="Wraps the Serverless CLI"
-LABEL "com.github.actions.icon"="zap"
-LABEL "com.github.actions.color"="gray-dark"
+# master
+# master
+# master
+# LABEL "com.github.actions.name"="GitHub Action for Serverless Framework"
+# LABEL "com.github.actions.description"="Wraps the Serverless CLI"
+# LABEL "com.github.actions.icon"="zap"
+# LABEL "com.github.actions.color"="gray-dark"
 
 # Install serverless globally
 
@@ -74,16 +75,16 @@ This Action wraps the [Serverless Framework](https://serverless.com/framework/do
 CLI to enable common commands. See their documentation for usage and provider selection.
 
 ## Usage
-You'll first have to have a Serverless project as outlined in Serverless's [Getting Started](https://serverless.com/framework/docs/getting-started/).  
+You'll first have to have a Serverless project as outlined in Serverless's [Getting Started](https://serverless.com/framework/docs/getting-started"/).  
 Suppose your provider of choice were Amazon AWS. A workflow could look as follows to install dependencies, and deploy to a Lambda function.
 
 _Note:_ We're first using the NPM Action to install project dependencies, then running `serverless deploy` via the action.
 
-# <<<<<<< BuckosBits/bucksbitties/MoneyMan573/bucksbitties/main.yml
-# ```workflow
-* workflow "Deploy via Serverless" {
-  on = "push"
-  resolves = ["deploy"]
+# "github.com/BuckosBits/bucksbitties/.github/workflows/bitbucket-bucksbitties-pipelines./main1.yml
+# workflow
+' 'workflow "Deploy via Serverless" {
+    'on = "push"
+  'resolves = ["deploy"]
 }
 #
 action "install" {
@@ -127,13 +128,13 @@ action "deploy" {
    # "AWS_SECRET_ACCESS_KEY",
  # ]
 # }
-# ```
 #
-# >>>>>>> master
+#
+# master
 ### Secrets
-Depending on the Serverless provider chosen, you'll need to supply appropriate credentials.  The above example illustrates a typical AWS scenario, but Serverless supports other cloud providers.
+' Depending on the Serverless provider chosen, you'll need to supply appropriate credentials.  The above example illustrates a typical AWS scenario, but Serverless supports other cloud providers.
 #
-Typically, with any cloud provider, their particular authentication environment params are **Required**.
+' Typically, with any cloud provider, their particular authentication environment params are **Required**.
 #
 ### Environment Variables
 # - `SERVICE_ROOT` - **Optional**.  To specify a particular subdirectory of your project that contains the Serverless service (the directory with the `serverless.yml` file) you can specify a `SERVICE_ROOT`.  This action will `cd` into that directory then execute commands.  The default root is `.` (project root).
@@ -141,16 +142,16 @@ Typically, with any cloud provider, their particular authentication environment 
 #### Example
 To navigate and deploy two services (in this example "Users" and "Admins") in different subdirectories:
 #
-# ```hcl
-action "Deploy Users Service" {
+# hcl
+# action "Deploy Users Service" {
 # <<<<<<< MoneyMan573/BuckosBits/bucksbitties
 # =======
 # <<<<<<< BuckosBits/bucksbitties/MoneyMan573/bucksbitties/main.yml
 # >>>>>>> master
-  uses = "BigGuy573/action-serverless@master"
-  args = "deploy"
-  env = {
-    SERVICE_ROOT = "users_service"
+#  uses = "BigGuy573/action-serverless@master"
+#  args = "deploy"
+#  env = {
+#    SERVICE_ROOT = "users_service"
   }
   secrets = [
     "AWS_ACCESS_KEY_ID",

@@ -36,8 +36,12 @@
 		<intellij.perfectomobile.version>18.4.0.0 </intellij.perfectomobile.version>
 		<qaf.version>2.1.14</qaf.version>
 		<qafsupport.version>2.1.14</qafsupport.version>
+# <<<<<<< snyk-fix-08ca4fcbfdca3191e6eaa7cbc676a653
+		<appium.client.version>7.4.0</appium.client.version>
+# =======
 		<appium.client.version>7.4.1</appium.client.version>
 		<appium.client.version>7.4.1</appium.client.version>
+# >>>>>>> master
 	</properties>
 
 	<scm>
