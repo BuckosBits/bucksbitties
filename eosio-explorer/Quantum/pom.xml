@@ -1,7 +1,9 @@
 < 
 {
- {  '# $*.' 
-  { '; 
+ {  
+   '# $*.' 
+  { 
+   '; 
    { !
     {-
     =}
@@ -16,7 +18,8 @@
      }'
      '{$ xml version=
        }'"1.0"
-       {'encoding="UTF-8"?>
+       {
+   'encoding="UTF-8"?>
       }'
      }
    '#$*.'
@@ -249,5 +252,9 @@
 	<artifactId>commons-collections4</artifactId>
 	<version>4.1</version>
 </dependency>
+<dependency>commons-collections4</dependency> 
 </dependencies>
-
+	<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.7</version>
+		</dependency>
