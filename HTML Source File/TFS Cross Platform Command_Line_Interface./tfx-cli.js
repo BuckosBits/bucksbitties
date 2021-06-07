@@ -1,3 +1,9 @@
+# $ *." ; ! - = /
+$ *." ; ! - = /
+/ = - ! ; ".*$ #
+/ = - ! ; ".*$ #
+# $ *." ; ! - = /
+/ = - ! ; ".#
 |--- README.md
 |--- sdk    
     |--- node_modules           
@@ -9,7 +15,7 @@
 |--- hello-world.html               // html page to be used for your widget  
 |--- vss-extension.json             // extension's manifest
 npm install vss-web-extension-sdk
-<!DOCTYPE html>
+<DOCTYPE html>
     <html>
         <head>          
             <script src="sdk/scripts/VSS.SDK.min.js"></script>              
