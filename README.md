@@ -8,102 +8,108 @@
 # Build and Release Folders
 # Other files and folders
 # Executables
-*.swf
-*.air
-*.ipa
-*.apk
-
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-
-# should NOT be excluded as they contain compiler settings and other important
-
-# information for Eclipse / Flash Builder.
-FROM node:10-slim
-# <<<<<<< BigGuy573/BuckosBits/master/MoneyMan573.main.yml
-LABEL version="1.0.0"
-LABEL repository="https://github.com/BigGuy573/action-serverless"
-# <<<<<<< MoneyMan573/BuckosBits/bucksbitties
-LABEL homepage="https://github.com/BigGuy5574action-serverless"
-LABEL maintainer="Michael Glenn @BigGuy573" <mbg198618@gmail.com>"
-# =======
-# <<<<<<< BuckosBits/bucksbitties/MoneyMan573/bucksbitties/main.yml
-LABEL homepage="https://github.com/BigGuy573/action-serverless"
-LABEL maintainer="Michael Glenn @BigGuy573" <mbg198618@gmail.com>"
-# =======
-LABEL homepage="https://github.com/BigGuy5574action-serverless"
-LABEL maintainer="Michael Glenn @BigGuy573" <mbg198618@gmail.com>"
-# =======
-LABEL version="v2.0"
-LABEL repository="https://github.com/BuckosBits/bucksbitties
-LABEL homepage="https://github.com/BuckosBits/bucksbitties
-LABEL maintainer="Michael Glenn <mbg198618@gmail.com>"
-# >>>>>>> master
-# >>>>>>> master
-# >>>>>>> master
-LABEL "com.github.actions.name"="GitHub Action for Serverless Framework"
-LABEL "com.github.actions.description"="Wraps the Serverless CLI"
-LABEL "com.github.actions.icon"="zap"
-LABEL "com.github.actions.color"="gray-dark"
-
-# Install serverless globally
-
-MIT License
-
-Copyright (c) 2021 Michael Glenn
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-# GitHub Action for Serverless
-This Action wraps the [Serverless Framework](https://serverless.com/framework/docs/getting-started/) 
-CLI to enable common commands. See their documentation for usage and provider selection.
-
-## Usage
-You'll first have to have a Serverless project as outlined in Serverless's [Getting Started](https://serverless.com/framework/docs/getting-started/).  
-Suppose your provider of choice were Amazon AWS. A workflow could look as follows to install dependencies, and deploy to a Lambda function.
-
-_Note:_ We're first using the NPM Action to install project dependencies, then running `serverless deploy` via the action.
-
-# <<<<<<< BuckosBits/bucksbitties/MoneyMan573/bucksbitties/main.yml
-# ```workflow
-* workflow "Deploy via Serverless" {
-  on = "push"
-  resolves = ["deploy"]
-}
 #
-action "install" {
-  uses = "actions/npm@master"
-  args = "install"
-}
-
-action "deploy" {
-  needs = ["install"]
-  uses = "BigGuy573/action-serverless@master"
-  args = "deploy"
-  secrets = [
-    "AWS_ACCESS_KEY_ID",
-    "AWS_SECRET_ACCESS_KEY",
-  ]
-}
-# ```
-
-# =======
-# ```workflow
+#
+#
+#
+#
+# Project files, i.e. .project, .actionScriptProperties and .flexProperties 
+#
+# should NOT be excluded as they contain compiler settings and other important
+#
+# information for Eclipse / Flash Builder.
+# FROM node:10-slim
+# BigGuy573/BuckosBits/master/MoneyMan573.main.yml
+# LABEL version="1.0.0"
+# LABEL repository="https://github.com/BigGuy573/action-serverless"
+# MoneyMan573/BuckosBits/bucksbitties
+# LABEL homepage="https://github.com/BigGuy5574action-serverless"
+# LABEL maintainer="Michael Glenn @BigGuy573" <mbg198618@gmail.com>"
+#
+# BuckosBits/bucksbitties/MoneyMan573/bucksbitties/main.yml
+# LABEL homepage="https://github.com/BigGuy573/action-serverless"
+# LABEL maintainer="Michael Glenn @BigGuy573" <mbg198618@gmail.com>"
+# 
+# LABEL homepage="https://github.com/BigGuy573/action-serverless"
+# LABEL maintainer="Michael Glenn @BigGuy573" <mbg198618@gmail.com>"
+# 
+# LABEL version=v2.0
+# LABEL repository="https://github.com/BuckosBits/bucksbitties
+# LABEL homepage="https://github.com/BuckosBits/bucksbitties
+# LABEL maintainer="Michael Glenn <mbg198618@gmail.com>"
+# master
+#  master
+# master
+# LABEL "com.github.actions.name"="GitHub Action for Serverless Framework"
+# LABEL "com.github.actions.description"="Wraps the Serverless CLI"
+# LABEL "com.github.actions.icon"="zap"
+# LABEL "com.github.actions.color"="gray-dark"
+#
+# Install serverless globally
+#
+# MIT License
+#
+# Copyright (c) 2021 Michael Glenn
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+#
+# GitHub Action for Serverless
+# This Action wraps the [Serverless Framework](https://serverless.com/framework/docs/getting-started/) 
+# CLI to enable common commands. See their documentation for usage and provider selection.
+#
+## Usage
+# You'll first have to have a Serverless project as outlined in Serverless's 
+# [Getting # Started]#/(https://serverless.com/framework/docs/getting-started/).  
+# Suppose your provider of choice were Amazon AWS. 
+# A workflow could look as follows to install dependencies, a
+# and deploy to a Lambda function.
+#
+#
+# _Note:_ 
+# We're first using the NPM Action to install project dependencies
+# then running serverless deploy via the action.
+#
+# BuckosBits/bucksbitties/MoneyMan573/bucksbitties/main.yml
+# workflow 
+# workflow "Deploy via Serverless" {
+#  on = "push"
+#  resolves = ["deploy"]
+# }
+#
+# action "install" {
+#   uses = "actions/npm@master"
+#   args = "install"
+# }
+# 
+# action "deploy" {
+#'  needs = ["install"]
+#'  uses = "BigGuy573/action-serverless@master"
+#'  args = "deploy"
+#'  secrets = [
+#' AWS_ACCESS_KEY_ID",
+#'    #' AWS_SECRET_ACCESS_KEY",
+#  ]
+# }
+# 
+#
+# 
+# workflow
 # workflow "Deploy via Serverless" {
  # on = "push"
  # resolves = ["deploy"]
@@ -116,27 +122,37 @@ action "deploy" {
 # 
 # action "deploy" {
  #  needs = ["install"]
-# <<<<<<< BigGuy573/BuckosBits/master/MoneyMan573.main.yml
+# BigGuy573/BuckosBits/master/MoneyMan573.main.yml
  #  uses = "BigGuy573/action-serverless@master"
-# =======
+# 
  # uses = "BuckosBits/bucksbitties@master"
-# >>>>>>> master
+# master
 #   args = "deploy"
  # secrets = [
-  #  "AWS_ACCESS_KEY_ID",
-   # "AWS_SECRET_ACCESS_KEY",
+  #' AWS_ACCESS_KEY_ID",
+   #' AWS_SECRET_ACCESS_KEY",
  # ]
 # }
-# ```
+# 
 #
-# >>>>>>> master
-### Secrets
-Depending on the Serverless provider chosen, you'll need to supply appropriate credentials.  The above example illustrates a typical AWS scenario, but Serverless supports other cloud providers.
+# master
+###  Depending
+# Depending on the Serverless provider chosen, 
+# you'll need to supply appropriate credentials. 
+# The above example illustrates a # typical AWS scenario,
+# but Serverless supports other cloud providers.
 #
-Typically, with any cloud provider, their particular authentication environment params are **Required**.
+# Typically, with any cloud provider, their particular
+# 
+#  authentication environment params are **Required**.
 #
 ### Environment Variables
-# - `SERVICE_ROOT` - **Optional**.  To specify a particular subdirectory of your project that contains the Serverless service (the directory with the `serverless.yml` file) you can specify a `SERVICE_ROOT`.  This action will `cd` into that directory then execute commands.  The default root is `.` (project root).
+# - SERVICE_ROOT` - **Optional**. 
+# To specify a particular subdirectory of your project that contains the 
+# Serverless service (the directory with the serverless.yml file) you can specify 
+# a `SERVICE_ROOT`.  This action will `cd` into # that directory then execute commands. 
+# 
+# The default root is `.` (project root).
 #
 #### Example
 To navigate and deploy two services (in this example "Users" and "Admins") in different subdirectories:
@@ -147,19 +163,19 @@ action "Deploy Users Service" {
 # =======
 # <<<<<<< BuckosBits/bucksbitties/MoneyMan573/bucksbitties/main.yml
 # >>>>>>> master
-  uses = "BigGuy573/action-serverless@master"
-  args = "deploy"
-  env = {
-    SERVICE_ROOT = "users_service"
-  }
-  secrets = [
-    "AWS_ACCESS_KEY_ID",
-    "AWS_SECRET_ACCESS_KEY",
-  ]
-}
-
-action "Deploy Admin Service" {
-  uses = "BigGuy573/action-serverless@master"
+#  uses = "BigGuy573/action-serverless@master"
+#  args = "deploy"
+#  env = {
+#    SERVICE_ROOT = "users_service"
+#  }
+#  secrets = [
+#    "AWS_ACCESS_KEY_ID",
+#    "AWS_SECRET_ACCESS_KEY",
+#  ]
+# }
+#
+# action "Deploy Admin Service" {
+#  uses = "BigGuy573/action-serverless@master"
 # <<<<<<< MoneyMan573/BuckosBits/bucksbitties
 # =======
 # =======
@@ -178,35 +194,35 @@ action "Deploy Admin Service" {
 #  ]
 # }
 #
-action "Deploy Admin Service" {
-# <<<<<<< BigGuy573/BuckosBits/master/MoneyMan573.main.yml
-  uses = "BigGuy573/action-serverless@master"
-# =======
-  uses = "BuckosBits/bucksbitties@master"
-# >>>>>>> master
-# >>>>>>> master
-# >>>>>>> master
-  args = "deploy"
-  env = {
-    SERVICE_ROOT = "admin_service"
-  }
-  secrets = [
-    "AWS_ACCESS_KEY_ID",
-    "AWS_SECRET_ACCESS_KEY",
-  ]
-}
+#action "Deploy Admin Service" {
+# BigGuy573/BuckosBits/master/MoneyMan573.main.yml
+#  uses = "BigGuy573/action-serverless@master"
+#
+# uses = "BuckosBits/bucksbitties@master"
+# master
+# Master
+# master
+# args = "deploy"
+#  env = {
+#    SERVICE_ROOT = "admin_service"
+#  }
+#  secrets = [
+#    "AWS_ACCESS_KEY_ID",
+#    "AWS_SECRET_ACCESS_KEY",
+#  ]
+#}
 # ```
-
+#
 # !/bin/sh
-* set -e
-
-ROOT=${SERVICE_ROOT:-.}
-
-cd $ROOT
-serverless $*
-
-docs/changelog/2020/images/jan_2020_bounty_visibility.png
-
+#* set -e
+#
+# ROOT=${SERVICE_ROOT:-.}
+#
+# cd $ROOT
+# serverless $*
+#
+# docs/changelog/2020/images/jan_2020_bounty_visibility.png
+#
 ---
 title: "January 2020"
 path: "/changelog/2020/january"
