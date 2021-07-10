@@ -1,0 +1,139 @@
+Validator for bitbucket-pipelines.yml
+Copy and paste your bitbucket-pipelines.yml configuration below to validate it.
+
+Test your bitbucket-pipelines.ymlVALID
+1
+#  Template npm-publish
+2
+
+3
+#  This template allows you to publish your npm package, as defined in package.json, to npmjs.com or any other npm-like registry.
+4
+#  The workflow allows running tests, code linting and security scans on feature branches (as well as master).
+5
+#  The npm package will be validated and published after the code is merged to master.
+6
+
+7
+# Prerequisites: $NPM_TOKEN setup in the Deployment variables.
+8
+# For advanced cases, please, follow examples from the pipe's README https://bitbucket.org/atlassian/npm-publish/src/master/README.md
+9
+
+10
+image: node:10.15.3
+11
+
+12
+pipelines:
+13
+  default:
+14
+    - parallel:
+15
+      - step:
+16
+          name: Build and Test
+17
+          caches:
+18
+            - node
+19
+          script:
+20
+            - npm install
+21
+            - npm test
+22
+      - step:
+23
+          name: Lint the node package
+24
+          script:
+25
+            - npm install eslint
+26
+            - npx eslint .
+27
+          caches:
+28
+            - node
+29
+  branches:
+30
+    master:
+31
+      - parallel:
+32
+        - step:
+33
+            name: Build and Test
+34
+            caches:
+35
+              - node
+36
+            script:
+37
+              - npm install
+38
+              - npm test
+39
+        - step:
+40
+            name: Security Scan
+41
+            script:
+42
+              # Run a security scan for sensitive data.
+43
+              # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
+44
+              - pipe: atlassian/git-secrets-scan:0.4.3
+45
+      - step:
+46
+          name: Deploy to Production
+47
+          deployment: Production
+48
+          script:
+49
+            # Bump versions before publishing
+50
+            - npm --no-git-tag-version version "1.0.$BITBUCKET_BUILD_NUMBER" -m "Upgrade to new version"
+51
+            # Publish package
+52
+            - pipe: atlassian/npm-publish:0.3.1
+53
+              variables:
+54
+                NPM_TOKEN: $NPM_TOKEN
+55
+
+Configure
+Documentation
+
+Change the template
+The templates allow you to configure your pipeline using your preferred language. The template will override any configuration content.
+
+Publish a NPM package
+
+Add more steps
+Deployment Step
+Deploy your repository to an environment.
+Manual Step
+Optionally run this step in your pipeline.
+Parallel Step
+Runs multiple steps simultaneously.
+How to use deployment step
+Add deployment: (test|staging|production) to the deployment step in this bitbucket-pipelines.yml file.
+
+
+Add Pipes (Integrations)
+YAMLSpaces(2)No line wrap
+
+Copy configuration
+New to Bitbucket Pipelines?
+Bitbucket Pipelines is a Bitbucket feature that helps your team build, test and deploy code. Learn more.
