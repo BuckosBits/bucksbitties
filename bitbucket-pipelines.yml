@@ -99,3 +99,9 @@ relevant logs and error messages
 steps to reproduce
 <<<≤<<<BigGuy573/bucksbitties-pipelines.yml
 >>>>>>> master
+- step:
+    name: Deploy to test
+    deployment: test
+    # trigger: manual  # Uncomment to make this a manual deployment.
+    script:
+      - echo "Deploying to test environment"
