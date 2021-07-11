@@ -5,7 +5,7 @@ name:bucksbitties/azure/bucksbitties/bitbucket-pipelines-main1.yml
  Controls when the action will run. Triggers the workflow on push or pull request
  events but only for the master branch
 on:
-  push:https://github.com/BuckosBits/bucksbitties/workflows/bucksbitties/bitbucket-pipelines-main1.yml
+  push:https://github.com/MoneyMan573BuckosBits//bucksbitties/workflows/bucksbitties/bitbucket-pipelines-main1.yml
     branches: [ main ]
   pull_request:MoneyMan573/bucksbitties
     branches: [ main ]
@@ -28,11 +28,11 @@ jobs:
 
        Runs a set of commands using the runners shell
       - name: Run a multi-line script
-        run: | #test, #verify, #deploy
+        run: |#test,#verify,#deploy
           echo Add other actions to build,
           echo test, and deploy your project.
- <<<<<<< MoneyMan573/BuckosBits/bucksbitties
->
+MoneyMan573/BuckosBits/bucksbitties
+>BigGuy573/bucksbitties-pipelines-main1.yml
 
 <# This is a basic workflow to help you get started with Actions
 
