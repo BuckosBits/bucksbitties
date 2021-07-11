@@ -8,11 +8,11 @@
 # Build and Release Folders
 # Other files and folders
 # Executables
-#
-#
-#
-#
-#
+---
+<a href="https://www.codefactor.io/repository/bitbucket/buckobit/bucksbitties-.github-workflows-name-bucksbitties-ci-bitbucket"><img src="https://www.codefactor.io/repository/bitbucket/buckobit/bucksbitties-.github-workflows-name-bucksbitties-ci-bitbucket/badge" alt="CodeFactor" /></a>
+---
+
+
 # Project files, i.e. .project, .actionScriptProperties and .flexProperties 
 #
 # should NOT be excluded as they contain compiler settings and other important
