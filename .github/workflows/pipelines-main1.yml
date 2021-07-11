@@ -9,9 +9,9 @@ Name
 bitbucket
 -
 /
-bucksbitties-pipelines-main1.yml.github/
-workflows/
-pipelines
+bucksbitties-pipelines-main1.yml/workflows/pipelines
+
+
 -
 main
 .
