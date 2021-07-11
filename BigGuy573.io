@@ -69,5 +69,5 @@ jobs:
         run: | #test, #verify, #deploy
           echo Add other actions to build,
           echo test, and deploy your project.>
- =======
- >>>>>>> master
+
+master
